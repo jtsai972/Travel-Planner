@@ -1,0 +1,5 @@
+
+
+//Hiding content
+
+$("section").hide();
