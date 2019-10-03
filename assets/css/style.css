@@ -3,7 +3,7 @@
     transition: all ease 0.5s;
 }
 body {
-    background: #bbb;
+    background: #bbb url("../images/hex-bg.png");
     display: flex;
         align-items: center;
         flex-flow: column;
@@ -19,7 +19,7 @@ a:hover { color: #f36652; text-decoration: underline;}
 
 /* Content positioning */
 main, footer {
-    box-shadow: 2px 2px 5px 0 #999;
+    box-shadow: 0 2px 5px 0 #999;
     width: 90%;
         max-width: 1080px;
 }
