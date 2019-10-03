@@ -44,12 +44,12 @@ nav {
     nav a:hover{ background: #63bdbb; color: white; text-decoration: none; }
 
 footer { 
-    background: #666;
+    background: rgba(99, 189, 187, 0.7);
     border: 0;
     border-top: 0.25em solid #63bdbb;
     border-image: linear-gradient(to right, #f36652, #63bdbb, #fabd46);
     border-image-slice: 1;
-    color: white;
+    color: black;
     padding: 1em;
     text-align: center;
 }
