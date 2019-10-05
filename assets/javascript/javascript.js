@@ -163,7 +163,7 @@ function hotelAPI(queryValues) {
 
         $.ajax(auth).done(function (response) {
             token = response;
-            //console.log(token);
+            console.log(token);
             //console.log("Access token:" + token.access_token);
             var tokenBearer = "Bearer " + token.access_token;
             //console.log(tokenBearer);
@@ -184,7 +184,7 @@ function hotelAPI(queryValues) {
             $.ajax(settings).then( function(response) {
                 var queryResult = response;
                 // console.log("AJAX YOU BETTER WORK!");
-                // console.log(queryResult);
+                console.log(queryResult);
 
                 //variables you want will go here
                 //Example for printing out multiple 
