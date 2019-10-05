@@ -30,12 +30,24 @@ firebase.initializeApp(config); //starting database (jtsai)
 const database = firebase.database();
 const dbAuth = database.ref('/authentication');
 
+// var key = {  };
+// dbAuth.push(key);
+
 /* ====================================
  * Non-database Global Variables
  * ==================================== */
 
-// var key = {  };
-// dbAuth.push(key);
+// You can also use these values as examples and for testing
+
+// Test Full URLS
+var testFlightURL = "https://test.api.amadeus.com/v1/shopping/flight-offers?origin=MAD&destination=PAR&departureDate=2019-12-01&returnDate=2019-12-28 &max10";
+var testHotelURL = "https://test.api.amadeus.com/v2/shopping/hotel-offers?cityCode=LON";
+var testRestaurantURL = "https://api.yelp.com/v3/businesses/search?term=delis&latitude=37.786882&longitude=-122.399972";
+
+// Test values
+var testFlightValue = "origin=MAD&destination=PAR&departureDate=2019-12-01&returnDate=2019-12-28 &max10";
+var testHotelValue = "cityCode=LON";
+var testRestaurantValue = "term=delis&latitude=37.786882&longitude=-122.399972";
 
 /* ====================================
  * Initialization of document
@@ -53,9 +65,6 @@ $("section").hide();
 /* ====================================
  * Ajax queries
  * ==================================== */
-
-var testFlightURL = "https://test.api.amadeus.com/v1/shopping/flight-offers?origin=MAD&destination=PAR&departureDate=2019-12-01&returnDate=2019-12-28 &max10";
-
 // You guys will have to create the search queries in your function and pass it here
 function flightAPI(queryValues) {
     //base url for the API
@@ -123,9 +132,6 @@ function flightAPI(queryValues) {
         });
     });
 }
-
-var testHotelURL = "https://test.api.amadeus.com/v2/shopping/hotel-offers?cityCode=LON";
-
 
 // You guys will have to create the search queries in your function and pass it here
 function hotelAPI(queryValues) {
@@ -198,7 +204,7 @@ function restaurantAPI(queryValues) {
 
     //final yelp query
     var queryURL = 
-        queryBaseURL + "businesses/search?" + queryValues;
+        "https://cors-anywhere.herokuapp.com/" + queryBaseURL + "businesses/search?" + queryValues;
 
     //referencing firebase in order to get keys from there (jtsai)
     dbAuth.once("value", function(snapshot) {
@@ -215,14 +221,19 @@ function restaurantAPI(queryValues) {
             "crossDomain": true,
             "url": queryURL,
             "method": "GET",
+            "contentType": "text/json",
+            "dataType": "json",
+            "cache": true,
             "headers": {
                 "Accept": "*/*",
+                "Access-Control-Allow-Origin" : "*",
                 "Authorization": tokenBearer
             }
         }
 
         $.ajax(settings).then( function(response) {
             var queryResult = response;
+            console.log(response);
             //variables you want will go here
             //Example for printing out multiple 
             // for(let i=0; i < queryResult.data[i]) {
