@@ -192,7 +192,6 @@ section { display: none; }
 
 /* sections with the active class are visible now */
 section.active {
-    background: rgba(99, 189, 187, 0.25);
     display: block;
     flex: 1 1 auto; /* making it so active sections will shrink and grow with their containers */
     padding: 2em;
