@@ -4,7 +4,7 @@
 }
 body {
     /*background: #bbb url("../images/hex-bg.png"); */
-    background: #444 url("https://images.unsplash.com/photo-1564824726384-9f43d508e71a?ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80") center / cover;
+    background: #444 url("../images/bg-unsplash-minified-ardito-ryan-harrisna-mgcw5w1JhVg.jpg") center / cover;
     display: flex;
         align-items: center;
         flex-flow: column;
@@ -20,13 +20,13 @@ a:hover { color: #f36652; text-decoration: underline;}
 
 /* Content positioning */
 main, footer {
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.5);
+    box-shadow: 0 0px 5px 0 rgba(0,0,0,0.5);
     width: 90%;
         max-width: 1080px;
 }
 
 main {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.8);
     border: 1px solid #63bdbb;
     border-image: linear-gradient(to bottom, #f36652, #63bdbb, #fabd46);
     border-image-slice: 1;
@@ -36,32 +36,35 @@ main {
 }
 
 nav {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.25);
     display: flex;
         flex-flow: column;
     font-size: 1.5em;
     text-align: center;
 }
-    nav a { color: black; padding: 2rem; }
-    nav a:hover{ background: rgba(99, 189, 187, 0.75); color: white; text-decoration: none; }
-
-    nav img {
-        width: 5em;
-        transition: none;
-        transition: opacity ease 0.5s;
+    nav a { 
+        color: black; 
+        padding: 2rem; 
     }
-    nav #nav-logo .nav-hover, nav #nav-logo:hover .nav-img {
-        opacity: 0;
-        width: 0;
+    nav a:hover, 
+    nav a.active{ 
+        background: rgba(99, 189, 187, 0.75); 
+        color: white; 
+        text-decoration: none; 
     }
+    nav #nav-logo .nav-img, 
     nav #nav-logo:hover .nav-hover {
-        opacity: 1;
-        width: 5em;
+        display: inline-block;
+        width: 4em;
+    }
+    nav #nav-logo .nav-hover, 
+    nav #nav-logo:hover .nav-img {
+        display: none;
     }
     
 
 footer { 
-    background: rgba(99, 189, 187, 0.5);
+    background: rgba(99, 189, 187, 0.9);
     border: 0;
     border-top: 0.25em solid #63bdbb;
     border-image: linear-gradient(to right, #f36652, #63bdbb, #fabd46);
@@ -71,11 +74,22 @@ footer {
     text-align: center;
 }
 
+img {
+    max-width: 100%;
+}
+
 .container {
     border-width: 0;
     border-left: 1px solid #63bdbb;
-    border-image: linear-gradient(to bottom, #f36652, #63bdbb, #fabd46);
+    border-image: linear-gradient(
+        to bottom, 
+        #f36652,#63bdbb, #fabd46
+    );
+    box-shadow: inset 10px 0px 3px -10px rgba(0,0,0,0.5);
     border-image-slice: 1;
+    display: flex;
+        align-items: stretch;
+        justify-content: stretch;
     flex: 1 1 auto;
 }
 
@@ -84,7 +98,20 @@ section {
     min-height: 20vh;
     padding: 2em;
 }
-
-img {
-    max-width: 100%;
+section.active {
+    background: rgba(99, 189, 187, 0.25);
+    display: block;
+    flex: 1 1 auto;
 }
+
+section#home.active {
+    display: flex;
+        align-items: center;
+        justify-content: center;
+    text-align: center;
+}
+section#home img {
+    display: inline-block;
+    width: 50%;
+}
+
