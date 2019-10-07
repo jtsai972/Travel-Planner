@@ -86,8 +86,9 @@ main {
     display: flex;
         align-items: stretch;
         flex-flow: row;
-    max-height: 90vh;
-    min-height: 50vh;
+    min-height:30em;
+    max-height:90vh;
+    overflow: auto;
 }
 
 nav {
@@ -291,6 +292,8 @@ section.active {
     display: flex;
         flex-flow: row;
         flex-wrap: wrap;
+    max-height: 30em;
+    overflow-y: scroll;
     padding-right: 1em;
 }
 #restaurant-results .result {
