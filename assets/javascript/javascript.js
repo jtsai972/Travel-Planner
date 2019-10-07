@@ -85,6 +85,8 @@ $("#restaurants button").on("click", function() {
     /* Preventing page refresh on form button click */
     event.preventDefault();
 
+    $(".loader").addClass("active");
+
     /* Getting form inputs */
     var foodSearch = $("#food-search").val().trim();
     var foodLocation = $("#food-location").val().trim();
@@ -109,7 +111,7 @@ $("#restaurants button").on("click", function() {
  * Other functions
  * ==================================== */
 function printRestaurant(business) {
-
+    $(".loader").removeClass("active");
     /* Printing out all the content in the query */
     for( let i = 0; i < business.length; i++ ) {
         /* shortening some stuff */
