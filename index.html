@@ -10,13 +10,23 @@
     <title>Trip Planner</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="assets/images/favicon.ico"
+    />
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:400,900|Roboto&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:400,900|Roboto&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/css/reset.css" />
@@ -30,8 +40,16 @@
       <!-- Hello navigation to hide/display content -->
       <nav>
         <a id="nav-logo" class="active" href="#home">
-          <img class="nav-img" src="assets/images/logo_trans.png" alt="Trip Planner Logo image for navigation link">
-          <img class="nav-hover" src="assets/images/logo_trans_hover.png" alt="Trip Planner Logo hover image for navigation link">
+          <img
+            class="nav-img"
+            src="assets/images/logo_trans.png"
+            alt="Trip Planner Logo image for navigation link"
+          />
+          <img
+            class="nav-hover"
+            src="assets/images/logo_trans_hover.png"
+            alt="Trip Planner Logo hover image for navigation link"
+          />
         </a>
         <a href="#flight">Flight Info</a>
         <a href="#hotel">Hotel Info</a>
@@ -41,11 +59,14 @@
 
       <!-- Content on the right side of the nav -->
       <div class="container">
-
         <!-- setting up starting title page -->
         <section id="home" class="active">
           <div>
-            <img id="home-logo" src="assets/images/logo_trans.png" alt="Trip planner logo image" />
+            <img
+              id="home-logo"
+              src="assets/images/logo_trans.png"
+              alt="Trip planner logo image"
+            />
             <h1 class="title">Travel Planner</h1>
             <h2 class="tag-line">Travel made easy</h2>
           </div>
@@ -53,29 +74,59 @@
 
         <section id="flight">flight</section>
 
-        <section id="hotel">hotel</section>
+        <!-- /////// Hotel Start -->
+        <section id="hotel">
+          <form>
+            <label for="hotel-search">
+              <strong>Nights</strong>
+              <input
+                id="hotel-nights"
+                type="number"
+                name="hotel-nights"
+                placeholder="How many nights?"
+              />
+            </label>
+
+            <label for="hotel-location">
+              <strong>Airport Code</strong>
+              <input
+                id="hotel-location"
+                type="search"
+                name="hotel-location"
+                placeholder="Dallas, TX"
+              />
+            </label>
+
+            <button>
+              <i class="material-icons">search</i>
+            </button>
+          </form>
+
+          <div id="hotel-results"></div>
+        </section>
+
+        <!-- /////// Hotel  END -->
 
         <section id="restaurants">
           <form>
-
             <label for="food-search">
               <strong>Find</strong>
-              <input 
-                id="food-search" 
-                type="search" 
-                name="food-search" 
+              <input
+                id="food-search"
+                type="search"
+                name="food-search"
                 placeholder="Delis, Italian, Burgers"
-              >
+              />
             </label>
 
             <label for="food-location">
               <strong>Near</strong>
-              <input 
-                id="food-location" 
-                type="search" 
-                name="food-location" 
+              <input
+                id="food-location"
+                type="search"
+                name="food-location"
                 placeholder="San Francisco, Chicago"
-              >
+              />
             </label>
 
             <button>
@@ -85,15 +136,16 @@
 
           <div id="restaurant-results">
             <div class="loader">
-                <img src="assets/images/Double Ring-3s-200px.gif" alt="loading spinner">
+              <img
+                src="assets/images/Double Ring-3s-200px.gif"
+                alt="loading spinner"
+              />
             </div>
           </div>
         </section>
 
         <section id="summary">summary</section>
-        
       </div>
-
     </main>
 
     <footer>
@@ -102,7 +154,6 @@
     </footer>
 
     <!-- Footer (to add if we want) -->
-
 
     <!-- scripts-->
     <!-- jQuery -->

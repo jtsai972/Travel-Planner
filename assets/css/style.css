@@ -2,9 +2,10 @@
  *  Global styling
  * =============================*/
 
-* { /* this means set all elements to styles below */
-    box-sizing: border-box;
-    transition: all ease 0.5s;
+* {
+  /* this means set all elements to styles below */
+  box-sizing: border-box;
+  transition: all ease 0.5s;
 }
 
 /* =============================
@@ -12,48 +13,62 @@
  * =============================*/
 
 body {
-    /*background: #bbb url("../images/hex-bg.png"); */
+  /*background: #bbb url("../images/hex-bg.png"); */
 
-    /* setting a background color and setting a background image that is centered and covers the entire page */
-    background: #444 url("../images/bg-unsplash-minified-ardito-ryan-harrisna-mgcw5w1JhVg.jpg") center / cover;
-    /* Making it so that the content is centered vertically and horizontally */
-    display: flex;
-        align-items: center;
-        flex-flow: column;
-        justify-content: center;
-    /* setting up the base font */
-    font-family: 'Roboto', sans-serif;
-    min-height: 100vh; /* making it so that the minimum height is 100% of the height of the viewport (the screen) */
+  /* setting a background color and setting a background image that is centered and covers the entire page */
+  background: #444
+    url("../images/bg-unsplash-minified-ardito-ryan-harrisna-mgcw5w1JhVg.jpg")
+    center / cover;
+  /* Making it so that the content is centered vertically and horizontally */
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  justify-content: center;
+  /* setting up the base font */
+  font-family: "Roboto", sans-serif;
+  min-height: 100vh; /* making it so that the minimum height is 100% of the height of the viewport (the screen) */
 }
 
 /* =============================
  *  Text Styling
  * =============================*/
 
- /* Setting header font */
-h1, h2, h3 {
-    font-family: 'Raleway', sans-serif;
+/* Setting header font */
+h1,
+h2,
+h3 {
+  font-family: "Raleway", sans-serif;
 }
-h1 { font-size: 2em; }
-h2 { font-size: 1.5em;}
+h1 {
+  font-size: 2em;
+}
+h2 {
+  font-size: 1.5em;
+}
 
 /* setting paragraphs to have some spacing between lines */
-p {line-height: 1.5em;}
+p {
+  line-height: 1.5em;
+}
 
-strong { font-weight: bold; }
-em { font-style: italics; } 
+strong {
+  font-weight: bold;
+}
+em {
+  font-style: italics;
+}
 
 /* link styling */
-a { 
-    color: #63bdbb; 
-    text-decoration: none;
+a {
+  color: #63bdbb;
+  text-decoration: none;
 }
-a:hover { 
-    color: #f36652; 
+a:hover {
+  color: #f36652;
 }
 
 .container a:hover {
-    border-bottom: 1px solid #f36652;
+  border-bottom: 1px solid #f36652;
 }
 
 /* =============================
@@ -61,291 +76,335 @@ a:hover {
  * =============================*/
 
 /* Giving the main content and footer a box shadow and setting the base widths  */
-main, footer {
-    box-shadow: 0 0px 5px 0 rgba(0,0,0,0.5);
-    width: 90%;
-        max-width: 1080px;
+main,
+footer {
+  box-shadow: 0 0px 5px 0 rgba(0, 0, 0, 0.5);
+  width: 90%;
+  max-width: 1080px;
 }
 
 main {
-    /* transparent white background */
-    background: rgba(255, 255, 255, 0.6);
-    /* Magical rainbow borders of magicalness */
-    border: 1px solid #63bdbb;
-    border-image: linear-gradient(
-        to right,
-        #f36652, 
-        #63bdbb, 
-        #fabd46
-    );
-    border-image-slice: 1;
-    border-bottom: none;
-    /* outlines the rainbow border*/
-    box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.5); 
-    /* making it so that content within stretches */
-    display: flex;
-        align-items: stretch;
-        flex-flow: row;
-    min-height:30em;
-    max-height:90vh;
-    overflow: auto;
+  /* transparent white background */
+  background: rgba(255, 255, 255, 0.6);
+  /* Magical rainbow borders of magicalness */
+  border: 1px solid #63bdbb;
+  border-image: linear-gradient(to right, #f36652, #63bdbb, #fabd46);
+  border-image-slice: 1;
+  border-bottom: none;
+  /* outlines the rainbow border*/
+  box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.5);
+  /* making it so that content within stretches */
+  display: flex;
+  align-items: stretch;
+  flex-flow: row;
+  min-height: 30em;
+  max-height: 90vh;
+  overflow: auto;
 }
 
 nav {
-    background: rgba(255, 255, 255, 0.75);
-    /* making it so that the navigation goes from top to bottom */
-    display: flex;
-        flex-flow: column;
-    /* setting a base font-size for navigation items */
-    font-size: 1.5em;
-    /* this is here to make it a little more balanced looking */
-    padding-bottom: 4em;
-    text-align: center;
-    width: auto; /* this is just for semantics */
-        min-width: 7.5em;
+  background: rgba(255, 255, 255, 0.75);
+  /* making it so that the navigation goes from top to bottom */
+  display: flex;
+  flex-flow: column;
+  /* setting a base font-size for navigation items */
+  font-size: 1.5em;
+  /* this is here to make it a little more balanced looking */
+  padding-bottom: 4em;
+  text-align: center;
+  width: auto; /* this is just for semantics */
+  min-width: 7.5em;
 }
-    /* styling nav links */
-    nav a { 
-        color: black; 
-        padding: 1em; 
-    }
-    /* When a link is set to active with a class or hovered over... */
-    nav a:hover,
-    nav a.active { 
-        /* it gets a nifty transparent background and shadow*/
-        background: rgba(99, 189, 187, 0.75);
-        box-shadow: 0 0 3px 1px rgba(0,0,0,0.5);
-        color: white; 
-        margin: 0 -2px; /* adds 2 pixels of space on either side of the element without actually increasing it's official width */
-        text-decoration: none; 
-        z-index: 1; /* raises it above most content on the page since default z-index is 0 */
-    }
-    nav a:hover {
-        /* making the background & box shadow darker */
-        background: rgba(99, 189, 187, 1);  
-        box-shadow: 0 0 5px 1px rgba(0,0,0,0.75);
-        margin: 0 -4px; /* adds more space */
-        z-index: 2; /* raises it even higher */
-    }
-    /* This deals with some awkward spacing stuff when increasing logo hover size */
-    nav #nav-logo {
-        margin-top: -0.1em;
-        padding-top: 1.1em;
-    }
-        /* Switches image visibility: makes these visible */
-        nav #nav-logo .nav-img, 
-        nav #nav-logo:hover .nav-hover,
-        nav #nav-logo.active .nav-hover {
-            display: inline-block;
-            width: 4em;
-        }
-        /* Switches image visibility: makes these invisible */
-        nav #nav-logo .nav-hover, 
-        nav #nav-logo:hover .nav-img,
-        nav #nav-logo.active .nav-img {
-            display: none;
-        }
+/* styling nav links */
+nav a {
+  color: black;
+  padding: 1em;
+}
+/* When a link is set to active with a class or hovered over... */
+nav a:hover,
+nav a.active {
+  /* it gets a nifty transparent background and shadow*/
+  background: rgba(99, 189, 187, 0.75);
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.5);
+  color: white;
+  margin: 0 -2px; /* adds 2 pixels of space on either side of the element without actually increasing it's official width */
+  text-decoration: none;
+  z-index: 1; /* raises it above most content on the page since default z-index is 0 */
+}
+nav a:hover {
+  /* making the background & box shadow darker */
+  background: rgba(99, 189, 187, 1);
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.75);
+  margin: 0 -4px; /* adds more space */
+  z-index: 2; /* raises it even higher */
+}
+/* This deals with some awkward spacing stuff when increasing logo hover size */
+nav #nav-logo {
+  margin-top: -0.1em;
+  padding-top: 1.1em;
+}
+/* Switches image visibility: makes these visible */
+nav #nav-logo .nav-img,
+nav #nav-logo:hover .nav-hover,
+nav #nav-logo.active .nav-hover {
+  display: inline-block;
+  width: 4em;
+}
+/* Switches image visibility: makes these invisible */
+nav #nav-logo .nav-hover,
+nav #nav-logo:hover .nav-img,
+nav #nav-logo.active .nav-img {
+  display: none;
+}
 /* This is for all the content to the right of the nav bar */
 .container {
-    /* rainbow magical borders only on the left side of this div */
-    border-width: 0;
-    border-left: 1px solid #63bdbb;
-    border-image: linear-gradient(
-        to bottom, 
-        #f36652 10%,
-        #63bdbb,
-        #fabd46 90%
-    );
-    border-image-slice: 1;
-    /* giving it a bit of an internal shadow but only at the bottom */
-    box-shadow: inset 11px 0px 3px -10px rgba(0,0,0,0.5);
-    /* Making it so the sections will stretch to fill the content */
-    display: flex;
-        align-items: stretch;
-        justify-content: stretch;
-    /* makes it so that this container will grow and shrink with its container element*/
-    flex: 1 1 auto;
+  /* rainbow magical borders only on the left side of this div */
+  border-width: 0;
+  border-left: 1px solid #63bdbb;
+  border-image: linear-gradient(to bottom, #f36652 10%, #63bdbb, #fabd46 90%);
+  border-image-slice: 1;
+  /* giving it a bit of an internal shadow but only at the bottom */
+  box-shadow: inset 11px 0px 3px -10px rgba(0, 0, 0, 0.5);
+  /* Making it so the sections will stretch to fill the content */
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  /* makes it so that this container will grow and shrink with its container element*/
+  flex: 1 1 auto;
 }
 
-footer { 
-    /* transparent blue background */
-    background: rgba(99, 189, 187, 0.9);
-    box-shadow: 
-        0 0px 3px 0px rgba(0,0,0,0.5), /* top shadow */
-        inset 0 4px 4px -4px rgba(0,0,0,0.5); /* inner shadow */
-    /* wide magical rainbow border on the top of the footer */
-    border: 0;
-    border-top: 0.25em solid #63bdbb;
-    border-image: linear-gradient(
-        to right, 
-        #f36652 10%, 
-        #63bdbb, 
-        #fabd46 90%
-    );
-    border-image-slice: 1;
-    color: white;
-    padding: 1em;
-    text-align: center;
+footer {
+  /* transparent blue background */
+  background: rgba(99, 189, 187, 0.9);
+  box-shadow: 0 0px 3px 0px rgba(0, 0, 0, 0.5),
+    /* top shadow */ inset 0 4px 4px -4px rgba(0, 0, 0, 0.5); /* inner shadow */
+  /* wide magical rainbow border on the top of the footer */
+  border: 0;
+  border-top: 0.25em solid #63bdbb;
+  border-image: linear-gradient(to right, #f36652 10%, #63bdbb, #fabd46 90%);
+  border-image-slice: 1;
+  color: white;
+  padding: 1em;
+  text-align: center;
 }
 
 /* =============================
  *  General content styling
  * =============================*/
 
- /* images won't get bigger than their containers now */
-img { max-width: 100%; }
+/* images won't get bigger than their containers now */
+img {
+  max-width: 100%;
+}
 
 /* sections are invisible now */
-section { display: none; }
+section {
+  display: none;
+}
 
 /* sections with the active class are visible now */
 section.active {
-    display: block;
-    flex: 1 1 auto; /* making it so active sections will shrink and grow with their containers */
-    overflow-y: auto;
-    margin: 1em auto;
-    margin-right: 1px;
+  display: block;
+  flex: 1 1 auto; /* making it so active sections will shrink and grow with their containers */
+  overflow-y: auto;
+  margin: 1em auto;
+  margin-right: 1px;
 }
-
 
 /* =============================
  *  Home Page styling
  * =============================*/
 /* Setting up the active home page */
-    #home.active {
-        background: rgba(255, 255, 255, 0.75);
-        /* making it so contents are centered */
-        display: flex;
-            align-items: center;
-            justify-content: center;
-        text-align: center;
-    }
-        /* setting image-logo size */
-        #home #home-logo {
-            display: inline-block;
-            width: 50%;
-                max-width: 12em;
-        }
-        /* setting home text up */
-        #home .title, #home .tag-line {
-            color: #f36652;
-            /* putting spaces between letters (15% or font size) */
-            letter-spacing: 0.15em; 
-            /* making them all uppercase */
-            text-transform: uppercase;
-        }
-        #home .title {
-            /* making title text spacing bigger (75% of font size) */
-            letter-spacing: 0.75em;
-            margin: 1em auto;
-        }
-        /* making the tag line super thicc */
-        #home .tag-line { font-weight: 900; }
-        
+#home.active {
+  background: rgba(255, 255, 255, 0.75);
+  /* making it so contents are centered */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+/* setting image-logo size */
+#home #home-logo {
+  display: inline-block;
+  width: 50%;
+  max-width: 12em;
+}
+/* setting home text up */
+#home .title,
+#home .tag-line {
+  color: #f36652;
+  /* putting spaces between letters (15% or font size) */
+  letter-spacing: 0.15em;
+  /* making them all uppercase */
+  text-transform: uppercase;
+}
+#home .title {
+  /* making title text spacing bigger (75% of font size) */
+  letter-spacing: 0.75em;
+  margin: 1em auto;
+}
+/* making the tag line super thicc */
+#home .tag-line {
+  font-weight: 900;
+}
+
 /* =============================
  *  Other (?) styling
  * =============================*/
-
 
 /* =============================
  *  Restaurant styling (like yelp)
  * ============================= */
 #restaurants.active {
-    text-align: center;
+  text-align: center;
 }
 /* Set up the search for the restaurants */
 #restaurants form {
-    background: white;
-    border-radius: 0.25em;
-    box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.25);
-    color: #666;
-    display: inline-flex;
-        align-items: center;
-    margin: 1em auto;
-        margin-top: 0.5em;
+  background: white;
+  border-radius: 0.25em;
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+  color: #666;
+  display: inline-flex;
+  align-items: center;
+  margin: 1em auto;
+  margin-top: 0.5em;
 }
-    #restaurants label,
-    #restaurants input,
-    #restaurants button {
-        border: none;
-    }
-    #restaurants label {
-        border-right: 1px solid gray;
-        margin: 0.5em auto;
-        padding: 0 0.5em;
-    }
-        #restaurants label:last-of-type { border-right: none; } /* No border for the last label in the search */
-    #restaurants input { margin-left:0.5em; }
-    #restaurants button {
-        background-color: #d32323;
-        border-top-right-radius: 0.25em;
-        border-bottom-right-radius: 0.25em;
-        color: white;
-        display: inline-flex;
-            align-items: center;
-        padding: 0.5em 1em;
-    }
-    #restaurants input::placeholder { color: #999; }
+#restaurants label,
+#restaurants input,
+#restaurants button {
+  border: none;
+}
+#restaurants label {
+  border-right: 1px solid gray;
+  margin: 0.5em auto;
+  padding: 0 0.5em;
+}
+#restaurants label:last-of-type {
+  border-right: none;
+} /* No border for the last label in the search */
+#restaurants input {
+  margin-left: 0.5em;
+}
+#restaurants button {
+  background-color: #d32323;
+  border-top-right-radius: 0.25em;
+  border-bottom-right-radius: 0.25em;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5em 1em;
+}
+#restaurants input::placeholder {
+  color: #999;
+}
 
 /* Results from the search */
 #restaurant-results {
-    display: flex;
-        flex-flow: row;
-        flex-wrap: wrap;
-    max-height: 28em;
-    overflow-y: auto;
-    padding-right: 1em;
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  max-height: 28em;
+  overflow-y: auto;
+  padding-right: 1em;
 }
 #restaurant-results .result {
-    margin: 0.5em auto;
-    width: 50%;
+  margin: 0.5em auto;
+  width: 50%;
 }
-    #restaurant-results .loader {
-        display: none;
-    }
-    #restaurant-results .loader.active {
-        display: flex;
-            align-items: center;
-            justify-content: center;
-        width: 100%;
-        height: 20em;
-    }
-    #restaurant-results .loader img {
-        display: inline-block;
-        height: 200px;
-        width: 200px;
-    }
+#restaurant-results .loader {
+  display: none;
+}
+#restaurant-results .loader.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 20em;
+}
+#restaurant-results .loader img {
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+}
 
-    #restaurant-results figure {
-        background: rgba(255, 255, 255, 0.75);
-        display: flex;
-            flex-flow: row;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-        margin-left: 1em;
-        padding: 0.5em;
-    }
-    #restaurant-results figure:hover {
-        box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.5)
-    }
-    #restaurant-results  figcaption { 
-        text-align: left; 
-    }
-    #restaurant-results .img { 
-        border: 1px solid transparent;
-        margin-right: 1em; 
-        vertical-align: bottom;
-    }
-        #restaurant-results .img:hover { 
-            border-color: #f36652;
-            vertical-align: bottom;
-        }
-    #restaurant-results img {
-        background-position: 50% 50%;
-        background-repeat:   no-repeat;
-        background-size:     cover;
-        height: 7em;
-        width:  7em;
-        vertical-align: bottom;
-    }
-.restaurant-name { font-weight: bold; }
+#restaurant-results figure {
+  background: rgba(255, 255, 255, 0.75);
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-left: 1em;
+  padding: 0.5em;
+}
+#restaurant-results figure:hover {
+  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.5);
+}
+#restaurant-results figcaption {
+  text-align: left;
+}
+#restaurant-results .img {
+  border: 1px solid transparent;
+  margin-right: 1em;
+  vertical-align: bottom;
+}
+#restaurant-results .img:hover {
+  border-color: #f36652;
+  vertical-align: bottom;
+}
+#restaurant-results img {
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 7em;
+  width: 7em;
+  vertical-align: bottom;
+}
+.restaurant-name {
+  font-weight: bold;
+}
+
+/* HOTEL CSS  */
+
+#hotel.active {
+  text-align: center;
+}
+/* Set up the search for the restaurants */
+#hotel form {
+  background: white;
+  border-radius: 0.25em;
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+  color: #666;
+  display: inline-flex;
+  align-items: center;
+  margin: 1em auto;
+  margin-top: 0.5em;
+}
+#hotel label,
+#hotel input,
+#hotel button {
+  border: none;
+  text-align: center;
+}
+#hotel label {
+  border-right: 1px solid gray;
+  margin: 0.5em auto;
+  padding: 0 0.5em;
+}
+#hotel label:last-of-type {
+  border-right: none;
+} /* No border for the last label in the search */
+#hotel input {
+  margin-left: 0.5em;
+}
+#hotel button {
+  background-color: #d32323;
+  border-top-right-radius: 0.25em;
+  border-bottom-right-radius: 0.25em;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5em 1em;
+}
+#hotel input::placeholder {
+  color: #999;
+}
