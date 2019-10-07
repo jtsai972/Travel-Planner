@@ -251,6 +251,7 @@ section.active {
 #restaurants.active {
     text-align: center;
 }
+/* Set up the search for the restaurants */
 #restaurants form {
     background: white;
     border-radius: 0.25em;
@@ -271,7 +272,7 @@ section.active {
         margin: 0.5em auto;
         padding: 0 0.5em;
     }
-    #restaurants label:last-of-type { border-right: none; }
+        #restaurants label:last-of-type { border-right: none; } /* No border for the last label in the search */
     #restaurants input { margin-left:0.5em; }
     #restaurants button {
         background-color: #d32323;
@@ -283,6 +284,8 @@ section.active {
         padding: 0.5em 1em;
     }
     #restaurants input::placeholder { color: #999; }
+
+/* Results from the search */
 #restaurant-results {
     display: flex;
         flex-flow: row;

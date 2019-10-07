@@ -108,7 +108,45 @@ $("#restaurants button").on("click", function() {
 /* ====================================
  * Other functions
  * ==================================== */
-/*not sure where these should go, guess it depends on what's the most convenient */
+function printRestaurant(business) {
+
+    /* Printing out all the content in the query */
+    for( let i = 0; i < business.length; i++ ) {
+        /* shortening some stuff */
+        var picture = "url(" + business[i].image_url + ")";
+        var address = business[i].location.display_address;
+        /* Creating a figure html element */
+        var figure = 
+        $("<figure>").append(
+            /* Creating an image in a link tag */
+            $("<a class='img' rel='noopener noreferrer'>")
+                .attr("href", business[i].url)
+                .append(
+                    $("<img>").css("background-image", picture)
+                ),
+            /* Adding a caption with restaurant info */
+            $("<figcaption>").append(
+                $("<p class='restaurant-name'>").append(
+                    $("<a rel='noopener noreferrer'>")
+                        .attr("href", business[i].url)
+                        .text(business[i].name)
+                ),
+                $("<p>")
+                    .html(
+                        "<em>" + address[0] + "<br />" +
+                        address[address.length-1] + "</em>"
+                    ),
+                $("<p>")
+                    .html("<strong>Phone:</strong> " + business[i].display_phone)
+            )
+        );
+
+        /* attaching it all to the results page */
+        $("#restaurant-results").prepend(
+            $("<div class='result'>").append(figure)
+        )
+    }
+}
 
 
 /* ====================================
@@ -321,39 +359,4 @@ function restaurantAPI(queryValues) {
             restaurantCount++;
         });
     })
-}
-
-function printRestaurant(business) {
-
-    for( let i = 0; i < business.length; i++ ) {
-        var picture = "url(" + business[i].image_url + ")";
-        var address = business[i].location.display_address;
-
-        var figure = 
-        $("<figure>").append(
-            $("<a class='img' rel='noopener noreferrer'>")
-                .attr("href", business[i].url)
-                .append(
-                    $("<img>").css("background-image", picture)
-                ),
-            $("<figcaption>").append(
-                $("<p class='restaurant-name'>").append(
-                    $("<a rel='noopener noreferrer'>")
-                        .attr("href", business[i].url)
-                        .text(business[i].name)
-                ),
-                $("<p>")
-                    .html(
-                        "<em>" + address[0] + "<br />" +
-                        address[address.length-1] + "</em>"
-                    ),
-                $("<p>")
-                    .html("<strong>Phone:</strong> " + business[i].display_phone)
-            )
-        );
-
-        $("#restaurant-results").prepend(
-            $("<div class='result'>").append(figure)
-        )
-    }
 }
