@@ -292,7 +292,7 @@ section.active {
     display: flex;
         flex-flow: row;
         flex-wrap: wrap;
-    max-height: 30em;
+    max-height: 27em;
     overflow-y: scroll;
     padding-right: 1em;
 }
