@@ -31,6 +31,9 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   </head>
   <body>
     <!-- Header (to add if we want) -->
@@ -72,12 +75,53 @@
           </div>
         </section>
 
-        <section id="flight">flight</section>
+<section id="flight"> <h1 class="addyour"> Add Your Destination </h1>
+  <form>
+    <label for="flight-search">
+      <strong>From</strong>
+      <br>
+      <input id="flight-search" type="search" name="flight-search" placeholder="Dallas, New York...">
+    </label>
+    <label for="flight-location">
+      <strong>To</strong>
+      <br>
+      <input id="flight-location" type="search" name="flight-location" placeholder="Miami, Colorado...">
+    </label>
+    <label for="flight-dates">
+      <strong>Dates</strong>
+      <br>
+      <div id="second-form">
+
+        <label id="departure">
+          <p>Departure</p>
+          <input id="flight-dates" type="search" name="flight-dates" placeholder="MM/DD/YYYY">
+        </label>
+        
+      
+
+        <label id="return">
+          <p>Return</p>
+          <input id="flight-dates" type="search" name="flight-dates" placeholder="MM/DD/YYYY">
+        </label>
+    </label>
+    </div>
+
+    <input type="text" name="datefilter" value="">
+
+    <button>
+      <i class="material-icons">search</i>
+    </button>
+  </form>
+  <div id="flight-results"></div>
+</section>
+<section id="summary">summary</section>
+</section>
+      
 
         <!-- /////// Hotel Start -->
         <section id="hotel">
           <form>
-            <label for="hotel-search">
+            <label for="hotel-nights">
               <strong>Nights</strong>
               <input
                 id="hotel-nights"
@@ -157,6 +201,8 @@
 
     <!-- scripts-->
     <!-- jQuery -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <!-- Firebase References -->
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>

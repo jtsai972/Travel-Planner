@@ -412,3 +412,76 @@ section.active {
 #hotel input::placeholder {
   color: #999;
 }
+
+/*  FLIGHT */
+
+#flight.active {
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  flex-flow: column;
+}
+#flight.active {
+  text-align: center;
+  color: rgba(99, 189, 187, 0.9);
+  font-family: Roboto;
+  font-size: 25px;
+}
+#flight form {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  flex-flow: column;
+  background: rgba(255, 255, 255, 0.4);
+  text-align: center;
+}
+#flight strong {
+  font-size: 15px;
+}
+#flight-search {
+  background-color: white;
+  border-color: #63bdbb;
+  border-width: 1px;
+  align-items: center;
+  text-align: center;
+}
+#flight-location {
+  background-color: white;
+  border-color: #63bdbb;
+  border-width: 1px;
+  align-items: center;
+  text-align: center;
+}
+#flight-dates {
+  background-color: white;
+  border-color: #63bdbb;
+  border-width: 1px;
+  align-items: center;
+  font-family: Roboto;
+  font-size: 15px;
+  text-align: center;
+}
+#second-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  font-family: Roboto;
+  font-size: 15px;
+}
+.ui-datepicker {
+  background-color: white;
+}
+button {
+  padding: 0px 0px 0px 0px;
+}
+.material-icons {
+  background-color: #f36652;
+}
+
+label {
+  margin: 0.5em;
+}
