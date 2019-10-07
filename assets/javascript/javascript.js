@@ -17,13 +17,17 @@
 /* ====================================
  * Database setup
  * ==================================== */
-//Sorry, I don't have a clue how to hide this key & make it work on github at the same time
+
+/* ----------------------------------------------
+ * Sorry, I don't have a clue how to hide this key & make it work on github at the same time
+ * ---------------------------------------------- */
 var config = {
     apiKey: "AIzaSyDju-ufXCy5nHMPUefNuZu6EjGC5kdLd9I",
     authDomain: "authentication-43ba6.firebaseapp.com",
     databaseURL: "https://authentication-43ba6.firebaseio.com",
     storageBucket: "authentication-43ba6.appspot.com"
 };
+
 
 firebase.initializeApp(config); //starting database (jtsai)
 //a couple of database variables that will be referenced (jtsai)
@@ -37,14 +41,16 @@ const dbAuth = database.ref('/authentication');
  * Non-database Global Variables
  * ==================================== */
 
-// You can also use these values as examples and for testing
+var restaurantNum = 6, restaurantCount = 0;
 
-// Test Full URLS
+/* You can also use these values as examples and for testing */
+
+/* Test Full URLS */
 var testFlightURL = "https://test.api.amadeus.com/v1/shopping/flight-offers?origin=MAD&destination=PAR&departureDate=2019-12-01&returnDate=2019-12-28 &max10";
 var testHotelURL = "https://test.api.amadeus.com/v2/shopping/hotel-offers?cityCode=LON";
 var testRestaurantURL = "https://api.yelp.com/v3/businesses/search?term=delis&latitude=37.786882&longitude=-122.399972";
 
-// Test values
+/* Test values */
 var testFlightValue = "origin=MAD&destination=PAR&departureDate=2019-12-01&returnDate=2019-12-28 &max10";
 var testHotelValue = "cityCode=LON";
 var testRestaurantValue = "term=delis&latitude=37.786882&longitude=-122.399972";
@@ -58,52 +64,116 @@ var testRestaurantValue = "term=delis&latitude=37.786882&longitude=-122.399972";
  * On Clicks
  * ==================================== */
 $("nav a").on("click", function() {
-    //making sure no other classes have the class of active;
+    /* making sure no other classes have the class of active; */
     $("nav a").removeClass("active");
     $("section").removeClass("active");
 
-    //setting this anchor tag to active 
+    /* setting this anchor tag to active  */
     $(this).addClass("active");
 
-    //getting the id of the related section
+    /* getting the id of the related section */
     let section = $(this).attr("href");
 
-    //making sure we got the right thing
+    /* making sure we got the right thing */
     console.log("Section:" + section); 
 
-    //make the relative section active (to show content)
+    /*make the relative section active (to show content) */
     $(section).addClass("active");
 })
+
+$("#restaurants button").on("click", function() {
+    /* Preventing page refresh on form button click */
+    event.preventDefault();
+
+    /* Getting form inputs */
+    var foodSearch = $("#food-search").val().trim();
+    var foodLocation = $("#food-location").val().trim();
+    //console.log(` search food: ${foodSearch}, search location ${foodLocation} `);
+
+    /* Getting rid of all spaces */
+    var queryFoodSearch = "term=" + foodSearch.replace(" ", "-");
+    var queryFoodLocation = "location=" + foodLocation.replace(" ", "-");
+    //console.log(` search food: ${queryFoodSearch}, search location ${queryFoodLocation} `);
+
+    var queryValue = queryFoodSearch + "&" + queryFoodLocation;
+    console.log(`Search: ${queryValue}`);
+
+    /* passing search into API */
+    restaurantAPI(queryValue);
+
+    /* Resetting form */
+    $('#restaurants form').trigger("reset");
+});
 
 /* ====================================
  * Other functions
  * ==================================== */
-//not sure where these should go, guess it depends on what's the most convenient
+function printRestaurant(business) {
+
+    /* Printing out all the content in the query */
+    for( let i = 0; i < business.length; i++ ) {
+        /* shortening some stuff */
+        var picture = "url(" + business[i].image_url + ")";
+        var address = business[i].location.display_address;
+        /* Creating a figure html element */
+        var figure = 
+        $("<figure>").append(
+            /* Creating an image in a link tag */
+            $("<a class='img' rel='noopener noreferrer'>")
+                .attr("href", business[i].url)
+                .append(
+                    $("<img>").css("background-image", picture)
+                ),
+            /* Adding a caption with restaurant info */
+            $("<figcaption>").append(
+                $("<p class='restaurant-name'>").append(
+                    $("<a rel='noopener noreferrer'>")
+                        .attr("href", business[i].url)
+                        .text(business[i].name)
+                ),
+                $("<p>")
+                    .html(
+                        "<em>" + address[0] + "<br />" +
+                        address[address.length-1] + "</em>"
+                    ),
+                $("<p>")
+                    .html("<strong>Phone:</strong> " + business[i].display_phone)
+            )
+        );
+
+        /* attaching it all to the results page */
+        $("#restaurant-results").prepend(
+            $("<div class='result'>").append(figure)
+        )
+    }
+}
 
 
 /* ====================================
  * Ajax queries
  * ==================================== */
-// You guys will have to create the search queries in your function and pass it here
+/* You guys will have to create the search queries in your function and pass it here */
 function flightAPI(queryValues) {
-    //base url for the API
+    /* base url for the API */
     var queryBaseURL = "https://test.api.amadeus.com/"; 
 
-    //the final URL that has the query terms added to the end
+    /*the final URL that has the query terms added to the end */
     var queryURL = 
         queryBaseURL + "v1/shopping/flight-offers?" + queryValues;
 
-    //So I'm using an API that requires an authentication token and it really doesn't want you to commit your key and stuff anywhere
-    
-    //referencing firebase in order to get keys from there (jtsai)
-    //This is crap security, but still better than nothing. (jtsai)
+    /* ----------------------------------------------
+     * So I'm using an API that requires an authentication token and it really doesn't want you to commit your key and stuff anywhere
+     *
+     * referencing firebase in order to get keys from there (jtsai)
+     * This is crap security, but still better than nothing. (jtsai) 
+     * ---------------------------------------------- */
     dbAuth.once("value", function(snapshot) {
         var cid, csec;  //creating variables for keys
         cid = snapshot.child('amadeusKey').val();
         csec = snapshot.child('amadeusSecret').val();
         //console.log(`cId: ${cid} cSec: ${csec}`);
 
-        //using the keys from firebase to get a token (this token expires so I figured it'd be safer to make sure it's called whenever you need this flightAPI query) (jtsai)
+        /* using the keys from firebase to get a token (this token expires so I figured it'd be safer to make sure it's called whenever you need this flightAPI query) (jtsai) */
         var auth = {
             "url": queryBaseURL + "v1/security/oauth2/token",
             "method": "POST",
@@ -122,8 +192,9 @@ function flightAPI(queryValues) {
             var tokenBearer = "Bearer " + token.access_token;
             //console.log(tokenBearer);
 
-            //once authentication is done:
-            // Finally starting the actual ajax query for flight data(jtsai)
+            /* once authentication is done:
+             * Finally starting the actual ajax query for flight data(jtsai) 
+             * ---------------------------------------------- */
             var settings = {
                 "async": true,
                 "crossDomain": true,
@@ -140,30 +211,43 @@ function flightAPI(queryValues) {
                 // console.log("AJAX YOU BETTER WORK!");
                 // console.log(queryResult);
 
-                //variables you want will go here
-                //Example for printing out multiple 
-                // for(let i=0; i < queryResult.data[i]) {
-                //     imgSrc = queryResult.data[i].<more path here>
-                //     <more data and variables here>
-                //     print();
-                // }
+                /** ----------------------------------------------
+                 *  variables for stuff you want to get from the API query go here
+                 *  
+                 *  Example for getting data you want
+                 *      var flightName = queryResult.name;
+                 *  
+                 *  Example for printing out data multiple times
+                 *      for(let i=0; i < queryResult.data[i]) {
+                 *  
+                 *      //Getting the data we wanted
+                 *          //(getting the source url of the image from the queryResults Object)
+                 *          imgSrc = queryResult.data[i].url; 
+                 *          flightDescription = queryResult.data[i].description //(getting the description data from the queryResults Object)
+                 *          <more data and variables here>
+                 *          
+                 *          //Printing the data we wanted here
+                 *          $('img').attr('src') = imgSrc; //setting the image source url for an image in the html
+                 *          $('p').text(flightDescription); //making a paragraph with flightDescription content as its text
+                 *      }
+                 * ---------------------------------------------- */
             });
         });
     });
 }
 
-// You guys will have to create the search queries in your function and pass it here
+/* You guys will have to create the search queries in your function and pass it here */
 function hotelAPI(queryValues) {
-    //base url for the API
+    /* base url for the API */
     var queryBaseURL = "https://test.api.amadeus.com/"; 
 
-    //the final URL that has the query terms added to the end
+    /* the final URL that has the query terms added to the end */
     var queryURL = 
         queryBaseURL + "v2/shopping/hotel-offers?" + queryValues;
     
-    //referencing firebase in order to get keys from there (jtsai)
+    /* referencing firebase in order to get keys from there (jtsai) */
     dbAuth.once("value", function(snapshot) {
-        var cid, csec;  //creating variables for keys
+        var cid, csec;  /* creating variables for keys */
         cid = snapshot.child('amadeusKey').val();
         csec = snapshot.child('amadeusSecret').val();
         //console.log(`cId: ${cid} cSec: ${csec}`);
@@ -187,8 +271,10 @@ function hotelAPI(queryValues) {
             var tokenBearer = "Bearer " + token.access_token;
             //console.log(tokenBearer);
 
-            //once authentication is done:
-            // Finally starting the actual ajax query for hotel data(jtsai)
+            /* ----------------------------------------------
+             * once authentication is done:
+             * Finally starting the actual ajax query for hotel data(jtsai)
+             * ---------------------------------------------- */
             var settings = {
                 "async": true,
                 "crossDomain": true,
@@ -205,25 +291,41 @@ function hotelAPI(queryValues) {
                 // console.log("AJAX YOU BETTER WORK!");
                 // console.log(queryResult);
 
-                //variables you want will go here
-                //Example for printing out multiple 
-                // for(let i=0; i < queryResult.data[i]) {
-                //     imgSrc = queryResult.data[i].<more path here>
-                //     <more data and variables here>
-                //     print();
-                // }
+                /** ----------------------------------------------
+                 *  variables for stuff you want to get from the API query go here
+                 *  
+                 *  Example for getting data you want
+                 *      var hotelName = queryResult.name;
+                 *  
+                 *  Example for printing out data multiple times
+                 *      for(let i=0; i < queryResult.data[i]) {
+                 *  
+                 *      //Getting the data we wanted
+                 *          //(getting the source url of the image from the queryResults Object)
+                 *          imgSrc = queryResult.data[i].url; 
+                 *          hotelDescription = queryResult.data[i].description //(getting the description data from the queryResults Object)
+                 *          <more data and variables here>
+                 *          
+                 *          //Printing the data we wanted here
+                 *          $('img').attr('src') = imgSrc; //setting the image source url for an image in the html
+                 *          $('p').text(hotelDescription); //making a paragraph with hotelDescription content as its text
+                 *      }
+                 * ---------------------------------------------- */
             });
         });
     });
 }
 
 function restaurantAPI(queryValues) {
-    //base url for the API
+    /* base url for the API */
     var queryBaseURL = "https://api.yelp.com/v3/"; 
 
     //final yelp query
     var queryURL = 
-        "https://cors-anywhere.herokuapp.com/" + queryBaseURL + "businesses/search?" + queryValues;
+        "https://cors-anywhere.herokuapp.com/" + 
+        queryBaseURL + "businesses/search?" +  queryValues + 
+        "&limit=" + restaurantNum + 
+        "&offset=" + restaurantCount;
 
     //referencing firebase in order to get keys from there (jtsai)
     dbAuth.once("value", function(snapshot) {
@@ -240,9 +342,6 @@ function restaurantAPI(queryValues) {
             "crossDomain": true,
             "url": queryURL,
             "method": "GET",
-            "contentType": "text/json",
-            "dataType": "json",
-            "cache": true,
             "headers": {
                 "Accept": "*/*",
                 "Access-Control-Allow-Origin" : "*",
@@ -252,14 +351,12 @@ function restaurantAPI(queryValues) {
 
         $.ajax(settings).then( function(response) {
             var queryResult = response;
-            // console.log(response);
-            //variables you want will go here
-            //Example for printing out multiple 
-            // for(let i=0; i < queryResult.data[i]) {
-            //     imgSrc = queryResult.data[i].<more path here>
-            //     <more data and variables here>
-            //     print();
-            // }
+            //console.log(response);
+            var business = queryResult.businesses;
+            console.log(business);
+            printRestaurant(business);
+
+            restaurantCount++;
         });
     })
 }

@@ -40,6 +40,9 @@ h2 { font-size: 1.5em;}
 /* setting paragraphs to have some spacing between lines */
 p {line-height: 1.5em;}
 
+strong { font-weight: bold; }
+em { font-style: italics; } 
+
 /* link styling */
 a { 
     color: #63bdbb; 
@@ -47,9 +50,11 @@ a {
 }
 a:hover { 
     color: #f36652; 
-    text-decoration: underline;
 }
 
+.container a:hover {
+    border-bottom: 1px solid #f36652;
+}
 
 /* =============================
  *  Content positioning/sizing 
@@ -64,7 +69,7 @@ main, footer {
 
 main {
     /* transparent white background */
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.6);
     /* Magical rainbow borders of magicalness */
     border: 1px solid #63bdbb;
     border-image: linear-gradient(
@@ -81,10 +86,11 @@ main {
     display: flex;
         align-items: stretch;
         flex-flow: row;
+    height: 50vh;
 }
 
 nav {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.75);
     /* making it so that the navigation goes from top to bottom */
     display: flex;
         flex-flow: column;
@@ -108,7 +114,7 @@ nav {
         background: rgba(99, 189, 187, 0.75);
         box-shadow: 0 0 3px 1px rgba(0,0,0,0.5);
         color: white; 
-        margin: auto -2px; /* adds 2 pixels of space on either side of the element without actually increasing it's official width */
+        margin: 0 -2px; /* adds 2 pixels of space on either side of the element without actually increasing it's official width */
         text-decoration: none; 
         z-index: 1; /* raises it above most content on the page since default z-index is 0 */
     }
@@ -116,7 +122,7 @@ nav {
         /* making the background & box shadow darker */
         background: rgba(99, 189, 187, 1);  
         box-shadow: 0 0 5px 1px rgba(0,0,0,0.75);
-        margin: auto -4px; /* adds more space */
+        margin: 0 -4px; /* adds more space */
         z-index: 2; /* raises it even higher */
     }
     /* This deals with some awkward spacing stuff when increasing logo hover size */
@@ -194,7 +200,9 @@ section { display: none; }
 section.active {
     display: block;
     flex: 1 1 auto; /* making it so active sections will shrink and grow with their containers */
-    padding: 2em;
+    overflow-y: auto;
+    margin: 1em auto;
+    margin-right: 1px;
 }
 
 
@@ -203,7 +211,7 @@ section.active {
  * =============================*/
 /* Setting up the active home page */
     #home.active {
-        background: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.75);
         /* making it so contents are centered */
         display: flex;
             align-items: center;
@@ -235,3 +243,89 @@ section.active {
 /* =============================
  *  Other (?) styling
  * =============================*/
+
+
+/* =============================
+ *  Restaurant styling (like yelp)
+ * ============================= */
+#restaurants.active {
+    text-align: center;
+}
+/* Set up the search for the restaurants */
+#restaurants form {
+    background: white;
+    border-radius: 0.25em;
+    box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.25);
+    color: #666;
+    display: inline-flex;
+        align-items: center;
+    margin: 1em auto;
+        margin-top: 0.5em;
+}
+    #restaurants label,
+    #restaurants input,
+    #restaurants button {
+        border: none;
+    }
+    #restaurants label {
+        border-right: 1px solid gray;
+        margin: 0.5em auto;
+        padding: 0 0.5em;
+    }
+        #restaurants label:last-of-type { border-right: none; } /* No border for the last label in the search */
+    #restaurants input { margin-left:0.5em; }
+    #restaurants button {
+        background-color: #d32323;
+        border-top-right-radius: 0.25em;
+        border-bottom-right-radius: 0.25em;
+        color: white;
+        display: inline-flex;
+            align-items: center;
+        padding: 0.5em 1em;
+    }
+    #restaurants input::placeholder { color: #999; }
+
+/* Results from the search */
+#restaurant-results {
+    display: flex;
+        flex-flow: row;
+        flex-wrap: wrap;
+    padding-right: 1em;
+}
+#restaurant-results .result {
+    margin: 0.5em auto;
+    width: 50%;
+}
+    #restaurant-results figure {
+        background: rgba(255, 255, 255, 0.75);
+        display: flex;
+            flex-flow: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        margin-left: 1em;
+        padding: 0.5em;
+    }
+    #restaurant-results figure:hover {
+        box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.5)
+    }
+    #restaurant-results  figcaption { 
+        text-align: left; 
+    }
+    #restaurant-results .img { 
+        border: 1px solid transparent;
+        margin-right: 1em; 
+        vertical-align: bottom;
+    }
+        #restaurant-results .img:hover { 
+            border-color: #f36652;
+            vertical-align: bottom;
+        }
+    #restaurant-results img {
+        background-position: 50% 50%;
+        background-repeat:   no-repeat;
+        background-size:     cover;
+        height: 7em;
+        width:  7em;
+        vertical-align: bottom;
+    }
+.restaurant-name { font-weight: bold; }
