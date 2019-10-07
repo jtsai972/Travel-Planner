@@ -13,7 +13,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico">
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,900|Roboto&display=swap" rel="stylesheet">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/css/reset.css" />
@@ -24,21 +24,43 @@
 
     <!-- Main content-->
     <main>
+      <!-- Hello navigation to hide/display content -->
       <nav>
-        <a href="#logo"><img src="assets/images/logo_trans.png"></a>
+        <a id="nav-logo" class="active" href="#home">
+          <img class="nav-img" src="assets/images/logo_trans.png" alt="Trip Planner Logo image for navigation link">
+          <img class="nav-hover" src="assets/images/logo_trans_hover.png" alt="Trip Planner Logo hover image for navigation link">
+        </a>
         <a href="#flight">Flight Info</a>
         <a href="#hotel">Hotel Info</a>
         <a href="#restaurants">Restaurants</a>
         <a href="#itinerary">Itinerary</a>
       </nav>
+
+      <!-- Content on the right side of the nav -->
       <div class="container">
+
+        <!-- setting up starting title page -->
+        <section id="home" class="active">
+          <div>
+            <img id="home-logo" src="assets/images/logo_trans.png" alt="Trip planner logo image" />
+            <h1 class="title">Travel Planner</h1>
+            <h2 class="tag-line">Travel made easy</h2>
+          </div>
+        </section>
+
         <section id="flight">flight</section>
         <section id="hotel">hotel</section>
         <section id="restaurants">restaurants</section>
         <section id="itinerary">itinerary</section>
+        
       </div>
+
     </main>
-    <footer>Copyright here</footer>
+
+    <footer>
+      <p>Copyright &copy; 2019</p>
+      <p>Powered by Amadeus Travel API and Yelp API</p>
+    </footer>
 
     <!-- Footer (to add if we want) -->
 
