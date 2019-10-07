@@ -184,34 +184,25 @@ function printRestaurant(business) {
 // < !-- /////// Hotel start -->
 
 function printHotel(hotel) {
-  $(".loader").removeClass("active");
+  var hotel = hotel.data;
+
   /* Printing out all the content in the query */
   for (let i = 0; i < hotel.length; i++) {
     /* shortening some stuff */
-    var picture = "url(" + hotel[i].image_url + ")";
-    var address = hotel[i].location.display_address;
+
+    var address = hotel[i].hotel.address.lines[0];
+
     /* Creating a figure html element */
-    var figure = $("<figure>").append(
-      /* Creating an image in a link tag */
-      $("<a class='img' rel='noopener noreferrer'>")
-        .attr("href", hotel[i].url)
-        .append($("<img>").css("background-image", picture)),
-      /* Adding a caption with restaurant info */
-      $("<figcaption>").append(
-        $("<p class='hotel-name'>").append(
-          $("<a rel='noopener noreferrer'>")
-            .attr("href", hotel[i].url)
-            .text(hotel[i].name)
-        ),
-        $("<p>").html(
-          "<em>" + address[0] + "<br />" + address[address.length - 1] + "</em>"
-        ),
-        $("<p>").html("<strong>Phone:</strong> " + hotel[i].display_phone)
-      )
+    var hotelDiv = $("<div>").append(
+      $("<p class='hotel-name'>").text(hotel[i].hotel.name),
+      $("<p>").html(
+        "<em>" + address + "<br />" + hotel[i].hotel.address.cityName + "</em>"
+      ),
+      $("<p>").html("<strong>Phone:</strong> " + hotel[i].hotel.contact.phone)
     );
 
     /* attaching it all to the results page */
-    $("#hotel-results").prepend($("<div class='result'>").append(figure));
+    $("#hotel-results").prepend(hotelDiv);
   }
 }
 
@@ -361,6 +352,8 @@ function hotelAPI(queryValues) {
         // console.log("AJAX YOU BETTER WORK!");
         console.log(queryResult);
 
+        printHotel(queryResult);
+
         /** ----------------------------------------------
          *  variables for stuff you want to get from the API query go here
          *
@@ -436,3 +429,5 @@ function restaurantAPI(queryValues) {
     });
   });
 }
+
+// calendar
