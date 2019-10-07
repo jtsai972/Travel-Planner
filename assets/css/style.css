@@ -84,22 +84,26 @@ footer {
 }
 
 main {
-  /* transparent white background */
-  background: rgba(255, 255, 255, 0.6);
-  /* Magical rainbow borders of magicalness */
-  border: 1px solid #63bdbb;
-  border-image: linear-gradient(to right, #f36652, #63bdbb, #fabd46);
-  border-image-slice: 1;
-  border-bottom: none;
-  /* outlines the rainbow border*/
-  box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.5);
-  /* making it so that content within stretches */
-  display: flex;
-  align-items: stretch;
-  flex-flow: row;
-  min-height: 30em;
-  max-height: 90vh;
-  overflow: auto;
+    /* transparent white background */
+    background: rgba(255, 255, 255, 0.6);
+    /* Magical rainbow borders of magicalness */
+    border: 1px solid #63bdbb;
+    border-image: linear-gradient(
+        to right,
+        #f36652, 
+        #63bdbb, 
+        #fabd46
+    );
+    border-image-slice: 1;
+    border-bottom: none;
+    /* outlines the rainbow border*/
+    box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.5); 
+    /* making it so that content within stretches */
+    display: flex;
+        align-items: stretch;
+        flex-flow: row;
+    min-height:30em;
+    max-height:90vh;
 }
 
 nav {
