@@ -15,6 +15,9 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,900|Roboto&display=swap" rel="stylesheet">
 
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
@@ -49,9 +52,41 @@
         </section>
 
         <section id="flight">flight</section>
+
         <section id="hotel">hotel</section>
-        <section id="restaurants">restaurants</section>
-        <section id="itinerary">itinerary</section>
+
+        <section id="restaurants">
+          <form>
+
+            <label for="food-search">
+              <strong>Find</strong>
+              <input 
+                id="food-search" 
+                type="search" 
+                name="food-search" 
+                placeholder="Delis, Italian, Burgers"
+              >
+            </label>
+
+            <label for="food-location">
+              <strong>Near</strong>
+              <input 
+                id="food-location" 
+                type="search" 
+                name="food-location" 
+                placeholder="San Francisco, Chicago"
+              >
+            </label>
+
+            <button>
+              <i class="material-icons">search</i>
+            </button>
+          </form>
+
+          <div id="restaurant-results"></div>
+        </section>
+
+        <section id="summary">summary</section>
         
       </div>
 
