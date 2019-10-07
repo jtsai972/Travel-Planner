@@ -331,17 +331,21 @@ function printRestaurant(business) {
 
         var figure = 
         $("<figure>").append(
-            $("<img>").css("background-image", picture),
+            $("<a class='img' rel='noopener noreferrer'>")
+                .attr("href", business[i].url)
+                .append(
+                    $("<img>").css("background-image", picture)
+                ),
             $("<figcaption>").append(
                 $("<p class='restaurant-name'>").append(
-                    $("<a>")
+                    $("<a rel='noopener noreferrer'>")
                         .attr("href", business[i].url)
                         .text(business[i].name)
                 ),
                 $("<p>")
                     .html(
                         "<em>" + address[0] + "<br />" +
-                        address[1] + "</em>"
+                        address[address.length-1] + "</em>"
                     ),
                 $("<p>")
                     .html("<strong>Phone:</strong> " + business[i].display_phone)

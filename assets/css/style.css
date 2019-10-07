@@ -49,10 +49,12 @@ a {
     text-decoration: none;
 }
 a:hover { 
-    border: 1px solid #f36652;
     color: #f36652; 
 }
 
+.container a:hover {
+    border-bottom: 1px solid #f36652;
+}
 
 /* =============================
  *  Content positioning/sizing 
@@ -88,7 +90,7 @@ main {
 }
 
 nav {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.75);
     /* making it so that the navigation goes from top to bottom */
     display: flex;
         flex-flow: column;
@@ -300,13 +302,27 @@ section.active {
         margin-left: 1em;
         padding: 0.5em;
     }
-    #restaurant-results  figcaption { text-align: left; }
-#restaurant-results img {
-    width:  7em;
-    height: 7em;
-    background-position: 50% 50%;
-    background-repeat:   no-repeat;
-    background-size:     cover;
-    margin-right: 1em;
-}
+    #restaurant-results figure:hover {
+        box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.5)
+    }
+    #restaurant-results  figcaption { 
+        text-align: left; 
+    }
+    #restaurant-results .img { 
+        border: 1px solid transparent;
+        margin-right: 1em; 
+        vertical-align: bottom;
+    }
+        #restaurant-results .img:hover { 
+            border-color: #f36652;
+            vertical-align: bottom;
+        }
+    #restaurant-results img {
+        background-position: 50% 50%;
+        background-repeat:   no-repeat;
+        background-size:     cover;
+        height: 7em;
+        width:  7em;
+        vertical-align: bottom;
+    }
 .restaurant-name { font-weight: bold; }
