@@ -49,8 +49,8 @@ a {
     text-decoration: none;
 }
 a:hover { 
+    border: 1px solid #f36652;
     color: #f36652; 
-    text-decoration: underline;
 }
 
 
@@ -200,6 +200,7 @@ section.active {
     flex: 1 1 auto; /* making it so active sections will shrink and grow with their containers */
     overflow-y: auto;
     margin: 1em auto;
+    margin-right: 1px;
 }
 
 
@@ -208,7 +209,7 @@ section.active {
  * =============================*/
 /* Setting up the active home page */
     #home.active {
-        background: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.75);
         /* making it so contents are centered */
         display: flex;
             align-items: center;
@@ -251,7 +252,7 @@ section.active {
 #restaurants form {
     background: white;
     border-radius: 0.25em;
-    box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.25);
     color: #666;
     display: inline-flex;
         align-items: center;
@@ -279,20 +280,27 @@ section.active {
             align-items: center;
         padding: 0.5em 1em;
     }
+    #restaurants input::placeholder { color: #999; }
 #restaurant-results {
     display: flex;
         flex-flow: row;
         flex-wrap: wrap;
+    padding-right: 1em;
 }
-#restaurant-results figure {
-    display: flex;
-        flex-flow: row;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-    margin: 1em 0;
-    padding: 0 2em;
+#restaurant-results .result {
+    margin: 0.5em auto;
     width: 50%;
 }
+    #restaurant-results figure {
+        background: rgba(255, 255, 255, 0.75);
+        display: flex;
+            flex-flow: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        margin-left: 1em;
+        padding: 0.5em;
+    }
+    #restaurant-results  figcaption { text-align: left; }
 #restaurant-results img {
     width:  7em;
     height: 7em;
@@ -301,3 +309,4 @@ section.active {
     background-size:     cover;
     margin-right: 1em;
 }
+.restaurant-name { font-weight: bold; }

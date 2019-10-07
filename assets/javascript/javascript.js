@@ -88,18 +88,12 @@ $("#restaurants button").on("click", function() {
     /* Getting form inputs */
     var foodSearch = $("#food-search").val().trim();
     var foodLocation = $("#food-location").val().trim();
-    console.log(`
-        search food: ${foodSearch}, 
-        search location ${foodLocation}
-    `);
+    //console.log(` search food: ${foodSearch}, search location ${foodLocation} `);
 
     /* Getting rid of all spaces */
     var queryFoodSearch = "term=" + foodSearch.replace(" ", "-");
     var queryFoodLocation = "location=" + foodLocation.replace(" ", "-");
-    console.log(`
-        search food: ${queryFoodSearch}, 
-        search location ${queryFoodLocation}
-    `);
+    //console.log(` search food: ${queryFoodSearch}, search location ${queryFoodLocation} `);
 
     var queryValue = queryFoodSearch + "&" + queryFoodLocation;
     console.log(`Search: ${queryValue}`);
@@ -108,7 +102,7 @@ $("#restaurants button").on("click", function() {
     restaurantAPI(queryValue);
 
     /* Resetting form */
-    $('#restaurant form').trigger("reset");
+    $('#restaurants form').trigger("reset");
 });
 
 /* ====================================
@@ -310,9 +304,6 @@ function restaurantAPI(queryValues) {
             "crossDomain": true,
             "url": queryURL,
             "method": "GET",
-            "contentType": "text/json",
-            "dataType": "json",
-            "cache": true,
             "headers": {
                 "Accept": "*/*",
                 "Access-Control-Allow-Origin" : "*",
@@ -322,12 +313,11 @@ function restaurantAPI(queryValues) {
 
         $.ajax(settings).then( function(response) {
             var queryResult = response;
-            console.log(response);
-            
+            //console.log(response);
             var business = queryResult.businesses;
             console.log(business);
-
             printRestaurant(business);
+
             restaurantCount++;
         });
     })
@@ -337,15 +327,29 @@ function printRestaurant(business) {
 
     for( let i = 0; i < business.length; i++ ) {
         var picture = "url(" + business[i].image_url + ")";
+        var address = business[i].location.display_address;
 
         var figure = 
         $("<figure>").append(
             $("<img>").css("background-image", picture),
             $("<figcaption>").append(
-                $("<p>").text(business[i].name)
+                $("<p class='restaurant-name'>").append(
+                    $("<a>")
+                        .attr("href", business[i].url)
+                        .text(business[i].name)
+                ),
+                $("<p>")
+                    .html(
+                        "<em>" + address[0] + "<br />" +
+                        address[1] + "</em>"
+                    ),
+                $("<p>")
+                    .html("<strong>Phone:</strong> " + business[i].display_phone)
             )
         );
 
-        $("#restaurant-results").append(figure);
+        $("#restaurant-results").prepend(
+            $("<div class='result'>").append(figure)
+        )
     }
 }
