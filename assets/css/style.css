@@ -292,8 +292,8 @@ section.active {
     display: flex;
         flex-flow: row;
         flex-wrap: wrap;
-    max-height: 27em;
-    overflow-y: scroll;
+    max-height: 28em;
+    overflow-y: auto;
     padding-right: 1em;
 }
 #restaurant-results .result {
