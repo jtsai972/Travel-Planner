@@ -86,7 +86,8 @@ main {
     display: flex;
         align-items: stretch;
         flex-flow: row;
-    height: 50vh;
+    max-height: 90vh;
+    min-height: 50vh;
 }
 
 nav {
