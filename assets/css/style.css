@@ -415,12 +415,25 @@ section.active {
   margin-left: 1em;
   padding: 0.5em;
   text-align: center;
+  position: relative;
 }
 
 #hotel-results .result figure:hover {
   box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.5);
   text-align: center;
 }
+
+#hotel-results .material-icons {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+  #hotel-results .addCircle  {
+      display: inline-block;
+  }
+  #hotel-results .addCircleOutline {
+      display: none;
+  }
 
 #hotel-results .result figcaption {
   text-align: center;
@@ -457,7 +470,7 @@ section.active {
 /* =============================
  *  Restaurant styling (like yelp)
  * ============================= */
- #restaurants.active {
+#restaurants.active {
   text-align: center;
 }
 #restaurants form {

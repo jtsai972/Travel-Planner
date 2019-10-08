@@ -94,36 +94,6 @@ $("section").on("mouseleave", "figure", function() {
   $(this).children(".addCircleOutline").hide();
 });
 
-$("#restaurants button").on("click", function() {
-  /* Preventing page refresh on form button click */
-  event.preventDefault();
-
-  $(".loading").addClass("active");
-
-  /* Getting form inputs */
-  var foodSearch = $("#food-search")
-    .val()
-    .trim();
-  var foodLocation = $("#food-location")
-    .val()
-    .trim();
-  //console.log(` search food: ${foodSearch}, search location ${foodLocation} `);
-
-  /* Getting rid of all spaces */
-  var queryFoodSearch = "term=" + foodSearch.replace(" ", "-");
-  var queryFoodLocation = "location=" + foodLocation.replace(" ", "-");
-  //console.log(` search food: ${queryFoodSearch}, search location ${queryFoodLocation} `);
-
-  var queryValue = queryFoodSearch + "&" + queryFoodLocation;
-  console.log(`Search: ${queryValue}`);
-
-  /* passing search into API */
-  restaurantAPI(queryValue);
-
-  /* Resetting form */
-  $("#restaurants form").trigger("reset");
-});
-
 // < !-- /////// Hotel start -->
 
 $("#hotel button").on("click", function() {
@@ -154,7 +124,54 @@ $("#hotel button").on("click", function() {
   $("#hotel form").trigger("reset");
 });
 
+$("#hotel-results").on("click", ".material-icons", function() {
+  var fig = $(this).parent();
+  //$(this).parent().css("background-color", "blue");
+  var name = fig.find(".name").text();
+  var phone = fig.find(".phone").text();
+  var address = [fig.find(".add1").text(), fig.find(".add2").text()];
+  var price = fig.find(".price").text();
+
+  // console.log(fig);
+  // console.log(img);
+
+  var selection = {
+      type: "hotel",
+      name: name,
+      address: address,
+      phone: phone,
+      price: price
+  };
+  console.log(selection);
+});
+
 // < !-- /////// Hotel end -->
+
+$("#restaurants button").on("click", function() {
+  /* Preventing page refresh on form button click */
+  event.preventDefault();
+
+  $(".loading").addClass("active");
+
+  /* Getting form inputs */
+  var foodSearch = $("#food-search").val().trim();
+  var foodLocation = $("#food-location").val().trim();
+  //console.log(` search food: ${foodSearch}, search location ${foodLocation} `);
+
+  /* Getting rid of all spaces */
+  var queryFoodSearch = "term=" + foodSearch.replace(" ", "-");
+  var queryFoodLocation = "location=" + foodLocation.replace(" ", "-");
+  //console.log(` search food: ${queryFoodSearch}, search location ${queryFoodLocation} `);
+
+  var queryValue = queryFoodSearch + "&" + queryFoodLocation;
+  console.log(`Search: ${queryValue}`);
+
+  /* passing search into API */
+  restaurantAPI(queryValue);
+
+  /* Resetting form */
+  $("#restaurants form").trigger("reset");
+});
 
 $("#restaurant-results").on("click", ".material-icons", function() {
     var fig = $(this).parent();
@@ -163,11 +180,9 @@ $("#restaurant-results").on("click", ".material-icons", function() {
     var url = fig.find("a").attr("href");
     var name = fig.find(".name").text();
     var phone = fig.find(".phone").text();
-    var address = [fig.find(".add1").text(), fig.find(".add2").text()]
-
-    console.log(fig);
-    console.log(img);
-
+    var address = [fig.find(".add1").text(), fig.find(".add2").text()];
+    // console.log(fig);
+    // console.log(img);
     var selection = {
         type: "restaurant",
         name: name,
@@ -176,9 +191,7 @@ $("#restaurant-results").on("click", ".material-icons", function() {
         phone: phone,
         url: url
     };
-
     console.log(selection);
-
 });
 
 /* ====================================
@@ -239,14 +252,28 @@ function printHotel(hotel) {
     var hotelPrice = hotel[i].offers[0].price.total;
 
     var figure = $("<figure>").append(
+      $("<i>").addClass("material-icons addCircle").text("add_circle"),
+      $("<i>").addClass("material-icons addCircleOutline").text("add_circle_outline"),
+      //Caption
       $("<figcaption>").append(
-        $("<p class='restaurant-name'>").text(hotelName)
-      ),
-      $("<p>").html("<em>" + address + "<br />" + hotelAddress + "</em>"),
-
-      $("<p>").html("<strong>Phone:</strong> " + hotelPhone),
-
-      $("<p>").html("<strong>Price:</strong> " + hotelPrice)
+        //Name
+        $("<p class='name'>").text(hotelName),
+        //Address
+        $("<p>").append(
+          $("<em class='add1'>").text(address),
+          $("<em class='add2'>").text(hotelAddress)
+        ),
+        //Phone
+        $("<p>").append(
+          $("<strong>").text("Phone: "),
+          $("<span class='phone'>").text(hotelPhone)
+        ),
+        //Price
+        $("<p>").append(
+          $("<strong>").text("Price: "),
+          $("<span class='price'>").text(hotelPrice)
+        )
+      )
     );
 
     $("#hotel-results").prepend($("<div class='result'>").append(figure));
