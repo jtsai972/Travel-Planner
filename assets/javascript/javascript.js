@@ -117,6 +117,9 @@ $("#hotel button").on("click", function() {
   var queryValue = queryHotelLocation;
   console.log(`Search: ${queryValue}`);
 
+  //clearing results
+  $("#hotel-results").find(".result").remove();
+
   /* passing search into API */
   hotelAPI(queryValue);
 
@@ -233,51 +236,62 @@ function printRestaurant(business) {
 
 function printHotel(hotel) {
   $(".loading").removeClass("active");
+
   var hotel = hotel.data;
 
-  /* Printing out all the content in the query */
-  for (let i = 0; i < hotel.length; i++) {
-    /* shortening some stuff */
+  if(hotel.length === 0 ) {
+    var textSorry = "Sorry, it seems like we cannot find any availabilities in this area";
+    var result = 
+      $("<div class='result'>").append(
+        $("<figure>").append(
+          $("<figcaption>").text(textSorry)));
+    $("#hotel-results").append(result);
+  } else {
+    /* Printing out all the content in the query */
+    for (let i = 0; i < hotel.length; i++) {
+      /* shortening some stuff */
 
-    // console.log(hotel[i].hotel.media);
+      // console.log(hotel[i].hotel.media);
 
-    var address = hotel[i].hotel.address.lines[0];
+      var address = hotel[i].hotel.address.lines[0];
 
-    var hotelName = hotel[i].hotel.name;
+      var hotelName = hotel[i].hotel.name;
 
-    var hotelAddress = hotel[i].hotel.address.cityName;
+      var hotelAddress = hotel[i].hotel.address.cityName;
 
-    var hotelPhone = ("contact" in hotel[i].hotel) ? hotel[i].hotel.contact.phone : "N/A";
+      var hotelPhone = ("contact" in hotel[i].hotel) ? hotel[i].hotel.contact.phone : "N/A";
 
-    var hotelPrice = hotel[i].offers[0].price.total;
+      var hotelPrice = hotel[i].offers[0].price.total;
 
-    var figure = $("<figure>").append(
-      $("<i>").addClass("material-icons addCircle").text("add_circle"),
-      $("<i>").addClass("material-icons addCircleOutline").text("add_circle_outline"),
-      //Caption
-      $("<figcaption>").append(
-        //Name
-        $("<p class='name'>").text(hotelName),
-        //Address
-        $("<p>").append(
-          $("<em class='add1'>").text(address),
-          $("<em class='add2'>").text(hotelAddress)
-        ),
-        //Phone
-        $("<p>").append(
-          $("<strong>").text("Phone: "),
-          $("<span class='phone'>").text(hotelPhone)
-        ),
-        //Price
-        $("<p>").append(
-          $("<strong>").text("Price: "),
-          $("<span class='price'>").text(hotelPrice)
+      var figure = $("<figure>").append(
+        $("<i>").addClass("material-icons addCircle").text("add_circle"),
+        $("<i>").addClass("material-icons addCircleOutline").text("add_circle_outline"),
+        //Caption
+        $("<figcaption>").append(
+          //Name
+          $("<p class='name'>").text(hotelName),
+          //Address
+          $("<p>").append(
+            $("<em class='add1'>").text(address),
+            $("<em class='add2'>").text(hotelAddress)
+          ),
+          //Phone
+          $("<p>").append(
+            $("<strong>").text("Phone: "),
+            $("<span class='phone'>").text(hotelPhone)
+          ),
+          //Price
+          $("<p>").append(
+            $("<strong>").text("Price: "),
+            $("<span class='price'>").text(hotelPrice)
+          )
         )
-      )
-    );
+      );
 
-    $("#hotel-results").prepend($("<div class='result'>").append(figure));
+      $("#hotel-results").prepend($("<div class='result'>").append(figure));
+    }
   }
+
 }
 
 // < !-- /////// Hotel end -->

@@ -463,7 +463,7 @@ section.active {
   text-align: center;
 }
   
-  #restaurant-results .result em {
+  #hotel-results .result em {
     display: block;
     font-style: italic;
   }
