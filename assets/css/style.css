@@ -112,7 +112,7 @@ nav {
   padding-bottom: 4em;
   text-align: center;
   width: auto; /* this is just for semantics */
-  min-width: 7.5em;
+  min-width: 9em;
 }
 /* styling nav links */
 nav a {
