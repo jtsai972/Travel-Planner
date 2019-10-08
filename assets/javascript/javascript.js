@@ -200,13 +200,17 @@ function printHotel(hotel) {
 
     var hotelPhone = hotel[i].hotel.contact.phone;
 
+    var hotelPrice = hotel[i].offers[0].price.total;
+
     var figure = $("<figure>").append(
       $("<figcaption>").append(
         $("<p class='restaurant-name'>").text(hotelName)
       ),
       $("<p>").html("<em>" + address + "<br />" + hotelAddress + "</em>"),
 
-      $("<p>").html("<strong>Phone:</strong> " + hotelPhone)
+      $("<p>").html("<strong>Phone:</strong> " + hotelPhone),
+
+      $("<p>").html("<strong>Price:</strong> " + hotelPrice)
     );
 
     $("#hotel-results").prepend($("<div class='result'>").append(figure));
