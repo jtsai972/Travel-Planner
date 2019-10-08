@@ -84,11 +84,21 @@ $("nav a").on("click", function() {
   $(section).addClass("active");
 });
 
+$("section").on("mouseenter", "figure", function() {
+  $(this).children(".addCircle").hide();
+  $(this).children(".addCircleOutline").show();
+});
+
+$("section").on("mouseleave", "figure", function() {
+  $(this).children(".addCircle").show();
+  $(this).children(".addCircleOutline").hide();
+});
+
 $("#restaurants button").on("click", function() {
   /* Preventing page refresh on form button click */
   event.preventDefault();
 
-  $(".loader").addClass("active");
+  $(".loading").addClass("active");
 
   /* Getting form inputs */
   var foodSearch = $("#food-search")
@@ -120,7 +130,7 @@ $("#hotel button").on("click", function() {
   /* Preventing page refresh on form button click */
   event.preventDefault();
 
-  $(".loader").addClass("active");
+  $(".loading").addClass("active");
 
   /* Getting form inputs */
   var hotelLocation = $("#hotel-location")
@@ -130,7 +140,7 @@ $("#hotel button").on("click", function() {
     .val()
     .trim();
 
-  var queryHotelLocation = "cityCode=" + "DAL"; //hotelLocation.replace(" ", "-");
+  var queryHotelLocation = "cityCode=" + hotelLocation.replace(" ", "-"); //"DAL";
 
   queryHotelLocation += "&numberOfNights=" + hotelNights;
 
@@ -146,11 +156,36 @@ $("#hotel button").on("click", function() {
 
 // < !-- /////// Hotel end -->
 
+$("#restaurant-results").on("click", ".material-icons", function() {
+    var fig = $(this).parent();
+    //$(this).parent().css("background-color", "blue");
+    var img = fig.find("img").attr("style");
+    var url = fig.find("a").attr("href");
+    var name = fig.find(".name").text();
+    var phone = fig.find(".phone").text();
+    var address = [fig.find(".add1").text(), fig.find(".add2").text()]
+
+    console.log(fig);
+    console.log(img);
+
+    var selection = {
+        type: "restaurant",
+        name: name,
+        address: address,
+        img: img,
+        phone: phone,
+        url: url
+    };
+
+    console.log(selection);
+
+});
+
 /* ====================================
  * Other functions
  * ==================================== */
 function printRestaurant(business) {
-  $(".loader").removeClass("active");
+  $(".loading").removeClass("active");
   /* Printing out all the content in the query */
   for (let i = 0; i < business.length; i++) {
     /* shortening some stuff */
@@ -184,6 +219,7 @@ function printRestaurant(business) {
 // < !-- /////// Hotel start -->
 
 function printHotel(hotel) {
+  $(".loading").removeClass("active");
   var hotel = hotel.data;
 
   /* Printing out all the content in the query */
@@ -394,51 +430,85 @@ function hotelAPI(queryValues) {
 
 function restaurantAPI(queryValues) {
   /* base url for the API */
-  var queryBaseURL = "https://api.yelp.com/v3/";
+  var queryBaseURL = "https://api.yelp.com/v3/"; 
 
   //final yelp query
-  var queryURL =
-    "https://cors-anywhere.herokuapp.com/" +
-    queryBaseURL +
-    "businesses/search?" +
-    queryValues +
-    "&limit=" +
-    restaurantNum +
-    "&offset=" +
-    restaurantCount;
+  var queryURL = 
+      "https://cors-anywhere.herokuapp.com/" + 
+      queryBaseURL + "businesses/search?" +  queryValues + 
+      "&limit=" + restaurantNum + 
+      "&offset=" + restaurantCount;
 
   //referencing firebase in order to get keys from there (jtsai)
   dbAuth.once("value", function(snapshot) {
-    var cid; //creating variables for keys
-    cid = snapshot.child("yelpKey").val();
-    //console.log(`cId: ${cid} cSec: ${csec}`);
+      var cid; //creating variables for keys
+      cid = snapshot.child('yelpKey').val();
+      //console.log(`cId: ${cid} cSec: ${csec}`);
 
-    var tokenBearer = "Bearer " + cid;
+      var tokenBearer = "Bearer " + cid; 
 
-    //using the keys from firebase to get a token (jtsai)
+      //using the keys from firebase to get a token (jtsai)
 
-    var settings = {
-      async: true,
-      crossDomain: true,
-      url: queryURL,
-      method: "GET",
-      headers: {
-        Accept: "*/*",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: tokenBearer
+      var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": queryURL,
+          "method": "GET",
+          "headers": {
+              "Accept": "*/*",
+              "Access-Control-Allow-Origin" : "*",
+              "Authorization": tokenBearer
+          }
       }
-    };
 
-    $.ajax(settings).then(function(response) {
-      var queryResult = response;
-      //console.log(response);
-      var business = queryResult.businesses;
-      console.log(business);
-      printRestaurant(business);
+      $.ajax(settings).then( function(response) {
+          var queryResult = response;
+          //console.log(response);
+          var business = queryResult.businesses;
+          console.log(business);
+          printRestaurant(business);
 
-      restaurantCount++;
-    });
-  });
+          restaurantCount++;
+      });
+  })
+}
+
+function printRestaurant(business) {
+    $(".loading").removeClass("active");
+    for( let i = 0; i < business.length; i++ ) {
+        var picture = "url(" + business[i].image_url + ")";
+        var address = business[i].location.display_address;
+
+        var figure = 
+        $("<figure>").append(
+            $("<i>").addClass("material-icons addCircle").text("add_circle"),
+            $("<i>").addClass("material-icons addCircleOutline").text("add_circle_outline"),
+            $("<a class='img' rel='noopener noreferrer'>")
+                .attr("href", business[i].url)
+                .append(
+                    $("<img>").css("background-image", picture)
+                ),
+            $("<figcaption>").append(
+                $("<p class='name'>").append(
+                    $("<a rel='noopener noreferrer'>")
+                        .attr("href", business[i].url)
+                        .text(business[i].name)
+                ),
+                $("<p>").append(
+                    $("<em class='add1'>").text(address[0]),
+                    $("<em class='add2'>").text(address[address.length-1])
+                ),
+                $("<p>").append(
+                    $("<strong>").text("Phone: "),
+                    $("<span class='phone'>").text(business[i].display_phone)
+                )
+            )
+        );
+
+        $("#restaurant-results").prepend(
+            $("<div class='result'>").append(figure)
+        )
+    }
 }
 
 // calendar
