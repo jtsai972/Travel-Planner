@@ -247,10 +247,126 @@ section.active {
 #home .tag-line {
   font-weight: 900;
 }
+/* =============================
+ *  Flight styling
+ * =============================*/
+#flight.active {
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  flex-flow: column;
+}
+#flight.active {
+  text-align: center;
+  color: rgba(99, 189, 187, 0.9);
+  font-family: Roboto;
+  font-size: 25px;
+}
+#flight form {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  flex-flow: column;
+  background: rgba(255, 255, 255, 0.4);
+  text-align: center;
+}
+#flight strong {
+  font-size: 15px;
+}
+#flight #flight-search {
+  background-color: white;
+  border-color: #63bdbb;
+  border-width: 1px;
+  align-items: center;
+  text-align: center;
+}
+#flight #flight-location {
+  background-color: white;
+  border-color: #63bdbb;
+  border-width: 1px;
+  align-items: center;
+  text-align: center;
+}
+#flight #flight-dates {
+  background-color: white;
+  border-color: #63bdbb;
+  border-width: 1px;
+  align-items: center;
+  font-family: Roboto;
+  font-size: 15px;
+  text-align: center;
+}
+#flight #second-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  font-family: Roboto;
+  font-size: 15px;
+}
+#flight .ui-datepicker {
+  background-color: white;
+}
+#flight button {
+  padding: 0px 0px 0px 0px;
+}
+#flight .material-icons {
+  background-color: #f36652;
+}
+
+#flight label {
+  margin: 0.5em;
+}
 
 /* =============================
- *  Other (?) styling
+ *  Hotel styling
  * =============================*/
+#hotel.active {
+  text-align: center;
+}
+/* Set up the search for the restaurants */
+#hotel form {
+  background: white;
+  border-radius: 0.25em;
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+  color: #666;
+  display: inline-flex;
+  align-items: center;
+  margin: 1em auto;
+  margin-top: 0.5em;
+}
+#hotel label,
+#hotel input,
+#hotel button {
+  border: none;
+  text-align: center;
+}
+#hotel label {
+  border-right: 1px solid gray;
+  margin: 0.5em auto;
+  padding: 0 0.5em;
+}
+#hotel label:last-of-type {
+  border-right: none;
+} /* No border for the last label in the search */
+#hotel input {
+  margin-left: 0.5em;
+}
+#hotel button {
+  background-color: #d32323;
+  border-top-right-radius: 0.25em;
+  border-bottom-right-radius: 0.25em;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5em 1em;
+}
+#hotel input::placeholder {
+  color: #999;
+}
 
 /* =============================
  *  Restaurant styling (like yelp)
@@ -361,123 +477,4 @@ section.active {
 }
 .restaurant-name {
   font-weight: bold;
-}
-
-/* HOTEL CSS  */
-
-#hotel.active {
-  text-align: center;
-}
-/* Set up the search for the restaurants */
-#hotel form {
-  background: white;
-  border-radius: 0.25em;
-  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
-  color: #666;
-  display: inline-flex;
-  align-items: center;
-  margin: 1em auto;
-  margin-top: 0.5em;
-}
-#hotel label,
-#hotel input,
-#hotel button {
-  border: none;
-  text-align: center;
-}
-#hotel label {
-  border-right: 1px solid gray;
-  margin: 0.5em auto;
-  padding: 0 0.5em;
-}
-#hotel label:last-of-type {
-  border-right: none;
-} /* No border for the last label in the search */
-#hotel input {
-  margin-left: 0.5em;
-}
-#hotel button {
-  background-color: #d32323;
-  border-top-right-radius: 0.25em;
-  border-bottom-right-radius: 0.25em;
-  color: white;
-  display: inline-flex;
-  align-items: center;
-  padding: 0.5em 1em;
-}
-#hotel input::placeholder {
-  color: #999;
-}
-
-/*  FLIGHT */
-
-#flight.active {
-  text-align: center;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: column;
-  flex-flow: column;
-}
-#flight.active {
-  text-align: center;
-  color: rgba(99, 189, 187, 0.9);
-  font-family: Roboto;
-  font-size: 25px;
-}
-#flight form {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: column;
-  flex-flow: column;
-  background: rgba(255, 255, 255, 0.4);
-  text-align: center;
-}
-#flight strong {
-  font-size: 15px;
-}
-#flight-search {
-  background-color: white;
-  border-color: #63bdbb;
-  border-width: 1px;
-  align-items: center;
-  text-align: center;
-}
-#flight-location {
-  background-color: white;
-  border-color: #63bdbb;
-  border-width: 1px;
-  align-items: center;
-  text-align: center;
-}
-#flight-dates {
-  background-color: white;
-  border-color: #63bdbb;
-  border-width: 1px;
-  align-items: center;
-  font-family: Roboto;
-  font-size: 15px;
-  text-align: center;
-}
-#second-form {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
-  font-family: Roboto;
-  font-size: 15px;
-}
-.ui-datepicker {
-  background-color: white;
-}
-button {
-  padding: 0px 0px 0px 0px;
-}
-.material-icons {
-  background-color: #f36652;
-}
-
-label {
-  margin: 0.5em;
 }
