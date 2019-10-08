@@ -409,11 +409,12 @@ section.active {
 
 #hotel-results .result figure {
   background: rgba(255, 255, 255, 0.75);
-  flex-flow: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
   margin-left: 1em;
   padding: 0.5em;
+    padding: 2em;
   text-align: center;
   position: relative;
 }
@@ -428,12 +429,12 @@ section.active {
   top: 4px;
   right: 4px;
 }
-  #hotel-results .addCircle  {
-      display: inline-block;
-  }
-  #hotel-results .addCircleOutline {
-      display: none;
-  }
+#hotel-results .addCircle {
+  display: inline-block;
+}
+#hotel-results .addCircleOutline {
+  display: none;
+}
 
 #hotel-results .result figcaption {
   text-align: center;
@@ -461,8 +462,13 @@ section.active {
   vertical-align: bottom;
   text-align: center;
 }
+  
+  #restaurant-results .result em {
+    display: block;
+    font-style: italic;
+  }
 
-.hotel-name {
+#hotel .name {
   font-weight: bold;
   text-align: center;
 }
@@ -476,111 +482,135 @@ section.active {
 #restaurants form {
   background: white;
   border-radius: 0.25em;
-  box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.25);
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
   color: #666;
   display: inline-flex;
-      align-items: center;
+  align-items: center;
   margin: 1em auto;
-      margin-top: 0.5em;
+  margin-top: 0.5em;
 }
   #restaurants label,
   #restaurants input,
   #restaurants button {
-      border: none;
+    border: none;
   }
   #restaurants label {
-      border-right: 1px solid gray;
-      margin: 0.5em auto;
-      padding: 0 0.5em;
+    border-right: 1px solid gray;
+    margin: 0.5em auto;
+    padding: 0 0.5em;
   }
-  #restaurants label:last-of-type { border-right: none; }
-  #restaurants input { margin-left:0.5em; }
+    #restaurants label:last-of-type {
+      border-right: none;
+    }
+  #restaurants input {
+    margin-left: 0.5em;
+  }
+    #restaurants input::placeholder {
+      color: #999;
+    }
   #restaurants button {
-      background-color: #d32323;
-      border-top-right-radius: 0.25em;
-      border-bottom-right-radius: 0.25em;
-      color: white;
-      display: inline-flex;
-          align-items: center;
-      padding: 0.5em 1em;
+    background-color: #d32323;
+    border-top-right-radius: 0.25em;
+    border-bottom-right-radius: 0.25em;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5em 1em;
   }
-  #restaurants input::placeholder { color: #999; }
+    #restaurants button:hover {
+      background-color: #0073bb;
+    }
 #restaurant-results {
   display: flex;
-      flex-flow: row;
-      flex-wrap: wrap;
+  align-items: stretch;
+  flex-flow: row;
+  flex-wrap: wrap;
   height: 28em;
   padding-right: 1em;
 }
-
-#restaurant-results .result {
-  margin: 0.5em auto;
-  width: 50%;
-}
-  #restaurant-results .result figure {
+  #restaurant-results .result {
+    margin: 0.5em auto;
+    width: 50%;
+  }
+    #restaurant-results .result figure {
       background: rgba(255, 255, 255, 0.75);
       display: flex;
-          flex-flow: row;
-          flex-wrap: wrap;
-          justify-content: flex-start;
+        flex-flow: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      height: 100%;
       margin-left: 1em;
       padding: 0.5em;
+        padding-right: 2em;
       position: relative;
-  }
-  #restaurant-results .material-icons {
-      position: absolute;
-      top: 4px;
-      right: 4px;
-  }
-      #restaurant-results .addCircle  {
+    }
+      #restaurant-results .result figure:hover {
+        box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.5);
+      }
+      #restaurant-results .material-icons {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+      }
+        #restaurant-results .addCircle {
           display: inline-block;
-      }
-      #restaurant-results .addCircleOutline {
+        }
+        #restaurant-results .addCircleOutline {
           display: none;
+        }
+      #restaurant-results .result figcaption {
+        flex: 1 1 0;
+        text-align: left;
       }
-  #restaurant-results .result figure:hover {
-      box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.5)
-  }
-  #restaurant-results .result figcaption { 
-      text-align: left; 
-  }
-  #restaurant-results .img { 
-      border: 1px solid transparent;
-      margin-right: 1em; 
-      vertical-align: bottom;
-  }
-      #restaurant-results .img:hover { 
-          border-color: #f36652;
+      #restaurant-results .img {
+        margin-right: 1em;
+        position: relative;
+        width: 33%;
+        vertical-align: bottom;
+      }
+        #restaurant-results .img:hover {
+          opacity: 0.5;
           vertical-align: bottom;
+        }
+        #restaurant-results .result .img:after {
+          content: "";
+          display: block;
+          padding-bottom: 100%;
+        }
+      #restaurant-results .result img {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100%;
+        position: absolute;
+          left: 0;
+          top: 0;
+        width: 100%;
+        vertical-align: bottom;
       }
-  #restaurant-results .result img {
-      background-position: 50% 50%;
-      background-repeat:   no-repeat;
-      background-size:     cover;
-      height: 7em;
-      width:  7em;
-      vertical-align: bottom;
-  }
-  #restaurant-results .result em {
-      display: block;
-      font-style: italic;
-  }
-.restaurant-name { font-weight: bold; }
+
+        #restaurant-results .result em {
+          display: block;
+          font-style: italic;
+        }
+        #restaurants .name {
+          font-weight: bold;
+        }
 /* =============================
  *  Other styling
  * =============================*/
 section.active .loading {
   display: none;
 }
-section.active .loading.active  {
-  background: transparent;
-  display: flex;
-      align-items: center;
-      flex-flow: column;
-      justify-content: center;
-  margin: 2em auto;
-  text-align: center;
-}
-section.active .loading figcaption {
-  text-align: center;
-}
+  section.active .loading.active {
+    background: transparent;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    justify-content: center;
+    margin: 2em auto;
+    text-align: center;
+  }
+  section.active .loading figcaption {
+    text-align: center;
+  }

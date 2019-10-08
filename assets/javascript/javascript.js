@@ -247,7 +247,7 @@ function printHotel(hotel) {
 
     var hotelAddress = hotel[i].hotel.address.cityName;
 
-    var hotelPhone = hotel[i].hotel.contact.phone;
+    var hotelPhone = ("contact" in hotel[i].hotel) ? hotel[i].hotel.contact.phone : "N/A";
 
     var hotelPrice = hotel[i].offers[0].price.total;
 
@@ -427,27 +427,6 @@ function hotelAPI(queryValues) {
         console.log(queryResult);
 
         printHotel(queryResult);
-
-        /** ----------------------------------------------
-         *  variables for stuff you want to get from the API query go here
-         *
-         *  Example for getting data you want
-         *      var hotelName = queryResult.name;
-         *
-         *  Example for printing out data multiple times
-         *      for(let i=0; i < queryResult.data[i]) {
-         *
-         *      //Getting the data we wanted
-         *          //(getting the source url of the image from the queryResults Object)
-         *          imgSrc = queryResult.data[i].url;
-         *          hotelDescription = queryResult.data[i].description //(getting the description data from the queryResults Object)
-         *          <more data and variables here>
-         *
-         *          //Printing the data we wanted here
-         *          $('img').attr('src') = imgSrc; //setting the image source url for an image in the html
-         *          $('p').text(hotelDescription); //making a paragraph with hotelDescription content as its text
-         *      }
-         * ---------------------------------------------- */
       });
     });
   });
