@@ -409,7 +409,6 @@ label {
 
 #hotel-results figure {
   background: rgba(255, 255, 255, 0.75);
-  display: flex;
   flex-flow: row;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -581,4 +580,3 @@ label {
 .restaurant-name {
   font-weight: bold;
 }
-
