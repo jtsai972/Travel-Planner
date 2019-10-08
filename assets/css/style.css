@@ -112,7 +112,7 @@ nav {
   padding-bottom: 4em;
   text-align: center;
   width: auto; /* this is just for semantics */
-  min-width: 7.5em;
+  min-width: 9em;
 }
 /* styling nav links */
 nav a {
@@ -248,135 +248,77 @@ section.active {
   font-weight: 900;
 }
 
-/* =============================
- *  Other (?) styling
- * =============================*/
+/*  FLIGHT --------------------------------------------- */
 
-/* =============================
- *  Restaurant styling (like yelp)
- * ============================= */
-#restaurants.active {
+#flight.active {
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  flex-flow: column;
+}
+#flight.active {
+  text-align: center;
+  color: rgba(99, 189, 187, 0.9);
+  font-family: Roboto;
+  font-size: 25px;
+}
+#flight form {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  flex-flow: column;
+  background: rgba(255, 255, 255, 0.4);
   text-align: center;
 }
-
-/* Set up the search for the restaurants */
-#restaurants form {
-  background: white;
-  border-radius: 0.25em;
-  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
-  color: #666;
-  display: inline-flex;
+#flight strong {
+  font-size: 15px;
+}
+#flight-search {
+  background-color: white;
+  border-color: #63bdbb;
+  border-width: 1px;
   align-items: center;
-  margin: 1em auto;
-  margin-top: 0.5em;
+  text-align: center;
 }
-
-#restaurants label,
-#restaurants input,
-#restaurants button {
-  border: none;
-}
-
-#restaurants label {
-  border-right: 1px solid gray;
-  margin: 0.5em auto;
-  padding: 0 0.5em;
-}
-
-#restaurants label:last-of-type {
-  border-right: none;
-} /* No border for the last label in the search */
-
-#restaurants input {
-  margin-left: 0.5em;
-}
-
-#restaurants button {
-  background-color: #d32323;
-  border-top-right-radius: 0.25em;
-  border-bottom-right-radius: 0.25em;
-  color: white;
-  display: inline-flex;
+#flight-location {
+  background-color: white;
+  border-color: #63bdbb;
+  border-width: 1px;
   align-items: center;
-  padding: 0.5em 1em;
+  text-align: center;
 }
-
-#restaurants input::placeholder {
-  color: #999;
-}
-
-/* Results from the search */
-#restaurant-results {
-  display: flex;
-  flex-flow: row;
-  flex-wrap: wrap;
-  max-height: 28em;
-  overflow-y: auto;
-  padding-right: 1em;
-}
-
-#restaurant-results .result {
-  margin: 0.5em auto;
-  width: 50%;
-}
-
-#restaurant-results .loader {
-  display: none;
-}
-
-#restaurant-results .loader.active {
-  display: flex;
+#flight-dates {
+  background-color: white;
+  border-color: #63bdbb;
+  border-width: 1px;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 20em;
+  font-family: Roboto;
+  font-size: 15px;
+  text-align: center;
 }
-#restaurant-results .loader img {
-  display: inline-block;
-  height: 200px;
-  width: 200px;
-}
-
-#restaurant-results figure {
-  background: rgba(255, 255, 255, 0.75);
+#second-form {
   display: flex;
-  flex-flow: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  margin-left: 1em;
-  padding: 0.5em;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  font-family: Roboto;
+  font-size: 15px;
+}
+.ui-datepicker {
+  background-color: white;
+}
+button {
+  padding: 0px 0px 0px 0px;
+}
+.material-icons {
+  background-color: #f36652;
 }
 
-#restaurant-results figure:hover {
-  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.5);
-}
-
-#restaurant-results figcaption {
-  text-align: left;
-}
-
-#restaurant-results .img {
-  border: 1px solid transparent;
-  margin-right: 1em;
-  vertical-align: bottom;
-}
-
-#restaurant-results .img:hover {
-  border-color: #f36652;
-  vertical-align: bottom;
-}
-
-#restaurant-results img {
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 7em;
-  width: 7em;
-  vertical-align: bottom;
-}
-
-.restaurant-name {
-  font-weight: bold;
+label {
+  margin: 0.5em;
 }
 
 /* HOTEL CSS ----------------------------------------------------  */
@@ -513,75 +455,130 @@ section.active {
   text-align: center;
 }
 
-/*  FLIGHT --------------------------------------------- */
-
-#flight.active {
+/* =============================
+ *  Restaurant styling (like yelp)
+ * ============================= */
+#restaurants.active {
   text-align: center;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: column;
-  flex-flow: column;
-}
-#flight.active {
-  text-align: center;
-  color: rgba(99, 189, 187, 0.9);
-  font-family: Roboto;
-  font-size: 25px;
-}
-#flight form {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: column;
-  flex-flow: column;
-  background: rgba(255, 255, 255, 0.4);
-  text-align: center;
-}
-#flight strong {
-  font-size: 15px;
-}
-#flight-search {
-  background-color: white;
-  border-color: #63bdbb;
-  border-width: 1px;
-  align-items: center;
-  text-align: center;
-}
-#flight-location {
-  background-color: white;
-  border-color: #63bdbb;
-  border-width: 1px;
-  align-items: center;
-  text-align: center;
-}
-#flight-dates {
-  background-color: white;
-  border-color: #63bdbb;
-  border-width: 1px;
-  align-items: center;
-  font-family: Roboto;
-  font-size: 15px;
-  text-align: center;
-}
-#second-form {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
-  font-family: Roboto;
-  font-size: 15px;
-}
-.ui-datepicker {
-  background-color: white;
-}
-button {
-  padding: 0px 0px 0px 0px;
-}
-.material-icons {
-  background-color: #f36652;
 }
 
-label {
-  margin: 0.5em;
+/* Set up the search for the restaurants */
+#restaurants form {
+  background: white;
+  border-radius: 0.25em;
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+  color: #666;
+  display: inline-flex;
+  align-items: center;
+  margin: 1em auto;
+  margin-top: 0.5em;
 }
+
+#restaurants label,
+#restaurants input,
+#restaurants button {
+  border: none;
+}
+
+#restaurants label {
+  border-right: 1px solid gray;
+  margin: 0.5em auto;
+  padding: 0 0.5em;
+}
+
+#restaurants label:last-of-type {
+  border-right: none;
+} /* No border for the last label in the search */
+
+#restaurants input {
+  margin-left: 0.5em;
+}
+
+#restaurants button {
+  background-color: #d32323;
+  border-top-right-radius: 0.25em;
+  border-bottom-right-radius: 0.25em;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5em 1em;
+}
+
+#restaurants input::placeholder {
+  color: #999;
+}
+
+/* Results from the search */
+#restaurant-results {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  max-height: 28em;
+  overflow-y: auto;
+  padding-right: 1em;
+}
+
+#restaurant-results .result {
+  margin: 0.5em auto;
+  width: 50%;
+}
+
+#restaurant-results .loader {
+  display: none;
+}
+
+#restaurant-results .loader.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 20em;
+}
+#restaurant-results .loader img {
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+}
+
+#restaurant-results figure {
+  background: rgba(255, 255, 255, 0.75);
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-left: 1em;
+  padding: 0.5em;
+}
+
+#restaurant-results figure:hover {
+  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.5);
+}
+
+#restaurant-results figcaption {
+  text-align: left;
+}
+
+#restaurant-results .img {
+  border: 1px solid transparent;
+  margin-right: 1em;
+  vertical-align: bottom;
+}
+
+#restaurant-results .img:hover {
+  border-color: #f36652;
+  vertical-align: bottom;
+}
+
+#restaurant-results img {
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 7em;
+  width: 7em;
+  vertical-align: bottom;
+}
+
+.restaurant-name {
+  font-weight: bold;
+}
+
