@@ -84,26 +84,21 @@ footer {
 }
 
 main {
-    /* transparent white background */
-    background: rgba(255, 255, 255, 0.6);
-    /* Magical rainbow borders of magicalness */
-    border: 1px solid #63bdbb;
-    border-image: linear-gradient(
-        to right,
-        #f36652, 
-        #63bdbb, 
-        #fabd46
-    );
-    border-image-slice: 1;
-    border-bottom: none;
-    /* outlines the rainbow border*/
-    box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.5); 
-    /* making it so that content within stretches */
-    display: flex;
-        align-items: stretch;
-        flex-flow: row;
-    min-height:30em;
-    max-height:90vh;
+  /* transparent white background */
+  background: rgba(255, 255, 255, 0.6);
+  /* Magical rainbow borders of magicalness */
+  border: 1px solid #63bdbb;
+  border-image: linear-gradient(to right, #f36652, #63bdbb, #fabd46);
+  border-image-slice: 1;
+  border-bottom: none;
+  /* outlines the rainbow border*/
+  box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.5);
+  /* making it so that content within stretches */
+  display: flex;
+  align-items: stretch;
+  flex-flow: row;
+  min-height: 30em;
+  max-height: 90vh;
 }
 
 nav {
@@ -137,7 +132,7 @@ nav a.active {
 }
 nav a:hover {
   /* making the background & box shadow darker */
-  background: rgba(99, 189, 187, 1);
+  background: rgba(99, 189, 187, 0.5);
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.75);
   margin: 0 -4px; /* adds more space */
   z-index: 2; /* raises it even higher */
@@ -179,7 +174,7 @@ nav #nav-logo.active .nav-img {
 
 footer {
   /* transparent blue background */
-  background: rgba(99, 189, 187, 0.9);
+  background: rgba(99, 189, 187, 0.4);
   box-shadow: 0 0px 3px 0px rgba(0, 0, 0, 0.5),
     /* top shadow */ inset 0 4px 4px -4px rgba(0, 0, 0, 0.5); /* inner shadow */
   /* wide magical rainbow border on the top of the footer */
@@ -220,7 +215,7 @@ section.active {
  * =============================*/
 /* Setting up the active home page */
 #home.active {
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0);
   /* making it so contents are centered */
   display: flex;
   align-items: center;
@@ -241,6 +236,7 @@ section.active {
   letter-spacing: 0.15em;
   /* making them all uppercase */
   text-transform: uppercase;
+  text-shadow: 2px 2px 5px white;
 }
 #home .title {
   /* making title text spacing bigger (75% of font size) */
