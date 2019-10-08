@@ -190,19 +190,26 @@ function printHotel(hotel) {
   for (let i = 0; i < hotel.length; i++) {
     /* shortening some stuff */
 
+    // console.log(hotel[i].hotel.media);
+
     var address = hotel[i].hotel.address.lines[0];
 
-    /* Creating a figure html element */
-    var hotelDiv = $("<div>").append(
-      $("<p class='hotel-name'>").text(hotel[i].hotel.name),
-      $("<p>").html(
-        "<em>" + address + "<br />" + hotel[i].hotel.address.cityName + "</em>"
+    var hotelName = hotel[i].hotel.name;
+
+    var hotelAddress = hotel[i].hotel.address.cityName;
+
+    var hotelPhone = hotel[i].hotel.contact.phone;
+
+    var figure = $("<figure>").append(
+      $("<figcaption>").append(
+        $("<p class='restaurant-name'>").text(hotelName)
       ),
-      $("<p>").html("<strong>Phone:</strong> " + hotel[i].hotel.contact.phone)
+      $("<p>").html("<em>" + address + "<br />" + hotelAddress + "</em>"),
+
+      $("<p>").html("<strong>Phone:</strong> " + hotelPhone)
     );
 
-    /* attaching it all to the results page */
-    $("#hotel-results").prepend(hotelDiv);
+    $("#hotel-results").prepend($("<div class='result'>").append(figure));
   }
 }
 
