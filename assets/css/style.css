@@ -258,6 +258,7 @@ section.active {
 #restaurants.active {
   text-align: center;
 }
+
 /* Set up the search for the restaurants */
 #restaurants form {
   background: white;
@@ -269,22 +270,27 @@ section.active {
   margin: 1em auto;
   margin-top: 0.5em;
 }
+
 #restaurants label,
 #restaurants input,
 #restaurants button {
   border: none;
 }
+
 #restaurants label {
   border-right: 1px solid gray;
   margin: 0.5em auto;
   padding: 0 0.5em;
 }
+
 #restaurants label:last-of-type {
   border-right: none;
 } /* No border for the last label in the search */
+
 #restaurants input {
   margin-left: 0.5em;
 }
+
 #restaurants button {
   background-color: #d32323;
   border-top-right-radius: 0.25em;
@@ -294,6 +300,7 @@ section.active {
   align-items: center;
   padding: 0.5em 1em;
 }
+
 #restaurants input::placeholder {
   color: #999;
 }
@@ -307,13 +314,16 @@ section.active {
   overflow-y: auto;
   padding-right: 1em;
 }
+
 #restaurant-results .result {
   margin: 0.5em auto;
   width: 50%;
 }
+
 #restaurant-results .loader {
   display: none;
 }
+
 #restaurant-results .loader.active {
   display: flex;
   align-items: center;
@@ -336,21 +346,26 @@ section.active {
   margin-left: 1em;
   padding: 0.5em;
 }
+
 #restaurant-results figure:hover {
   box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.5);
 }
+
 #restaurant-results figcaption {
   text-align: left;
 }
+
 #restaurant-results .img {
   border: 1px solid transparent;
   margin-right: 1em;
   vertical-align: bottom;
 }
+
 #restaurant-results .img:hover {
   border-color: #f36652;
   vertical-align: bottom;
 }
+
 #restaurant-results img {
   background-position: 50% 50%;
   background-repeat: no-repeat;
@@ -359,16 +374,16 @@ section.active {
   width: 7em;
   vertical-align: bottom;
 }
+
 .restaurant-name {
   font-weight: bold;
 }
 
-/* HOTEL CSS  */
-
+/* HOTEL CSS ----------------------------------------------------  */
 #hotel.active {
   text-align: center;
 }
-/* Set up the search for the restaurants */
+
 #hotel form {
   background: white;
   border-radius: 0.25em;
@@ -379,23 +394,27 @@ section.active {
   margin: 1em auto;
   margin-top: 0.5em;
 }
+
 #hotel label,
 #hotel input,
 #hotel button {
   border: none;
-  text-align: center;
 }
+
 #hotel label {
   border-right: 1px solid gray;
   margin: 0.5em auto;
   padding: 0 0.5em;
 }
-#hotel label:last-of-type {
+
+#hotellabel:last-of-type {
   border-right: none;
 } /* No border for the last label in the search */
+
 #hotel input {
   margin-left: 0.5em;
 }
+
 #hotel button {
   background-color: #d32323;
   border-top-right-radius: 0.25em;
@@ -405,11 +424,96 @@ section.active {
   align-items: center;
   padding: 0.5em 1em;
 }
+
+#hotel input::placeholder {
+  color: #999;
+} /* No border for the last label in the search */
+
+#hotel input {
+  margin-left: 0.5em;
+  text-align: center;
+}
+
+#hotel button {
+  background-color: #d32323;
+  border-top-right-radius: 0.25em;
+  border-bottom-right-radius: 0.25em;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5em 1em;
+  text-align: center;
+}
+
 #hotel input::placeholder {
   color: #999;
 }
 
-/*  FLIGHT */
+#hotel-results {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  max-height: 28em;
+  overflow-y: auto;
+  padding-right: 1em;
+  text-align: center;
+}
+
+#hotel-results .result {
+  margin: 0.5em auto;
+  width: 50%;
+  text-align: center;
+}
+
+#hotel-results figure {
+  background: rgba(255, 255, 255, 0.75);
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-left: 1em;
+  padding: 0.5em;
+  text-align: center;
+}
+
+#hotel-results figure:hover {
+  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+#hotel-results figcaption {
+  text-align: center;
+  text-align: center;
+}
+
+#hotel-results .img {
+  border: 1px solid transparent;
+  margin-right: 1em;
+  vertical-align: bottom;
+  text-align: center;
+}
+
+#hotel-results .img:hover {
+  border-color: #f36652;
+  vertical-align: bottom;
+}
+
+#hotel-results img {
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 7em;
+  width: 7em;
+  vertical-align: bottom;
+  text-align: center;
+}
+
+.hotel-name {
+  font-weight: bold;
+  text-align: center;
+}
+
+/*  FLIGHT --------------------------------------------- */
 
 #flight.active {
   text-align: center;
