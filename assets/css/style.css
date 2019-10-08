@@ -299,7 +299,7 @@ section.active {
   font-size: 15px;
   text-align: center;
 }
-#second-form {
+#flight #second-form {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -307,17 +307,17 @@ section.active {
   font-family: Roboto;
   font-size: 15px;
 }
-.ui-datepicker {
+#flight .ui-datepicker {
   background-color: white;
 }
-button {
+#flight button {
   padding: 0px 0px 0px 0px;
 }
-.material-icons {
+#flight .material-icons {
   background-color: #f36652;
 }
 
-label {
+#flight label {
   margin: 0.5em;
 }
 
