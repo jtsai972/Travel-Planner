@@ -101,7 +101,7 @@ $("#flight button").on("click", function() {
     "&returnDate=" + endFlight;
 
     //flightAPI(queryValue);
-    printFlight(flightExample.data); //workaround
+    printFlight(flightExample); //workaround
 });
 
 // < !-- /////// Hotel start -->
@@ -380,61 +380,77 @@ function flightAPI(queryValues) {
 function printFlight(flight) {
   $(".loading").removeClass("active");
 
-  console.log(flight);
-  
+  console.log(flight.data);
 
-  for( let i = 0; i < flight.length; i++ ) {
-    var offer = flight[i].offerItems[0].services[0].segments;
-    var offerTo = offer[0].flightSegment;
-    var offerFrom = offer[1].flightSegment;
+  for( let i = 0; i < flight.data.length; i++ ) {
+    var price = flight.data[i].offerItems[0].price.total;
+    var offer = flight.data[i].offerItems[0].services[0].segments;
+    var offerOne = offer[0].flightSegment;
 
-    var flightTo =
-      $("<div class='flight-to'>").append(
+    if(offer.length > 1 ) {
+      var offerTwo = offer[1].flightSegment;
+
+      var flightTwo =
+      $("<div class='flight flight-from'>").append(
         $("<p>").append(
           $("<strong>").text("Flight Number: "),
-          $("<span class='airline'>").text(offerTo.carrierCode + " "),
-          $("<span class='number'>").text(offerTo.number)
+          $("<span class='airline'>").text(offerTwo.carrierCode + " "),
+          $("<span class='number'>").text(offerTwo.number)
         ),
         $("<p class='departure'>").append(
           $("<strong>").text("Departs from: "),
-          $("<span class='airport'>").text(offerTo.departure.iataCode),
-          $("<span class='terminal'>").text(` Terminal ${offerTo.departure.terminal}`),
-          $("<em>").text(offerTo.departure.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
+          $("<span class='location'>").append(
+            $("<span class='airport'>").text(offerTwo.departure.iataCode),
+            $("<span class='terminal'>").text(` Terminal ${offerTwo.departure.terminal}`)
+          ),
+          $("<em>").text(offerTwo.departure.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
         ),
         $("<p class='arrival'>").append(
           $("<strong>").text("Arrives at: "),
-          $("<span class='airport'>").text(offerTo.arrival.iataCode),
-          $("<span class='terminal'>").text(offerTo.arrival.terminal),
-          $("<em>").text(offerTo.arrival.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
+          $("<span class='location'>").append(
+            $("<span class='airport'>").text(offerTwo.arrival.iataCode),
+            $("<span class='terminal'>").text(` Terminal ${offerTwo.arrival.terminal}`)
+          ),
+          $("<em>").text(offerTwo.arrival.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
         )
       );
+    } else {
+      flightTwo = "";
+    }
     
-      var flightFrom =
-      $("<div class='flight-from'>").append(
+    var flightOne =
+      $("<div class='flight flight-one'>").append(
         $("<p>").append(
           $("<strong>").text("Flight Number: "),
-          $("<span class='airline'>").text(offerFrom.carrierCode + " "),
-          $("<span class='number'>").text(offerFrom.number)
+          $("<span class='airline'>").text(offerOne.carrierCode + " "),
+          $("<span class='number'>").text(offerOne.number)
         ),
         $("<p class='departure'>").append(
           $("<strong>").text("Departs from: "),
-          $("<span class='airport'>").text(offerFrom.departure.iataCode),
-          $("<span class='terminal'>").text(` Terminal ${offerFrom.departure.terminal}`),
-          $("<em>").text(offerFrom.departure.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
+          $("<span class='location'>").append(
+            $("<span class='airport'>").text(offerOne.departure.iataCode),
+            $("<span class='terminal'>").text(` Terminal ${offerOne.departure.terminal}`)
+          ),
+          $("<em>").text(offerOne.departure.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
         ),
         $("<p class='arrival'>").append(
           $("<strong>").text("Arrives at: "),
-          $("<span class='airport'>").text(offerFrom.arrival.iataCode),
-          $("<span class='terminal'>").text(offerFrom.arrival.terminal),
-          $("<em>").text(offerFrom.arrival.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
+          $("<span class='location'>").append(
+            $("<span class='airport'>").text(offerOne.arrival.iataCode),
+            $("<span class='terminal'>").text(` Terminal ${offerOne.arrival.terminal}`)
+          ),
+          $("<em>").text(offerOne.arrival.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
         )
       );
 
-    $("#flight-results").prepend(
+    $("#flight-results").append(
       $("<div class='result'>").append(
         $("<i>").addClass("material-icons addCircle").text("add_circle"),
         $("<i>").addClass("material-icons addCircleOutline").text("add_circle_outline"),
-        flightTo, flightFrom
+        $("<p class='price'>").append(
+          $("<strong>").text(`Price: ${price} ${flight.meta.currency}`)
+        ),
+        flightOne, flightTwo
       )
     )
   }
@@ -700,7 +716,8 @@ var flightExample = {
                   flightSegment: {
                     departure: {
                       iataCode: "JFK",
-                      at: "2019-08-01T22:05:00-04:00"
+                      at: "2019-08-01T22:05:00-04:00",
+                      terminal: "4"
                     },
                     arrival: {
                       iataCode: "MAD",

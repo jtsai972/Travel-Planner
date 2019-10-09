@@ -254,27 +254,55 @@ section.active {
   margin-top: 1em;
   padding: 0.5em 1em;
 }
-#flight button:hover {
-  background-color: rgba(99,189,187,0.5);
-}
-
-#flight-results .result {
-  background: rgba(255, 255, 255, 0.75);
-  margin-top: 1em;
-  padding: 1em 2em;
-  position: relative;
-}
-  #flight-results .material-icons {
-    position: absolute;
-    top: 4px;
-    right: 4px;
+  #flight button:hover {
+    background-color: rgba(99,189,187,0.5);
   }
-    #flight-results .addCircle {
-      display: inline-block;
+#flight-results {
+  display: flex;
+    justify-content: space-evenly;
+}
+  #flight-results .result {
+    background: rgba(255, 255, 255, 0.75);
+    margin-top: 1em;
+    padding: 0.5em 1em;
+      padding-right: 2em;
+    position: relative;
+    text-align: left;
+    width: 45%;
+  }
+    #flight-results .material-icons {
+      position: absolute;
+      top: 4px;
+      right: 4px;
     }
-    #flight-results .addCircleOutline {
-      display: none;
+      #flight-results .addCircle {
+        display: inline-block;
+      }
+      #flight-results .addCircleOutline {
+        display: none;
+      }
+    #flight-results h3 {
+      font-size: 1.25em;
     }
+    #flight-results .flight {
+      background: white;
+      border: 1px solid gray;
+      margin: 0.5em 0; 
+      padding: 0.5em;
+    }
+      #flight-results .flight .departure strong,
+      #flight-results .flight .departure em
+      #flight-results .flight .arrival strong,
+      #flight-results .flight .arrival em,
+      #flight-results .flight .location {
+        display: block;
+        
+      }
+      #flight-results .flight .location,
+      #flight-results .flight .departure em,
+      #flight-results .flight .arrival em {
+        padding: 0 1em;
+      }
 
 /* HOTEL CSS ----------------------------------------------------  */
 #hotel form {
