@@ -1,20 +1,4 @@
 /* ====================================
- * Some documentation
- * ====================================
- *
- * API documentation
- * ----------------------------------
- *  flight API search:
- *  https://developers.amadeus.com/self-service/category/air/api-doc/flight-low-fare-search/api-reference
- *
- * hotel API search:
- * https://developers.amadeus.com/self-service/category/hotel/api-doc/hotel-search/api-reference
- *
- * resource for flight and hotel search:
- * https://documenter.getpostman.com/view/2672636/RWEcPfuJ?version=latest#8196c48f-30f9-4e3b-8590-e22f96da8326
- * */
-
-/* ====================================
  * Database setup
  * ==================================== */
 
@@ -47,7 +31,7 @@ var restaurantNum = 6,
 
 /* Test Full URLS */
 var testFlightURL =
-  "https://test.api.amadeus.com/v1/shopping/flight-offers?origin=MAD&destination=PAR&departureDate=2019-12-01&returnDate=2019-12-28 &max10";
+  "https://test.api.amadeus.com/v1/shopping/flight-offers?origin=MAD&destination=PAR&departureDate=2019-12-01&returnDate=2019-12-28&max10";
 var testHotelURL =
   "https://test.api.amadeus.com/v2/shopping/hotel-offers?cityCode=LON";
 var testRestaurantURL =
@@ -55,13 +39,14 @@ var testRestaurantURL =
 
 /* Test values */
 var testFlightValue =
-  "origin=MAD&destination=PAR&departureDate=2019-12-01&returnDate=2019-12-28 &max10";
+  "origin=MAD&destination=PAR&departureDate=2019-12-01&returnDate=2019-12-28&max10";
 var testHotelValue = "cityCode=LON";
 var testRestaurantValue = "term=delis&latitude=37.786882&longitude=-122.399972";
 
 /* ====================================
  * Initialization of document
  * ==================================== */
+$("#flight-dates").daterangepicker();
 
 /* ====================================
  * On Clicks
@@ -80,23 +65,133 @@ $("nav a").on("click", function() {
   /* making sure we got the right thing */
   console.log("Section:" + section);
 
+  if(section === "#summary") {
+    var sum = 0;
+    $('#summary .result span.price').each(function(){
+        sum += parseFloat($(this).text());  // Or this.innerHTML, this.innerText
+        console.log($(this).text());
+    });
+    $("#total").text(sum);
+  }
+
   /*make the relative section active (to show content) */
   $(section).addClass("active");
 });
+
+$("section").on("mouseenter", ".result", function() {
+  $(this).children(".addCircle").hide();
+  $(this).children(".addCircleOutline").show();
+});
+
+$("section").on("mouseleave", ".result", function() {
+  $(this).children(".addCircle").show();
+  $(this).children(".addCircleOutline").hide();
+});
+
+
+
+$("#flight button").on("click", function() {
+  event.preventDefault();
+  $(".loading").addClass("active");
+
+  var flightOrigin = $("#flight-origin").val().trim();
+  var flightDestination = $("#flight-destination").val().trim();
+
+  /* Getting dates */
+  var startFlight = $("#flight-dates").data('daterangepicker').startDate.format('YYYY-MM-DD');
+
+  var endFlight = $("#flight-dates").data('daterangepicker').endDate.format('YYYY-MM-DD');
+
+  console.log(`Loc From: ${flightOrigin}, To: ${flightDestination}`);
+  console.log(`Dates From: ${startFlight}, To: ${endFlight}`);
+
+  var queryValue = 
+    "origin=" + flightOrigin + 
+    "&destination=" + flightDestination +
+    "&departureDate=" + startFlight +
+    "&returnDate=" + endFlight;
+
+    /* Clearing previous results */
+    $("#restaurant-results").find(".result").remove();
+
+    //flightAPI(queryValue);
+    printFlight(flightExample); //workaround for server migration
+});
+
+$("#flight-results").on("click", ".material-icons", function() {
+  var result = $(this).parent();
+  console.log(result);
+
+  $("#flight-results .result").addClass("dim");
+  result.removeClass("dim");
+
+
+  $("#flight-choice").empty();
+  $("#flight-choice").append(result.clone());
+  $("#flight-choice .result").prepend(
+    $("<p class='title'>").text("flight")
+  );
+});
+
+// < !-- /////// Hotel start -->
+
+$("#hotel button").on("click", function() {
+  /* Preventing page refresh on form button click */
+  event.preventDefault();
+
+  $(".loading").addClass("active");
+
+  /* Getting form inputs */
+  var hotelLocation = $("#hotel-location")
+    .val()
+    .trim();
+  var hotelNights = $("#hotel-nights")
+    .val()
+    .trim();
+
+  var queryHotelLocation = "cityCode=" + hotelLocation.replace(" ", "-"); //"DAL";
+
+  queryHotelLocation += "&numberOfNights=" + hotelNights;
+
+  var queryValue = queryHotelLocation;
+  console.log(`Search: ${queryValue}`);
+
+  //clearing results
+  $("#hotel-results").find(".result").remove();
+
+  /* passing search into API */
+  hotelAPI(queryValue);
+
+  /* Resetting form */
+  $("#hotel form").trigger("reset");
+});
+
+$("#hotel-results").on("click", ".material-icons", function() {
+  var result = $(this).parent();
+  console.log(result);
+
+  $("#hotel-results .result").addClass("dim");
+  result.removeClass("dim");
+
+
+  $("#hotel-choice").empty();
+  $("#hotel-choice").append(result.clone());
+  $("#hotel-choice .result").prepend(
+    $("<p class='title'>").text("hotel")
+  );
+});
+
+// < !-- /////// Hotel end -->
 
 $("#restaurants button").on("click", function() {
   /* Preventing page refresh on form button click */
   event.preventDefault();
 
-  $(".loader").addClass("active");
+  $(".loading").addClass("active");
 
   /* Getting form inputs */
-  var foodSearch = $("#food-search")
-    .val()
-    .trim();
-  var foodLocation = $("#food-location")
-    .val()
-    .trim();
+  var foodSearch = $("#food-search").val().trim();
+  var foodLocation = $("#food-location").val().trim();
   //console.log(` search food: ${foodSearch}, search location ${foodLocation} `);
 
   /* Getting rid of all spaces */
@@ -107,6 +202,9 @@ $("#restaurants button").on("click", function() {
   var queryValue = queryFoodSearch + "&" + queryFoodLocation;
   console.log(`Search: ${queryValue}`);
 
+  /* Clearing previous results */
+  $("#restaurant-results").find(".result").remove();
+
   /* passing search into API */
   restaurantAPI(queryValue);
 
@@ -114,43 +212,26 @@ $("#restaurants button").on("click", function() {
   $("#restaurants form").trigger("reset");
 });
 
-// < !-- /////// Hotel start -->
+$("#restaurant-results").on("click", ".material-icons", function() {
+  var result = $(this).parent();
+  console.log(result);
 
-$("#hotel button").on("click", function() {
-  /* Preventing page refresh on form button click */
-  event.preventDefault();
+  $("#restaurant-results .result").addClass("dim");
+  result.removeClass("dim");
 
-  $(".loader").addClass("active");
 
-  /* Getting form inputs */
-  var hotelLocation = $("#hotel-location")
-    .val()
-    .trim();
-  var hotelNights = $("#hotel-nights")
-    .val()
-    .trim();
-
-  var queryHotelLocation = "cityCode=" + "DAL"; //hotelLocation.replace(" ", "-");
-
-  queryHotelLocation += "&numberOfNights=" + hotelNights;
-
-  var queryValue = queryHotelLocation;
-  console.log(`Search: ${queryValue}`);
-
-  /* passing search into API */
-  hotelAPI(queryValue);
-
-  /* Resetting form */
-  $("#hotel form").trigger("reset");
+  $("#restaurant-choice").empty();
+  $("#restaurant-choice").append(result.clone());
+  $("#restaurant-choice .result").prepend(
+    $("<p class='title'>").text("restaurant")
+  );
 });
-
-// < !-- /////// Hotel end -->
 
 /* ====================================
  * Other functions
  * ==================================== */
 function printRestaurant(business) {
-  $(".loader").removeClass("active");
+  $(".loading").removeClass("active");
   /* Printing out all the content in the query */
   for (let i = 0; i < business.length; i++) {
     /* shortening some stuff */
@@ -177,44 +258,74 @@ function printRestaurant(business) {
     );
 
     /* attaching it all to the results page */
-    $("#restaurant-results").prepend($("<div class='result'>").append(figure));
+    $("#restaurant-results").prepend($(`<div id='restaurant-${i}'class='result'>`).append(figure));
   }
 }
 
 // < !-- /////// Hotel start -->
 
 function printHotel(hotel) {
+  $(".loading").removeClass("active");
+
   var hotel = hotel.data;
 
-  /* Printing out all the content in the query */
-  for (let i = 0; i < hotel.length; i++) {
-    /* shortening some stuff */
+  if(hotel.length === 0 ) {
+    var textSorry = "Sorry, it seems like we cannot find any availabilities in this area";
+    var result = 
+      $("<div class='result'>").append(
+        $("<figure>").append(
+          $("<figcaption>").text(textSorry)));
+    $("#hotel-results").append(result);
+  } else {
+    /* Printing out all the content in the query */
+    for (let i = 0; i < hotel.length; i++) {
+      /* shortening some stuff */
 
-    // console.log(hotel[i].hotel.media);
+      // console.log(hotel[i].hotel.media);
 
-    var address = hotel[i].hotel.address.lines[0];
+      var address = hotel[i].hotel.address.lines[0];
 
-    var hotelName = hotel[i].hotel.name;
+      var hotelName = hotel[i].hotel.name;
 
-    var hotelAddress = hotel[i].hotel.address.cityName;
+      var hotelAddress = hotel[i].hotel.address.cityName;
 
-    var hotelPhone = hotel[i].hotel.contact.phone;
+      var hotelPhone = ("contact" in hotel[i].hotel) ? hotel[i].hotel.contact.phone : "N/A";
 
-    var hotelPrice = hotel[i].offers[0].price.total;
+      var hotelPrice = hotel[i].offers[0].price.total;
 
-    var figure = $("<figure>").append(
-      $("<figcaption>").append(
-        $("<p class='restaurant-name'>").text(hotelName)
-      ),
-      $("<p>").html("<em>" + address + "<br />" + hotelAddress + "</em>"),
+      var figure = $("<figure>").append(
+        //Caption
+        $("<figcaption>").append(
+          //Name
+          $("<p class='name'>").text(hotelName),
+          //Address
+          $("<p>").append(
+            $("<em class='add1'>").text(address + " "),
+            $("<em class='add2'>").text(hotelAddress)
+          ),
+          //Phone
+          $("<p>").append(
+            $("<strong>").text("Phone: "),
+            $("<span class='phone'>").text(hotelPhone)
+          ),
+          //Price
+          $("<p>").append(
+            $("<strong>").text("Price: "),
+            $("<span class='price'>").text(hotelPrice)
+          )
+        )
+      );
 
-      $("<p>").html("<strong>Phone:</strong> " + hotelPhone),
-
-      $("<p>").html("<strong>Price:</strong> " + hotelPrice)
-    );
-
-    $("#hotel-results").prepend($("<div class='result'>").append(figure));
+      $("#hotel-results").prepend(
+        $(`<div id='hotel-${i}' class='result'>`).append(
+          $("<i>").addClass("material-icons addCircle").text("add_circle"),
+          $("<i>").addClass("material-icons addCircleOutline").text("add_circle_outline"),
+          figure
+        )
+      );
+    }
   }
+
 }
 
 // < !-- /////// Hotel end -->
@@ -276,33 +387,96 @@ function flightAPI(queryValues) {
       };
 
       $.ajax(settings).then(function(response) {
-        var queryResult = response;
+        var queryResult = response.data;
         // console.log("AJAX YOU BETTER WORK!");
         // console.log(queryResult);
 
-        /** ----------------------------------------------
-         *  variables for stuff you want to get from the API query go here
-         *
-         *  Example for getting data you want
-         *      var flightName = queryResult.name;
-         *
-         *  Example for printing out data multiple times
-         *      for(let i=0; i < queryResult.data[i]) {
-         *
-         *      //Getting the data we wanted
-         *          //(getting the source url of the image from the queryResults Object)
-         *          imgSrc = queryResult.data[i].url;
-         *          flightDescription = queryResult.data[i].description //(getting the description data from the queryResults Object)
-         *          <more data and variables here>
-         *
-         *          //Printing the data we wanted here
-         *          $('img').attr('src') = imgSrc; //setting the image source url for an image in the html
-         *          $('p').text(flightDescription); //making a paragraph with flightDescription content as its text
-         *      }
-         * ---------------------------------------------- */
+        printFlight(queryResult);
       });
     });
   });
+}
+
+function printFlight(flight) {
+  $(".loading").removeClass("active");
+
+  console.log(flight.data);
+
+  for( let i = 0; i < flight.data.length; i++ ) {
+    var price = flight.data[i].offerItems[0].price.total;
+    var offer = flight.data[i].offerItems[0].services[0].segments;
+    var offerOne = offer[0].flightSegment;
+
+    if(offer.length > 1 ) {
+      var offerTwo = offer[1].flightSegment;
+
+      var flightTwo =
+      $("<div class='flight flight-from'>").append(
+        $("<p>").append(
+          $("<strong>").text("Flight Number: "),
+          $("<span class='airline'>").text(offerTwo.carrierCode + " "),
+          $("<span class='number'>").text(offerTwo.number)
+        ),
+        $("<p class='departure'>").append(
+          $("<strong>").text("Departs from: "),
+          $("<span class='location'>").append(
+            $("<span class='airport'>").text(offerTwo.departure.iataCode),
+            $("<span class='terminal'>").text(` Terminal ${offerTwo.departure.terminal}`)
+          ),
+          $("<em>").text(" " + offerTwo.departure.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
+        ),
+        $("<p class='arrival'>").append(
+          $("<strong>").text("Arrives at: "),
+          $("<span class='location'>").append(
+            $("<span class='airport'>").text(offerTwo.arrival.iataCode),
+            $("<span class='terminal'>").text(` Terminal ${offerTwo.arrival.terminal}`)
+          ),
+          $("<em>").text(" " + offerTwo.arrival.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
+        )
+      );
+    } else {
+      flightTwo = "";
+    }
+    
+    var flightOne =
+      $("<div class='flight flight-one'>").append(
+        $("<p>").append(
+          $("<strong>").text("Flight Number: "),
+          $("<span class='airline'>").text(offerOne.carrierCode + " "),
+          $("<span class='number'>").text(offerOne.number)
+        ),
+        $("<p class='departure'>").append(
+          $("<strong>").text("Departs from: "),
+          $("<span class='location'>").append(
+            $("<span class='airport'>").text(offerOne.departure.iataCode),
+            $("<span class='terminal'>").text(` Terminal ${offerOne.departure.terminal}`)
+          ),
+          $("<em>").text(" " + offerOne.departure.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
+        ),
+        $("<p class='arrival'>").append(
+          $("<strong>").text("Arrives at: "),
+          $("<span class='location'>").append(
+            $("<span class='airport'>").text(offerOne.arrival.iataCode),
+            $("<span class='terminal'>").text(` Terminal ${offerOne.arrival.terminal}`)
+          ),
+          $("<em>").text(" " + offerOne.arrival.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
+        )
+      );
+
+    $("#flight-results").append(
+      $(`<div id='flight-${i}' class='result'>`).append(
+        $("<i>").addClass("material-icons addCircle").text("add_circle"),
+        $("<i>").addClass("material-icons addCircleOutline").text("add_circle_outline"),
+        $("<p>").append(
+          $("<strong>").text("Price: "),
+          $("<span class='price'>").text(price),
+          $("<span class='currency'>").text(" " + flight.meta.currency)
+        ),
+        flightOne, flightTwo
+      )
+    )
+  }
+
 }
 
 /* You guys will have to create the search queries in your function and pass it here */
@@ -364,27 +538,6 @@ function hotelAPI(queryValues) {
         console.log(queryResult);
 
         printHotel(queryResult);
-
-        /** ----------------------------------------------
-         *  variables for stuff you want to get from the API query go here
-         *
-         *  Example for getting data you want
-         *      var hotelName = queryResult.name;
-         *
-         *  Example for printing out data multiple times
-         *      for(let i=0; i < queryResult.data[i]) {
-         *
-         *      //Getting the data we wanted
-         *          //(getting the source url of the image from the queryResults Object)
-         *          imgSrc = queryResult.data[i].url;
-         *          hotelDescription = queryResult.data[i].description //(getting the description data from the queryResults Object)
-         *          <more data and variables here>
-         *
-         *          //Printing the data we wanted here
-         *          $('img').attr('src') = imgSrc; //setting the image source url for an image in the html
-         *          $('p').text(hotelDescription); //making a paragraph with hotelDescription content as its text
-         *      }
-         * ---------------------------------------------- */
       });
     });
   });
@@ -394,51 +547,267 @@ function hotelAPI(queryValues) {
 
 function restaurantAPI(queryValues) {
   /* base url for the API */
-  var queryBaseURL = "https://api.yelp.com/v3/";
+  var queryBaseURL = "https://api.yelp.com/v3/"; 
 
   //final yelp query
-  var queryURL =
-    "https://cors-anywhere.herokuapp.com/" +
-    queryBaseURL +
-    "businesses/search?" +
-    queryValues +
-    "&limit=" +
-    restaurantNum +
-    "&offset=" +
-    restaurantCount;
+  var queryURL = 
+      "https://cors-anywhere.herokuapp.com/" + 
+      queryBaseURL + "businesses/search?" +  queryValues + 
+      "&limit=" + restaurantNum + 
+      "&offset=" + restaurantCount;
 
   //referencing firebase in order to get keys from there (jtsai)
   dbAuth.once("value", function(snapshot) {
-    var cid; //creating variables for keys
-    cid = snapshot.child("yelpKey").val();
-    //console.log(`cId: ${cid} cSec: ${csec}`);
+      var cid; //creating variables for keys
+      cid = snapshot.child('yelpKey').val();
+      //console.log(`cId: ${cid} cSec: ${csec}`);
 
-    var tokenBearer = "Bearer " + cid;
+      var tokenBearer = "Bearer " + cid; 
 
-    //using the keys from firebase to get a token (jtsai)
+      //using the keys from firebase to get a token (jtsai)
 
-    var settings = {
-      async: true,
-      crossDomain: true,
-      url: queryURL,
-      method: "GET",
-      headers: {
-        Accept: "*/*",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: tokenBearer
+      var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": queryURL,
+          "method": "GET",
+          "headers": {
+              "Accept": "*/*",
+              "Access-Control-Allow-Origin" : "*",
+              "Authorization": tokenBearer
+          }
       }
-    };
 
-    $.ajax(settings).then(function(response) {
-      var queryResult = response;
-      //console.log(response);
-      var business = queryResult.businesses;
-      console.log(business);
-      printRestaurant(business);
+      $.ajax(settings).then( function(response) {
+          var queryResult = response;
+          //console.log(response);
+          var business = queryResult.businesses;
+          console.log(business);
+          printRestaurant(business);
 
-      restaurantCount++;
-    });
-  });
+          restaurantCount++;
+      });
+  })
+}
+
+function printRestaurant(business) {
+  $(".loading").removeClass("active");
+  for( let i = 0; i < business.length; i++ ) {
+    var picture = "url(" + business[i].image_url + ")";
+    var address = business[i].location.display_address;
+
+    var figure = 
+    $("<figure>").append(
+      $("<a class='img' rel='noopener noreferrer'>")
+        .attr("href", business[i].url)
+        .append(
+          $("<img>").css("background-image", picture)
+        ),
+      $("<figcaption>").append(
+        $("<p class='name'>").append(
+          $("<a rel='noopener noreferrer'>")
+            .attr("href", business[i].url)
+            .text(business[i].name)
+        ),
+        $("<p>").append(
+          $("<em class='add1'>").text(address[0] + " "),
+          $("<em class='add2'>").text(address[address.length-1])
+        ),
+        $("<p>").append(
+          $("<strong>").text("Phone: "),
+          $("<span class='phone'>").text(business[i].display_phone)
+        )
+      )
+    );
+
+    $("#restaurant-results").prepend(
+        $("<div class='result'>").append(
+          $("<i>").addClass("material-icons addCircle").text("add_circle"),
+          $("<i>").addClass("material-icons addCircleOutline").text("add_circle_outline"),
+          figure
+        )
+    )
+  }
 }
 
 // calendar
+var flightExample = {
+  meta: {
+    links: {
+      self:
+        "http://test.api.amadeus.com/v1/shopping/flight-offers?origin=NYC&destination=MAD&departureDate=2019-08-01&adults=1&nonStop=false&max=2"
+    },
+    currency: "EUR",
+    defaults: {
+      nonStop: false,
+      adults: 1
+    }
+  },
+  data: [
+    {
+      type: "flight-offer",
+      id: "1539956390004--540268760",
+      offerItems: [
+        {
+          services: [
+            {
+              segments: [
+                {
+                  flightSegment: {
+                    departure: {
+                      iataCode: "EWR",
+                      terminal: "B",
+                      at: "2019-08-01T17:45:00-04:00"
+                    },
+                    arrival: {
+                      iataCode: "LIS",
+                      terminal: "1",
+                      at: "2019-08-02T05:35:00+01:00"
+                    },
+                    carrierCode: "TP",
+                    number: "202",
+                    aircraft: {
+                      code: "332"
+                    },
+                    operating: {
+                      carrierCode: "TP",
+                      number: "202"
+                    },
+                    duration: "0DT6H50M"
+                  },
+                  pricingDetailPerAdult: {
+                    travelClass: "ECONOMY",
+                    fareClass: "U",
+                    availability: 1,
+                    fareBasis: "UUSDSI0E"
+                  }
+                },
+                {
+                  flightSegment: {
+                    departure: {
+                      iataCode: "LIS",
+                      terminal: "1",
+                      at: "2019-08-02T06:55:00+01:00"
+                    },
+                    arrival: {
+                      iataCode: "MAD",
+                      terminal: "2",
+                      at: "2019-08-02T09:10:00+02:00"
+                    },
+                    carrierCode: "TP",
+                    number: "1026",
+                    aircraft: {
+                      code: "319"
+                    },
+                    operating: {
+                      carrierCode: "TP",
+                      number: "1026"
+                    },
+                    duration: "0DT1H15M"
+                  },
+                  pricingDetailPerAdult: {
+                    travelClass: "ECONOMY",
+                    fareClass: "U",
+                    availability: 5,
+                    fareBasis: "UUSDSI0E"
+                  }
+                }
+              ]
+            }
+          ],
+          price: {
+            total: "259.91",
+            totalTaxes: "185.91"
+          },
+          pricePerAdult: {
+            total: "259.91",
+            totalTaxes: "185.91"
+          }
+        }
+      ]
+    },
+    {
+      type: "flight-offer",
+      id: "1539956390004-765796655",
+      offerItems: [
+        {
+          services: [
+            {
+              segments: [
+                {
+                  flightSegment: {
+                    departure: {
+                      iataCode: "JFK",
+                      at: "2019-08-01T22:05:00-04:00",
+                      terminal: "4"
+                    },
+                    arrival: {
+                      iataCode: "MAD",
+                      at: "2019-08-02T11:30:00+02:00",
+                      terminal: "1"
+                    },
+                    carrierCode: "UX",
+                    number: "92",
+                    aircraft: {
+                      code: "332"
+                    },
+                    operating: {
+                      carrierCode: "UX",
+                      number: "92"
+                    },
+                    duration: "0DT7H25M"
+                  },
+                  pricingDetailPerAdult: {
+                    travelClass: "ECONOMY",
+                    fareClass: "M",
+                    availability: 9,
+                    fareBasis: "MYYOAE"
+                  }
+                }
+              ]
+            }
+          ],
+          price: {
+            total: "1670.89",
+            totalTaxes: "162.89"
+          },
+          pricePerAdult: {
+            total: "1670.89",
+            totalTaxes: "162.89"
+          }
+        }
+      ]
+    }
+  ],
+  dictionaries: {
+    locations: {
+      JFK: {
+        subType: "AIRPORT",
+        detailedName: "JOHN F KENNEDY INTL"
+      },
+      EWR: {
+        subType: "AIRPORT",
+        detailedName: "NEWARK LIBERTY INTL"
+      },
+      MAD: {
+        subType: "AIRPORT",
+        detailedName: "ADOLFO SUAREZ BARAJAS"
+      },
+      LIS: {
+        subType: "AIRPORT",
+        detailedName: "AIRPORT"
+      }
+    },
+    carriers: {
+      UX: "AIR EUROPA",
+      TP: "TAP PORTUGAL"
+    },
+    currencies: {
+      EUR: "EURO"
+    },
+    aircraft: {
+      "319": "AIRBUS INDUSTRIE A319",
+      "332": "AIRBUS INDUSTRIE A330-200"
+    }
+  }
+};

@@ -53,16 +53,11 @@
             src="assets/images/logo_trans_hover.png"
             alt="Trip Planner Logo hover image for navigation link"
           />
-
-      
-
         </a>
-        <br>
-        <br>
         <a href="#flight">FLIGHTS</a>
         <a href="#hotel">HOTELS</a>
         <a href="#restaurants">RESTAURANTS</a>
-        <a href="#itinerary">ITINERARY</a>
+        <a href="#summary">Summary</a>
       </nav>
 
       <!-- Content on the right side of the nav -->
@@ -72,7 +67,7 @@
           <div>
             <img
               id="home-logo"
-              src="assets/images/logo_trans.png"
+              src="assets/images/logo_trans_hover.png"
               alt="Trip planner logo image"
             />
             <h1 class="title">Travel Planner</h1>
@@ -80,47 +75,35 @@
           </div>
         </section>
 
-<section id="flight"> <h1 class="addyour"> Add Your Destination </h1>
-  <form>
-    <label for="flight-search">
-      <strong>From</strong>
-      <br>
-      <input id="flight-search" type="search" name="flight-search" placeholder="Dallas, New York...">
-    </label>
-    <label for="flight-location">
-      <strong>To</strong>
-      <br>
-      <input id="flight-location" type="search" name="flight-location" placeholder="Miami, Colorado...">
-    </label>
-    <label for="flight-dates">
-      <strong>Dates</strong>
-      <br>
-      <div id="second-form">
+        <section id="flight"> 
+          <form>
+            <h1>Add Your Destination</h1>
+            <!-- Origin -->
+            <label for="flight-origin">From</label>
+            <input id="flight-origin" type="search" name="flight-origin" placeholder="Dallas, New York...">
+            <!-- Destination -->
+            <label for="flight-destination">To</label>
+            <input id="flight-destination" type="search" name="flight-destination" placeholder="Miami, Colorado...">
+            <!-- Dates -->
+            <label for="flight-dates">Dates</label>
+            <input id="flight-dates" type="text" name="flight-dates" placeholder="MM/DD/YYYY - MM/DD/YYYY">
+            
 
-        <label id="departure">
-          <p>Departure</p>
-          <input id="flight-dates" type="search" name="flight-dates" placeholder="MM/DD/YYYY">
-        </label>
-        
-      
-
-        <label id="return">
-          <p>Return</p>
-          <input id="flight-dates" type="search" name="flight-dates" placeholder="MM/DD/YYYY">
-        </label>
-    </label>
-    </div>
-
-    
-
-    <button>
-      <i class="material-icons">search</i>
-    </button>
-  </form>
-  <div id="flight-results"></div>
-</section>
-<section id="summary">summary</section>
-</section>
+            <button>
+                <i class="material-icons">search</i>
+              </button>
+          </form>
+            
+          <div id="flight-results">
+            <figure class="loading">
+                <img
+                  src="assets/images/loading-ripple-2s.svg"
+                  alt="loading spinner"
+                />
+                <figcaption>Just a Second, Getting Results!</figcaption>
+              </figure>
+          </div>
+        </section>
       
 
         <!-- /////// Hotel Start -->
@@ -151,49 +134,65 @@
             </button>
           </form>
 
-          <div id="hotel-results"></div>
+          <div id="hotel-results">
+            <figure class="loading">
+              <img
+                src="assets/images/loading-ripple-2s.svg"
+                alt="loading spinner"
+              />
+              <figcaption>Just a Second, Getting Results!</figcaption>
+            </figure>
+          </div>
         </section>
 
         <!-- /////// Hotel  END -->
 
         <section id="restaurants">
-          <form>
-            <label for="food-search">
-              <strong>Find</strong>
-              <input
-                id="food-search"
-                type="search"
-                name="food-search"
-                placeholder="Delis, Italian, Burgers"
-              />
-            </label>
-
-            <label for="food-location">
-              <strong>Near</strong>
-              <input
-                id="food-location"
-                type="search"
-                name="food-location"
-                placeholder="San Francisco, Chicago"
-              />
-            </label>
-
-            <button>
-              <i class="material-icons">search</i>
-            </button>
-          </form>
-
-          <div id="restaurant-results">
-            <div class="loader">
-              <img
-                src="assets/images/Double Ring-3s-200px.gif"
-                alt="loading spinner"
-              />
+            <form>
+              <label for="food-search">
+                <strong>Find</strong>
+                <input
+                  id="food-search"
+                  type="search"
+                  name="food-search"
+                  placeholder="Delis, Italian, Burgers"
+                />
+              </label>
+  
+              <label for="food-location">
+                <strong>Near</strong>
+                <input
+                  id="food-location"
+                  type="search"
+                  name="food-location"
+                  placeholder="San Francisco, Chicago"
+                />
+              </label>
+  
+              <button>
+                <i class="material-icons">search</i>
+              </button>
+            </form>
+  
+            <div id="restaurant-results">
+              <figure class="loading">
+                <img
+                  src="assets/images/loading-ripple-2s.svg"
+                  alt="loading spinner"
+                />
+                <figcaption>Just a Second, Getting Results!</figcaption>
+              </figure>
             </div>
+          </section>
+
+        <section id="summary">
+          <div class="final">
+              <div id="flight-choice"></div>
+              <div id="hotel-choice"></div>
+              <h3>Total Price: <span id="total"></span></h3>
+              <div id="restaurant-choice"></div>
           </div>
         </section>
-
-        <section id="summary">summary</section>
       </div>
     </main>
 
@@ -202,13 +201,12 @@
       <p>Powered by Amadeus Travel API and Yelp API</p>
     </footer>
 
-    <!-- Footer (to add if we want) -->
-
     <!-- scripts-->
     <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- Daterange Picker -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <!-- Firebase References -->
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>

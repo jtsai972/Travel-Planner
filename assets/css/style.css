@@ -34,38 +34,22 @@ body {
  * =============================*/
 
 /* Setting header font */
-h1,
-h2,
-h3 {
-  font-family: "Raleway", sans-serif;
-}
-h1 {
-  font-size: 2em;
-}
-h2 {
-  font-size: 1.5em;
-}
+h1, h2, h3 { font-family: "Raleway", sans-serif; }
+h1 { font-size: 2em; }
+h2 {font-size: 1.5em;}
 
 /* setting paragraphs to have some spacing between lines */
-p {
-  line-height: 1.5em;
-}
+p { line-height: 1.5em; }
 
-strong {
-  font-weight: bold;
-}
-em {
-  font-style: italics;
-}
+strong { font-weight: bold; }
+em { font-style: italics; }
 
 /* link styling */
 a {
   color: #63bdbb;
   text-decoration: none;
 }
-a:hover {
-  color: #f36652;
-}
+a:hover { color: #f36652; }
 
 .container a:hover {
   border-bottom: 1px solid #f36652;
@@ -118,6 +102,7 @@ nav {
 nav a {
   color: black;
   padding: 1em;
+  text-transform: uppercase;
 }
 /* When a link is set to active with a class or hovered over... */
 nav a:hover,
@@ -207,7 +192,8 @@ section.active {
   flex: 1 1 auto; /* making it so active sections will shrink and grow with their containers */
   overflow-y: auto;
   margin: 1em auto;
-  margin-right: 1px;
+    margin-right: 1px;
+  text-align: center;
 }
 
 /* =============================
@@ -220,7 +206,6 @@ section.active {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
 }
 /* setting image-logo size */
 #home #home-logo {
@@ -236,7 +221,7 @@ section.active {
   letter-spacing: 0.15em;
   /* making them all uppercase */
   text-transform: uppercase;
-  text-shadow: 2px 2px 5px white;
+  text-shadow: 2px 2px 5px black;
 }
 #home .title {
   /* making title text spacing bigger (75% of font size) */
@@ -250,82 +235,77 @@ section.active {
 
 /*  FLIGHT --------------------------------------------- */
 
-#flight.active {
-  text-align: center;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: column;
-  flex-flow: column;
-}
-#flight.active {
-  text-align: center;
-  color: rgba(99, 189, 187, 0.9);
-  font-family: Roboto;
-  font-size: 25px;
-}
 #flight form {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: column;
-  flex-flow: column;
   background: rgba(255, 255, 255, 0.4);
-  text-align: center;
+  color: rgba(99, 189, 187, 1);
+  display: inline-flex;
+    align-items: center;
+    flex-flow: column;
+    justify-content: space-evenly;
+  padding: 1em 2em;
 }
-#flight strong {
-  font-size: 15px;
-}
-#flight-search {
-  background-color: white;
-  border-color: #63bdbb;
-  border-width: 1px;
-  align-items: center;
-  text-align: center;
-}
-#flight-location {
-  background-color: white;
-  border-color: #63bdbb;
-  border-width: 1px;
-  align-items: center;
-  text-align: center;
-}
-#flight-dates {
-  background-color: white;
-  border-color: #63bdbb;
-  border-width: 1px;
-  align-items: center;
-  font-family: Roboto;
-  font-size: 15px;
-  text-align: center;
-}
-#flight #second-form {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
-  font-family: Roboto;
-  font-size: 15px;
-}
-#flight .ui-datepicker {
-  background-color: white;
+#flight label {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
 }
 #flight button {
-  padding: 0px 0px 0px 0px;
+  background-color:#63bdbb;
+  border: 1px solid #63bdbb;
+  color: white;
+  margin-top: 1em;
+  padding: 0.5em 1em;
 }
-#flight .material-icons {
-  background-color: #f36652;
+  #flight button:hover {
+    background-color: rgba(99,189,187,0.5);
+  }
+#flight-results {
+  display: flex;
+    justify-content: space-evenly;
 }
-
-#flight label {
-  margin: 0.5em;
-}
+  #flight-results .result {
+    background: rgba(255, 255, 255, 0.75);
+    margin-top: 1em;
+    padding: 0.5em 1em;
+      padding-right: 2em;
+    position: relative;
+    text-align: left;
+    width: 45%;
+  }
+    #flight-results .material-icons {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+    }
+      #flight-results .addCircle {
+        display: inline-block;
+      }
+      #flight-results .addCircleOutline {
+        display: none;
+      }
+    #flight-results h3 {
+      font-size: 1.25em;
+    }
+    #flight-results .flight {
+      background: white;
+      border: 1px solid gray;
+      margin: 0.5em 0; 
+      padding: 0.5em;
+    }
+      #flight-results .flight .departure strong,
+      #flight-results .flight .departure em
+      #flight-results .flight .arrival strong,
+      #flight-results .flight .arrival em,
+      #flight-results .flight .location {
+        display: block;
+        
+      }
+      #flight-results .flight .location,
+      #flight-results .flight .departure em,
+      #flight-results .flight .arrival em {
+        padding: 0 1em;
+      }
 
 /* HOTEL CSS ----------------------------------------------------  */
-#hotel.active {
-  text-align: center;
-}
-
 #hotel form {
   background: white;
   border-radius: 0.25em;
@@ -405,41 +385,55 @@ section.active {
   margin: 0.5em auto;
   width: 50%;
   text-align: center;
+  position: relative;
 }
 
-#hotel-results figure {
+#hotel-results .result figure {
   background: rgba(255, 255, 255, 0.75);
-  flex-flow: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
   margin-left: 1em;
   padding: 0.5em;
+    padding: 2em;
   text-align: center;
 }
 
-#hotel-results figure:hover {
+#hotel-results .result figure:hover {
   box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.5);
   text-align: center;
 }
 
-#hotel-results figcaption {
+#hotel-results .material-icons {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+#hotel-results .addCircle {
+  display: inline-block;
+}
+#hotel-results .addCircleOutline {
+  display: none;
+}
+
+#hotel-results .result figcaption {
   text-align: center;
   text-align: center;
 }
 
-#hotel-results .img {
+#hotel-results .result .img {
   border: 1px solid transparent;
   margin-right: 1em;
   vertical-align: bottom;
   text-align: center;
 }
 
-#hotel-results .img:hover {
+#hotel-results .result .img:hover {
   border-color: #f36652;
   vertical-align: bottom;
 }
 
-#hotel-results img {
+#hotel-results .result img {
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -448,20 +442,22 @@ section.active {
   vertical-align: bottom;
   text-align: center;
 }
+  
+  #hotel-results .result em {
+    display: block;
+    font-style: italic;
+    text-transform: capitalize;
+  }
 
-.hotel-name {
+#hotel .name {
   font-weight: bold;
   text-align: center;
+  text-transform: capitalize;
 }
 
 /* =============================
  *  Restaurant styling (like yelp)
  * ============================= */
-#restaurants.active {
-  text-align: center;
-}
-
-/* Set up the search for the restaurants */
 #restaurants form {
   background: white;
   border-radius: 0.25em;
@@ -472,111 +468,204 @@ section.active {
   margin: 1em auto;
   margin-top: 0.5em;
 }
-
-#restaurants label,
-#restaurants input,
-#restaurants button {
-  border: none;
-}
-
-#restaurants label {
-  border-right: 1px solid gray;
-  margin: 0.5em auto;
-  padding: 0 0.5em;
-}
-
-#restaurants label:last-of-type {
-  border-right: none;
-} /* No border for the last label in the search */
-
-#restaurants input {
-  margin-left: 0.5em;
-}
-
-#restaurants button {
-  background-color: #d32323;
-  border-top-right-radius: 0.25em;
-  border-bottom-right-radius: 0.25em;
-  color: white;
-  display: inline-flex;
-  align-items: center;
-  padding: 0.5em 1em;
-}
-
-#restaurants input::placeholder {
-  color: #999;
-}
-
-/* Results from the search */
+  #restaurants label,
+  #restaurants input,
+  #restaurants button {
+    border: none;
+  }
+  #restaurants label {
+    border-right: 1px solid gray;
+    margin: 0.5em auto;
+    padding: 0 0.5em;
+  }
+    #restaurants label:last-of-type {
+      border-right: none;
+    }
+  #restaurants input {
+    margin-left: 0.5em;
+  }
+    #restaurants input::placeholder {
+      color: #999;
+    }
+  #restaurants button {
+    background-color: #d32323;
+    border-top-right-radius: 0.25em;
+    border-bottom-right-radius: 0.25em;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5em 1em;
+  }
+    #restaurants button:hover {
+      background-color: #0073bb;
+    }
 #restaurant-results {
   display: flex;
+  align-items: stretch;
   flex-flow: row;
   flex-wrap: wrap;
-  max-height: 28em;
-  overflow-y: auto;
+  height: 28em;
   padding-right: 1em;
 }
+  #restaurant-results .result {
+    margin: 0.5em auto;
+    position: relative;
+    width: 50%;
+  }
+    #restaurant-results .result figure {
+      background: rgba(255, 255, 255, 0.75);
+      display: flex;
+        flex-flow: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      height: 100%;
+      margin-left: 1em;
+      padding: 0.5em;
+        padding-right: 2em;
+    }
+      #restaurant-results .result figure:hover {
+        box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.5);
+      }
+      #restaurant-results .material-icons {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+      }
+        #restaurant-results .addCircle {
+          display: inline-block;
+        }
+        #restaurant-results .addCircleOutline {
+          display: none;
+        }
+      #restaurant-results .result figcaption {
+        flex: 1 1 0;
+        text-align: left;
+      }
+      #restaurant-results .img {
+        margin-right: 1em;
+        position: relative;
+        width: 33%;
+        vertical-align: bottom;
+      }
+        #restaurant-results .img:hover {
+          opacity: 0.5;
+          vertical-align: bottom;
+        }
+        #restaurant-results .result .img:after {
+          content: "";
+          display: block;
+          padding-bottom: 100%;
+        }
+      #restaurant-results .result img {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100%;
+        position: absolute;
+          left: 0;
+          top: 0;
+        width: 100%;
+        vertical-align: bottom;
+      }
 
-#restaurant-results .result {
-  margin: 0.5em auto;
-  width: 50%;
-}
-
-#restaurant-results .loader {
-  display: none;
-}
-
-#restaurant-results .loader.active {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 20em;
-}
-#restaurant-results .loader img {
-  display: inline-block;
-  height: 200px;
-  width: 200px;
-}
-
-#restaurant-results figure {
-  background: rgba(255, 255, 255, 0.75);
-  display: flex;
-  flex-flow: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  margin-left: 1em;
-  padding: 0.5em;
-}
-
-#restaurant-results figure:hover {
-  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.5);
-}
-
-#restaurant-results figcaption {
+        #restaurant-results .result em {
+          display: block;
+          font-style: italic;
+        }
+        #restaurants .name {
+          font-weight: bold;
+        }
+/* =============================
+ *  Summary
+ * ============================= */
+#summary .final {
+  display: inline-flex;
+    flex-flow: column;
+    justify-content: stretch;
   text-align: left;
 }
+#summary em {font-style: italic; }
 
-#restaurant-results .img {
-  border: 1px solid transparent;
-  margin-right: 1em;
-  vertical-align: bottom;
-}
+  #summary .material-icons { display: none!important;}
 
-#restaurant-results .img:hover {
-  border-color: #f36652;
-  vertical-align: bottom;
-}
+  #summary .result {
+    background: rgba(255, 255, 255, 0.5);
+    display: inline-block;
+    padding: 0.5em 2em;
+    width: 100%;
+  }
+  #summary #flight-choice .result .flight {
+      margin-top: 1em;
+  }
+  #summary #hotel-choice .name,
+  #summary #hotel-choice em {
+    text-transform: Capitalize;
+  }
+  #summary h3 {
+    font-size: 1.25em;
+    margin: 1em auto;
+  }
+  #summary .title {
+    border-bottom: 1px solid black;
+    font-size: 1.25em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    text-transform: Capitalize;
+  }
+  #restaurant-choice .result figure {
+    display: flex;
+      flex-flow: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    padding: 0.5em;
+  }
+  #restaurant-choice .img {
+    margin-right: 1em;
+    position: relative;
+    width: 33%;
+    vertical-align: bottom;
+  }
+    #restaurant-choice .img:hover {
+      opacity: 0.5;
+      vertical-align: bottom;
+    }
+    #restaurant-choice .result .img:after {
+      content: "";
+      display: block;
+      padding-bottom: 100%;
+    }
+  #restaurant-choice .result img {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    position: absolute;
+      left: 0;
+      top: 0;
+    width: 100%;
+    vertical-align: bottom;
+  }
+  #restaurant-choice em {
+    display: block;
+  }
 
-#restaurant-results img {
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 7em;
-  width: 7em;
-  vertical-align: bottom;
+/* =============================
+ *  Other styling
+ * =============================*/
+section.active .loading {
+  display: none;
 }
+  section.active .loading.active {
+    background: transparent;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    justify-content: center;
+    margin: 2em auto;
+    text-align: center;
+  }
+  section.active .loading figcaption {
+    text-align: center;
+  }
 
-.restaurant-name {
-  font-weight: bold;
-}
+  .dim {opacity: 0.5};
