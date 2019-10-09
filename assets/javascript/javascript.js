@@ -112,7 +112,7 @@ $("#flight button").on("click", function() {
     "&returnDate=" + endFlight;
 
     /* Clearing previous results */
-    $("#restaurant-results").find(".result").remove();
+    $("#flight-results").find(".result").remove();
 
     //flightAPI(queryValue);
     printFlight(flightExample); //workaround for server migration
