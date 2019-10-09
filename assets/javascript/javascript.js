@@ -122,9 +122,10 @@ $("#flight-results").on("click", ".material-icons", function() {
   var result = $(this).parent();
   console.log(result);
 
+  result.addClass("active");
+
   $("#flight-results .result").addClass("dim");
   result.removeClass("dim");
-
 
   $("#flight-choice").empty();
   $("#flight-choice").append(result.clone());
