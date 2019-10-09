@@ -65,6 +65,15 @@ $("nav a").on("click", function() {
   /* making sure we got the right thing */
   console.log("Section:" + section);
 
+  if(section === "#summary") {
+    var sum = 0;
+    $('#summary .result span.price').each(function(){
+        sum += parseFloat($(this).text());  // Or this.innerHTML, this.innerText
+        console.log($(this).text());
+    });
+    $("#total").text(sum);
+  }
+
   /*make the relative section active (to show content) */
   $(section).addClass("active");
 });
@@ -78,6 +87,8 @@ $("section").on("mouseleave", ".result", function() {
   $(this).children(".addCircle").show();
   $(this).children(".addCircleOutline").hide();
 });
+
+
 
 $("#flight button").on("click", function() {
   event.preventDefault();
@@ -117,6 +128,9 @@ $("#flight-results").on("click", ".material-icons", function() {
 
   $("#flight-choice").empty();
   $("#flight-choice").append(result.clone());
+  $("#flight-choice .result").prepend(
+    $("<p class='title'>").text("flight")
+  );
 });
 
 // < !-- /////// Hotel start -->
@@ -162,6 +176,9 @@ $("#hotel-results").on("click", ".material-icons", function() {
 
   $("#hotel-choice").empty();
   $("#hotel-choice").append(result.clone());
+  $("#hotel-choice .result").prepend(
+    $("<p class='title'>").text("hotel")
+  );
 });
 
 // < !-- /////// Hotel end -->
@@ -205,6 +222,9 @@ $("#restaurant-results").on("click", ".material-icons", function() {
 
   $("#restaurant-choice").empty();
   $("#restaurant-choice").append(result.clone());
+  $("#restaurant-choice .result").prepend(
+    $("<p class='title'>").text("restaurant")
+  );
 });
 
 /* ====================================
@@ -280,7 +300,7 @@ function printHotel(hotel) {
           $("<p class='name'>").text(hotelName),
           //Address
           $("<p>").append(
-            $("<em class='add1'>").text(address),
+            $("<em class='add1'>").text(address + " "),
             $("<em class='add2'>").text(hotelAddress)
           ),
           //Phone
@@ -403,7 +423,7 @@ function printFlight(flight) {
             $("<span class='airport'>").text(offerTwo.departure.iataCode),
             $("<span class='terminal'>").text(` Terminal ${offerTwo.departure.terminal}`)
           ),
-          $("<em>").text(offerTwo.departure.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
+          $("<em>").text(" " + offerTwo.departure.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
         ),
         $("<p class='arrival'>").append(
           $("<strong>").text("Arrives at: "),
@@ -411,7 +431,7 @@ function printFlight(flight) {
             $("<span class='airport'>").text(offerTwo.arrival.iataCode),
             $("<span class='terminal'>").text(` Terminal ${offerTwo.arrival.terminal}`)
           ),
-          $("<em>").text(offerTwo.arrival.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
+          $("<em>").text(" " + offerTwo.arrival.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
         )
       );
     } else {
@@ -431,7 +451,7 @@ function printFlight(flight) {
             $("<span class='airport'>").text(offerOne.departure.iataCode),
             $("<span class='terminal'>").text(` Terminal ${offerOne.departure.terminal}`)
           ),
-          $("<em>").text(offerOne.departure.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
+          $("<em>").text(" " + offerOne.departure.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
         ),
         $("<p class='arrival'>").append(
           $("<strong>").text("Arrives at: "),
@@ -439,7 +459,7 @@ function printFlight(flight) {
             $("<span class='airport'>").text(offerOne.arrival.iataCode),
             $("<span class='terminal'>").text(` Terminal ${offerOne.arrival.terminal}`)
           ),
-          $("<em>").text(offerOne.arrival.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
+          $("<em>").text(" " + offerOne.arrival.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
         )
       );
 
@@ -447,8 +467,10 @@ function printFlight(flight) {
       $(`<div id='flight-${i}' class='result'>`).append(
         $("<i>").addClass("material-icons addCircle").text("add_circle"),
         $("<i>").addClass("material-icons addCircleOutline").text("add_circle_outline"),
-        $("<p class='price'>").append(
-          $("<strong>").text(`Price: ${price} ${flight.meta.currency}`)
+        $("<p>").append(
+          $("<strong>").text("Price: "),
+          $("<span class='price'>").text(price),
+          $("<span class='currency'>").text(" " + flight.meta.currency)
         ),
         flightOne, flightTwo
       )
@@ -588,7 +610,7 @@ function printRestaurant(business) {
             .text(business[i].name)
         ),
         $("<p>").append(
-          $("<em class='add1'>").text(address[0]),
+          $("<em class='add1'>").text(address[0] + " "),
           $("<em class='add2'>").text(address[address.length-1])
         ),
         $("<p>").append(

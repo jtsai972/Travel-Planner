@@ -446,11 +446,13 @@ section.active {
   #hotel-results .result em {
     display: block;
     font-style: italic;
+    text-transform: capitalize;
   }
 
 #hotel .name {
   font-weight: bold;
   text-align: center;
+  text-transform: capitalize;
 }
 
 /* =============================
@@ -573,6 +575,80 @@ section.active {
         #restaurants .name {
           font-weight: bold;
         }
+/* =============================
+ *  Summary
+ * ============================= */
+#summary .final {
+  display: inline-flex;
+    flex-flow: column;
+    justify-content: stretch;
+  text-align: left;
+}
+#summary em {font-style: italic; }
+
+  #summary .material-icons { display: none!important;}
+
+  #summary .result {
+    background: rgba(255, 255, 255, 0.5);
+    display: inline-block;
+    padding: 0.5em 2em;
+    width: 100%;
+  }
+  #summary #flight-choice .result .flight {
+      margin-top: 1em;
+  }
+  #summary #hotel-choice .name,
+  #summary #hotel-choice em {
+    text-transform: Capitalize;
+  }
+  #summary h3 {
+    font-size: 1.25em;
+    margin: 1em auto;
+  }
+  #summary .title {
+    border-bottom: 1px solid black;
+    font-size: 1.25em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    text-transform: Capitalize;
+  }
+  #restaurant-choice .result figure {
+    display: flex;
+      flex-flow: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    padding: 0.5em;
+  }
+  #restaurant-choice .img {
+    margin-right: 1em;
+    position: relative;
+    width: 33%;
+    vertical-align: bottom;
+  }
+    #restaurant-choice .img:hover {
+      opacity: 0.5;
+      vertical-align: bottom;
+    }
+    #restaurant-choice .result .img:after {
+      content: "";
+      display: block;
+      padding-bottom: 100%;
+    }
+  #restaurant-choice .result img {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    position: absolute;
+      left: 0;
+      top: 0;
+    width: 100%;
+    vertical-align: bottom;
+  }
+  #restaurant-choice em {
+    display: block;
+  }
+
 /* =============================
  *  Other styling
  * =============================*/
