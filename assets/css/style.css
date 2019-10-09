@@ -34,38 +34,22 @@ body {
  * =============================*/
 
 /* Setting header font */
-h1,
-h2,
-h3 {
-  font-family: "Raleway", sans-serif;
-}
-h1 {
-  font-size: 2em;
-}
-h2 {
-  font-size: 1.5em;
-}
+h1, h2, h3 { font-family: "Raleway", sans-serif; }
+h1 { font-size: 2em; }
+h2 {font-size: 1.5em;}
 
 /* setting paragraphs to have some spacing between lines */
-p {
-  line-height: 1.5em;
-}
+p { line-height: 1.5em; }
 
-strong {
-  font-weight: bold;
-}
-em {
-  font-style: italics;
-}
+strong { font-weight: bold; }
+em { font-style: italics; }
 
 /* link styling */
 a {
   color: #63bdbb;
   text-decoration: none;
 }
-a:hover {
-  color: #f36652;
-}
+a:hover { color: #f36652; }
 
 .container a:hover {
   border-bottom: 1px solid #f36652;
@@ -207,7 +191,8 @@ section.active {
   flex: 1 1 auto; /* making it so active sections will shrink and grow with their containers */
   overflow-y: auto;
   margin: 1em auto;
-  margin-right: 1px;
+    margin-right: 1px;
+  text-align: center;
 }
 
 /* =============================
@@ -220,7 +205,6 @@ section.active {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
 }
 /* setting image-logo size */
 #home #home-logo {
@@ -250,82 +234,49 @@ section.active {
 
 /*  FLIGHT --------------------------------------------- */
 
-#flight.active {
-  text-align: center;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: column;
-  flex-flow: column;
-}
-#flight.active {
-  text-align: center;
-  color: rgba(99, 189, 187, 0.9);
-  font-family: Roboto;
-  font-size: 25px;
-}
 #flight form {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: column;
-  flex-flow: column;
   background: rgba(255, 255, 255, 0.4);
-  text-align: center;
+  color: rgba(99, 189, 187, 1);
+  display: inline-flex;
+    align-items: center;
+    flex-flow: column;
+    justify-content: space-evenly;
+  padding: 1em 2em;
 }
-#flight strong {
-  font-size: 15px;
-}
-#flight-search {
-  background-color: white;
-  border-color: #63bdbb;
-  border-width: 1px;
-  align-items: center;
-  text-align: center;
-}
-#flight-location {
-  background-color: white;
-  border-color: #63bdbb;
-  border-width: 1px;
-  align-items: center;
-  text-align: center;
-}
-#flight-dates {
-  background-color: white;
-  border-color: #63bdbb;
-  border-width: 1px;
-  align-items: center;
-  font-family: Roboto;
-  font-size: 15px;
-  text-align: center;
-}
-#flight #second-form {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
-  font-family: Roboto;
-  font-size: 15px;
-}
-#flight .ui-datepicker {
-  background-color: white;
+#flight label {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
 }
 #flight button {
-  padding: 0px 0px 0px 0px;
+  background-color:#63bdbb;
+  border: 1px solid #63bdbb;
+  color: white;
+  margin-top: 1em;
+  padding: 0.5em 1em;
 }
-#flight .material-icons {
-  background-color: #f36652;
+#flight button:hover {
+  background-color: rgba(99,189,187,0.5);
 }
 
-#flight label {
-  margin: 0.5em;
+#flight-results .result {
+  background: rgba(255, 255, 255, 0.75);
+  margin-top: 1em;
+  padding: 1em 2em;
+  position: relative;
 }
+  #flight-results .material-icons {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+  }
+    #flight-results .addCircle {
+      display: inline-block;
+    }
+    #flight-results .addCircleOutline {
+      display: none;
+    }
 
 /* HOTEL CSS ----------------------------------------------------  */
-#hotel.active {
-  text-align: center;
-}
-
 #hotel form {
   background: white;
   border-radius: 0.25em;
@@ -405,6 +356,7 @@ section.active {
   margin: 0.5em auto;
   width: 50%;
   text-align: center;
+  position: relative;
 }
 
 #hotel-results .result figure {
@@ -416,7 +368,6 @@ section.active {
   padding: 0.5em;
     padding: 2em;
   text-align: center;
-  position: relative;
 }
 
 #hotel-results .result figure:hover {
@@ -476,9 +427,6 @@ section.active {
 /* =============================
  *  Restaurant styling (like yelp)
  * ============================= */
-#restaurants.active {
-  text-align: center;
-}
 #restaurants form {
   background: white;
   border-radius: 0.25em;
@@ -530,6 +478,7 @@ section.active {
 }
   #restaurant-results .result {
     margin: 0.5em auto;
+    position: relative;
     width: 50%;
   }
     #restaurant-results .result figure {
@@ -542,7 +491,6 @@ section.active {
       margin-left: 1em;
       padding: 0.5em;
         padding-right: 2em;
-      position: relative;
     }
       #restaurant-results .result figure:hover {
         box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.5);

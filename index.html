@@ -76,38 +76,33 @@
         </section>
 
         <section id="flight"> 
-          <h1 class="addyour"> Add Your Destination </h1>
           <form>
-            <label for="flight-search">
-              <strong>From</strong>
-              <br>
-              <input id="flight-search" type="search" name="flight-search" placeholder="Dallas, New York...">
-            </label>
-            <label for="flight-location">
-              <strong>To</strong>
-              <br>
-              <input id="flight-location" type="search" name="flight-location" placeholder="Miami, Colorado...">
-            </label>
-            <label for="flight-dates">
-              <strong>Dates</strong>
-              <br>
-              <div id="second-form">
-                <label id="departure">
-                  <p>Departure</p>
-                  <input id="flight-dates" type="search" name="flight-dates" placeholder="MM/DD/YYYY">
-                </label>
-                <label id="return">
-                  <p>Return</p>
-                  <input id="flight-dates" type="search" name="flight-dates" placeholder="MM/DD/YYYY">
-                </label>
-              </label>
-            </div>
+            <h1>Add Your Destination</h1>
+            <!-- Origin -->
+            <label for="flight-origin">From</label>
+            <input id="flight-origin" type="search" name="flight-origin" placeholder="Dallas, New York...">
+            <!-- Destination -->
+            <label for="flight-destination">To</label>
+            <input id="flight-destination" type="search" name="flight-destination" placeholder="Miami, Colorado...">
+            <!-- Dates -->
+            <label for="flight-dates">Dates</label>
+            <input id="flight-dates" type="text" name="flight-dates" placeholder="MM/DD/YYYY - MM/DD/YYYY">
+            
 
             <button>
-              <i class="material-icons">search</i>
-            </button>
+                <i class="material-icons">search</i>
+              </button>
           </form>
-          <div id="flight-results"></div>
+            
+          <div id="flight-results">
+            <figure class="loading">
+                <img
+                  src="assets/images/loading-ripple-2s.svg"
+                  alt="loading spinner"
+                />
+                <figcaption>Just a Second, Getting Results!</figcaption>
+              </figure>
+          </div>
         </section>
       
 

@@ -1,20 +1,4 @@
 /* ====================================
- * Some documentation
- * ====================================
- *
- * API documentation
- * ----------------------------------
- *  flight API search:
- *  https://developers.amadeus.com/self-service/category/air/api-doc/flight-low-fare-search/api-reference
- *
- * hotel API search:
- * https://developers.amadeus.com/self-service/category/hotel/api-doc/hotel-search/api-reference
- *
- * resource for flight and hotel search:
- * https://documenter.getpostman.com/view/2672636/RWEcPfuJ?version=latest#8196c48f-30f9-4e3b-8590-e22f96da8326
- * */
-
-/* ====================================
  * Database setup
  * ==================================== */
 
@@ -47,7 +31,7 @@ var restaurantNum = 6,
 
 /* Test Full URLS */
 var testFlightURL =
-  "https://test.api.amadeus.com/v1/shopping/flight-offers?origin=MAD&destination=PAR&departureDate=2019-12-01&returnDate=2019-12-28 &max10";
+  "https://test.api.amadeus.com/v1/shopping/flight-offers?origin=MAD&destination=PAR&departureDate=2019-12-01&returnDate=2019-12-28&max10";
 var testHotelURL =
   "https://test.api.amadeus.com/v2/shopping/hotel-offers?cityCode=LON";
 var testRestaurantURL =
@@ -55,13 +39,14 @@ var testRestaurantURL =
 
 /* Test values */
 var testFlightValue =
-  "origin=MAD&destination=PAR&departureDate=2019-12-01&returnDate=2019-12-28 &max10";
+  "origin=MAD&destination=PAR&departureDate=2019-12-01&returnDate=2019-12-28&max10";
 var testHotelValue = "cityCode=LON";
 var testRestaurantValue = "term=delis&latitude=37.786882&longitude=-122.399972";
 
 /* ====================================
  * Initialization of document
  * ==================================== */
+$("#flight-dates").daterangepicker();
 
 /* ====================================
  * On Clicks
@@ -84,14 +69,39 @@ $("nav a").on("click", function() {
   $(section).addClass("active");
 });
 
-$("section").on("mouseenter", "figure", function() {
+$("section").on("mouseenter", ".result", function() {
   $(this).children(".addCircle").hide();
   $(this).children(".addCircleOutline").show();
 });
 
-$("section").on("mouseleave", "figure", function() {
+$("section").on("mouseleave", ".result", function() {
   $(this).children(".addCircle").show();
   $(this).children(".addCircleOutline").hide();
+});
+
+$("#flight button").on("click", function() {
+  event.preventDefault();
+  $(".loading").addClass("active");
+
+  var flightOrigin = $("#flight-origin").val().trim();
+  var flightDestination = $("#flight-destination").val().trim();
+
+  /* Getting dates */
+  var startFlight = $("#flight-dates").data('daterangepicker').startDate.format('YYYY-MM-DD');
+
+  var endFlight = $("#flight-dates").data('daterangepicker').endDate.format('YYYY-MM-DD');
+
+  console.log(`Loc From: ${flightOrigin}, To: ${flightDestination}`);
+  console.log(`Dates From: ${startFlight}, To: ${endFlight}`);
+
+  var queryValue = 
+    "origin=" + flightOrigin + 
+    "&destination=" + flightDestination +
+    "&departureDate=" + startFlight +
+    "&returnDate=" + endFlight;
+
+    //flightAPI(queryValue);
+    printFlight(flightExample.data); //workaround
 });
 
 // < !-- /////// Hotel start -->
@@ -128,7 +138,7 @@ $("#hotel button").on("click", function() {
 });
 
 $("#hotel-results").on("click", ".material-icons", function() {
-  var fig = $(this).parent();
+  var fig = $(this).find("figure");
   //$(this).parent().css("background-color", "blue");
   var name = fig.find(".name").text();
   var phone = fig.find(".phone").text();
@@ -177,7 +187,7 @@ $("#restaurants button").on("click", function() {
 });
 
 $("#restaurant-results").on("click", ".material-icons", function() {
-    var fig = $(this).parent();
+    var fig = $(this).find("figure");;
     //$(this).parent().css("background-color", "blue");
     var img = fig.find("img").attr("style");
     var url = fig.find("a").attr("href");
@@ -264,8 +274,6 @@ function printHotel(hotel) {
       var hotelPrice = hotel[i].offers[0].price.total;
 
       var figure = $("<figure>").append(
-        $("<i>").addClass("material-icons addCircle").text("add_circle"),
-        $("<i>").addClass("material-icons addCircleOutline").text("add_circle_outline"),
         //Caption
         $("<figcaption>").append(
           //Name
@@ -288,7 +296,13 @@ function printHotel(hotel) {
         )
       );
 
-      $("#hotel-results").prepend($("<div class='result'>").append(figure));
+      $("#hotel-results").prepend(
+        $("<div class='result'>").append(
+          $("<i>").addClass("material-icons addCircle").text("add_circle"),
+          $("<i>").addClass("material-icons addCircleOutline").text("add_circle_outline"),
+          figure
+        )
+      );
     }
   }
 
@@ -353,33 +367,78 @@ function flightAPI(queryValues) {
       };
 
       $.ajax(settings).then(function(response) {
-        var queryResult = response;
+        var queryResult = response.data;
         // console.log("AJAX YOU BETTER WORK!");
         // console.log(queryResult);
 
-        /** ----------------------------------------------
-         *  variables for stuff you want to get from the API query go here
-         *
-         *  Example for getting data you want
-         *      var flightName = queryResult.name;
-         *
-         *  Example for printing out data multiple times
-         *      for(let i=0; i < queryResult.data[i]) {
-         *
-         *      //Getting the data we wanted
-         *          //(getting the source url of the image from the queryResults Object)
-         *          imgSrc = queryResult.data[i].url;
-         *          flightDescription = queryResult.data[i].description //(getting the description data from the queryResults Object)
-         *          <more data and variables here>
-         *
-         *          //Printing the data we wanted here
-         *          $('img').attr('src') = imgSrc; //setting the image source url for an image in the html
-         *          $('p').text(flightDescription); //making a paragraph with flightDescription content as its text
-         *      }
-         * ---------------------------------------------- */
+        printFlight(queryResult);
       });
     });
   });
+}
+
+function printFlight(flight) {
+  $(".loading").removeClass("active");
+
+  console.log(flight);
+  
+
+  for( let i = 0; i < flight.length; i++ ) {
+    var offer = flight[i].offerItems[0].services[0].segments;
+    var offerTo = offer[0].flightSegment;
+    var offerFrom = offer[1].flightSegment;
+
+    var flightTo =
+      $("<div class='flight-to'>").append(
+        $("<p>").append(
+          $("<strong>").text("Flight Number: "),
+          $("<span class='airline'>").text(offerTo.carrierCode + " "),
+          $("<span class='number'>").text(offerTo.number)
+        ),
+        $("<p class='departure'>").append(
+          $("<strong>").text("Departs from: "),
+          $("<span class='airport'>").text(offerTo.departure.iataCode),
+          $("<span class='terminal'>").text(` Terminal ${offerTo.departure.terminal}`),
+          $("<em>").text(offerTo.departure.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
+        ),
+        $("<p class='arrival'>").append(
+          $("<strong>").text("Arrives at: "),
+          $("<span class='airport'>").text(offerTo.arrival.iataCode),
+          $("<span class='terminal'>").text(offerTo.arrival.terminal),
+          $("<em>").text(offerTo.arrival.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
+        )
+      );
+    
+      var flightFrom =
+      $("<div class='flight-from'>").append(
+        $("<p>").append(
+          $("<strong>").text("Flight Number: "),
+          $("<span class='airline'>").text(offerFrom.carrierCode + " "),
+          $("<span class='number'>").text(offerFrom.number)
+        ),
+        $("<p class='departure'>").append(
+          $("<strong>").text("Departs from: "),
+          $("<span class='airport'>").text(offerFrom.departure.iataCode),
+          $("<span class='terminal'>").text(` Terminal ${offerFrom.departure.terminal}`),
+          $("<em>").text(offerFrom.departure.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
+        ),
+        $("<p class='arrival'>").append(
+          $("<strong>").text("Arrives at: "),
+          $("<span class='airport'>").text(offerFrom.arrival.iataCode),
+          $("<span class='terminal'>").text(offerFrom.arrival.terminal),
+          $("<em>").text(offerFrom.arrival.at.replace("T", " ").replace(":00+", ":00 +").replace(":00-", ":00 -"))
+        )
+      );
+
+    $("#flight-results").prepend(
+      $("<div class='result'>").append(
+        $("<i>").addClass("material-icons addCircle").text("add_circle"),
+        $("<i>").addClass("material-icons addCircleOutline").text("add_circle_outline"),
+        flightTo, flightFrom
+      )
+    )
+  }
+
 }
 
 /* You guys will have to create the search queries in your function and pass it here */
@@ -494,41 +553,222 @@ function restaurantAPI(queryValues) {
 }
 
 function printRestaurant(business) {
-    $(".loading").removeClass("active");
-    for( let i = 0; i < business.length; i++ ) {
-        var picture = "url(" + business[i].image_url + ")";
-        var address = business[i].location.display_address;
+  $(".loading").removeClass("active");
+  for( let i = 0; i < business.length; i++ ) {
+    var picture = "url(" + business[i].image_url + ")";
+    var address = business[i].location.display_address;
 
-        var figure = 
-        $("<figure>").append(
-            $("<i>").addClass("material-icons addCircle").text("add_circle"),
-            $("<i>").addClass("material-icons addCircleOutline").text("add_circle_outline"),
-            $("<a class='img' rel='noopener noreferrer'>")
-                .attr("href", business[i].url)
-                .append(
-                    $("<img>").css("background-image", picture)
-                ),
-            $("<figcaption>").append(
-                $("<p class='name'>").append(
-                    $("<a rel='noopener noreferrer'>")
-                        .attr("href", business[i].url)
-                        .text(business[i].name)
-                ),
-                $("<p>").append(
-                    $("<em class='add1'>").text(address[0]),
-                    $("<em class='add2'>").text(address[address.length-1])
-                ),
-                $("<p>").append(
-                    $("<strong>").text("Phone: "),
-                    $("<span class='phone'>").text(business[i].display_phone)
-                )
-            )
-        );
-
-        $("#restaurant-results").prepend(
-            $("<div class='result'>").append(figure)
+    var figure = 
+    $("<figure>").append(
+      $("<a class='img' rel='noopener noreferrer'>")
+        .attr("href", business[i].url)
+        .append(
+          $("<img>").css("background-image", picture)
+        ),
+      $("<figcaption>").append(
+        $("<p class='name'>").append(
+          $("<a rel='noopener noreferrer'>")
+            .attr("href", business[i].url)
+            .text(business[i].name)
+        ),
+        $("<p>").append(
+          $("<em class='add1'>").text(address[0]),
+          $("<em class='add2'>").text(address[address.length-1])
+        ),
+        $("<p>").append(
+          $("<strong>").text("Phone: "),
+          $("<span class='phone'>").text(business[i].display_phone)
         )
-    }
+      )
+    );
+
+    $("#restaurant-results").prepend(
+        $("<div class='result'>").append(
+          $("<i>").addClass("material-icons addCircle").text("add_circle"),
+          $("<i>").addClass("material-icons addCircleOutline").text("add_circle_outline"),
+          figure
+        )
+    )
+  }
 }
 
 // calendar
+var flightExample = {
+  meta: {
+    links: {
+      self:
+        "http://test.api.amadeus.com/v1/shopping/flight-offers?origin=NYC&destination=MAD&departureDate=2019-08-01&adults=1&nonStop=false&max=2"
+    },
+    currency: "EUR",
+    defaults: {
+      nonStop: false,
+      adults: 1
+    }
+  },
+  data: [
+    {
+      type: "flight-offer",
+      id: "1539956390004--540268760",
+      offerItems: [
+        {
+          services: [
+            {
+              segments: [
+                {
+                  flightSegment: {
+                    departure: {
+                      iataCode: "EWR",
+                      terminal: "B",
+                      at: "2019-08-01T17:45:00-04:00"
+                    },
+                    arrival: {
+                      iataCode: "LIS",
+                      terminal: "1",
+                      at: "2019-08-02T05:35:00+01:00"
+                    },
+                    carrierCode: "TP",
+                    number: "202",
+                    aircraft: {
+                      code: "332"
+                    },
+                    operating: {
+                      carrierCode: "TP",
+                      number: "202"
+                    },
+                    duration: "0DT6H50M"
+                  },
+                  pricingDetailPerAdult: {
+                    travelClass: "ECONOMY",
+                    fareClass: "U",
+                    availability: 1,
+                    fareBasis: "UUSDSI0E"
+                  }
+                },
+                {
+                  flightSegment: {
+                    departure: {
+                      iataCode: "LIS",
+                      terminal: "1",
+                      at: "2019-08-02T06:55:00+01:00"
+                    },
+                    arrival: {
+                      iataCode: "MAD",
+                      terminal: "2",
+                      at: "2019-08-02T09:10:00+02:00"
+                    },
+                    carrierCode: "TP",
+                    number: "1026",
+                    aircraft: {
+                      code: "319"
+                    },
+                    operating: {
+                      carrierCode: "TP",
+                      number: "1026"
+                    },
+                    duration: "0DT1H15M"
+                  },
+                  pricingDetailPerAdult: {
+                    travelClass: "ECONOMY",
+                    fareClass: "U",
+                    availability: 5,
+                    fareBasis: "UUSDSI0E"
+                  }
+                }
+              ]
+            }
+          ],
+          price: {
+            total: "259.91",
+            totalTaxes: "185.91"
+          },
+          pricePerAdult: {
+            total: "259.91",
+            totalTaxes: "185.91"
+          }
+        }
+      ]
+    },
+    {
+      type: "flight-offer",
+      id: "1539956390004-765796655",
+      offerItems: [
+        {
+          services: [
+            {
+              segments: [
+                {
+                  flightSegment: {
+                    departure: {
+                      iataCode: "JFK",
+                      at: "2019-08-01T22:05:00-04:00"
+                    },
+                    arrival: {
+                      iataCode: "MAD",
+                      at: "2019-08-02T11:30:00+02:00",
+                      terminal: "1"
+                    },
+                    carrierCode: "UX",
+                    number: "92",
+                    aircraft: {
+                      code: "332"
+                    },
+                    operating: {
+                      carrierCode: "UX",
+                      number: "92"
+                    },
+                    duration: "0DT7H25M"
+                  },
+                  pricingDetailPerAdult: {
+                    travelClass: "ECONOMY",
+                    fareClass: "M",
+                    availability: 9,
+                    fareBasis: "MYYOAE"
+                  }
+                }
+              ]
+            }
+          ],
+          price: {
+            total: "1670.89",
+            totalTaxes: "162.89"
+          },
+          pricePerAdult: {
+            total: "1670.89",
+            totalTaxes: "162.89"
+          }
+        }
+      ]
+    }
+  ],
+  dictionaries: {
+    locations: {
+      JFK: {
+        subType: "AIRPORT",
+        detailedName: "JOHN F KENNEDY INTL"
+      },
+      EWR: {
+        subType: "AIRPORT",
+        detailedName: "NEWARK LIBERTY INTL"
+      },
+      MAD: {
+        subType: "AIRPORT",
+        detailedName: "ADOLFO SUAREZ BARAJAS"
+      },
+      LIS: {
+        subType: "AIRPORT",
+        detailedName: "AIRPORT"
+      }
+    },
+    carriers: {
+      UX: "AIR EUROPA",
+      TP: "TAP PORTUGAL"
+    },
+    currencies: {
+      EUR: "EURO"
+    },
+    aircraft: {
+      "319": "AIRBUS INDUSTRIE A319",
+      "332": "AIRBUS INDUSTRIE A330-200"
+    }
+  }
+};
