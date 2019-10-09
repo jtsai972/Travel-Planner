@@ -102,6 +102,7 @@ nav {
 nav a {
   color: black;
   padding: 1em;
+  text-transform: uppercase;
 }
 /* When a link is set to active with a class or hovered over... */
 nav a:hover,
@@ -220,7 +221,7 @@ section.active {
   letter-spacing: 0.15em;
   /* making them all uppercase */
   text-transform: uppercase;
-  text-shadow: 2px 2px 5px white;
+  text-shadow: 2px 2px 5px black;
 }
 #home .title {
   /* making title text spacing bigger (75% of font size) */
@@ -590,3 +591,5 @@ section.active .loading {
   section.active .loading figcaption {
     text-align: center;
   }
+
+  .dim {opacity: 0.5};

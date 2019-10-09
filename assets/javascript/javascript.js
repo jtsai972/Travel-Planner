@@ -100,8 +100,23 @@ $("#flight button").on("click", function() {
     "&departureDate=" + startFlight +
     "&returnDate=" + endFlight;
 
+    /* Clearing previous results */
+    $("#restaurant-results").find(".result").remove();
+
     //flightAPI(queryValue);
-    printFlight(flightExample); //workaround
+    printFlight(flightExample); //workaround for server migration
+});
+
+$("#flight-results").on("click", ".material-icons", function() {
+  var result = $(this).parent();
+  console.log(result);
+
+  $("#flight-results .result").addClass("dim");
+  result.removeClass("dim");
+
+
+  $("#flight-choice").empty();
+  $("#flight-choice").append(result.clone());
 });
 
 // < !-- /////// Hotel start -->
@@ -138,24 +153,15 @@ $("#hotel button").on("click", function() {
 });
 
 $("#hotel-results").on("click", ".material-icons", function() {
-  var fig = $(this).find("figure");
-  //$(this).parent().css("background-color", "blue");
-  var name = fig.find(".name").text();
-  var phone = fig.find(".phone").text();
-  var address = [fig.find(".add1").text(), fig.find(".add2").text()];
-  var price = fig.find(".price").text();
+  var result = $(this).parent();
+  console.log(result);
 
-  // console.log(fig);
-  // console.log(img);
+  $("#hotel-results .result").addClass("dim");
+  result.removeClass("dim");
 
-  var selection = {
-      type: "hotel",
-      name: name,
-      address: address,
-      phone: phone,
-      price: price
-  };
-  console.log(selection);
+
+  $("#hotel-choice").empty();
+  $("#hotel-choice").append(result.clone());
 });
 
 // < !-- /////// Hotel end -->
@@ -179,6 +185,9 @@ $("#restaurants button").on("click", function() {
   var queryValue = queryFoodSearch + "&" + queryFoodLocation;
   console.log(`Search: ${queryValue}`);
 
+  /* Clearing previous results */
+  $("#restaurant-results").find(".result").remove();
+
   /* passing search into API */
   restaurantAPI(queryValue);
 
@@ -187,24 +196,15 @@ $("#restaurants button").on("click", function() {
 });
 
 $("#restaurant-results").on("click", ".material-icons", function() {
-    var fig = $(this).find("figure");;
-    //$(this).parent().css("background-color", "blue");
-    var img = fig.find("img").attr("style");
-    var url = fig.find("a").attr("href");
-    var name = fig.find(".name").text();
-    var phone = fig.find(".phone").text();
-    var address = [fig.find(".add1").text(), fig.find(".add2").text()];
-    // console.log(fig);
-    // console.log(img);
-    var selection = {
-        type: "restaurant",
-        name: name,
-        address: address,
-        img: img,
-        phone: phone,
-        url: url
-    };
-    console.log(selection);
+  var result = $(this).parent();
+  console.log(result);
+
+  $("#restaurant-results .result").addClass("dim");
+  result.removeClass("dim");
+
+
+  $("#restaurant-choice").empty();
+  $("#restaurant-choice").append(result.clone());
 });
 
 /* ====================================
@@ -238,7 +238,7 @@ function printRestaurant(business) {
     );
 
     /* attaching it all to the results page */
-    $("#restaurant-results").prepend($("<div class='result'>").append(figure));
+    $("#restaurant-results").prepend($(`<div id='restaurant-${i}'class='result'>`).append(figure));
   }
 }
 
@@ -297,7 +297,7 @@ function printHotel(hotel) {
       );
 
       $("#hotel-results").prepend(
-        $("<div class='result'>").append(
+        $(`<div id='hotel-${i}' class='result'>`).append(
           $("<i>").addClass("material-icons addCircle").text("add_circle"),
           $("<i>").addClass("material-icons addCircleOutline").text("add_circle_outline"),
           figure
@@ -444,7 +444,7 @@ function printFlight(flight) {
       );
 
     $("#flight-results").append(
-      $("<div class='result'>").append(
+      $(`<div id='flight-${i}' class='result'>`).append(
         $("<i>").addClass("material-icons addCircle").text("add_circle"),
         $("<i>").addClass("material-icons addCircleOutline").text("add_circle_outline"),
         $("<p class='price'>").append(
