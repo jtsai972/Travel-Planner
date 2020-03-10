@@ -1,6 +1,6 @@
-# Group-Project-1
+# Trip Advisor: Travel Made Easy
 
-Live content at [https://jtsai972.github.io/Group-Project-1/](https://jtsai972.github.io/Group-Project-1/)
+Live content at [https://jtsai972.github.io/Trip-Advisor/](https://jtsai972.github.io/Trip-Advisor/)
 
 ## Description
 This project allows people to look for low-fare flights, hotels, and restaurants for their trip.
