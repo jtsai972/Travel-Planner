@@ -22,21 +22,21 @@
 <br />
 <p align="center">
 
-  <a href="https://jtsai972.github.io/Trip-Advisor/">
+  <a href="https://jtsai972.github.io/Travel-Planner/">
     <img src="https://github.com/jtsai972/Github-Portfolio/blob/master/assets/images/portfolio/group-project-01-travel-planner.png" width="320">
   </a>
 
-  <h3 align="center">Trip Advisor</h3>
+  <h3 align="center">Travel Planner</h3>
 
   <p align="center">
     Travel made easy.
     <br />
-    <a href="https://github.com/jtsai972/Trip-Advisor"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/jtsai972/Travel-Planner"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/jtsai972/Trip-Advisor/issues">Report Bug</a>
+    <a href="https://github.com/jtsai972/Travel-Planner/issues">Report Bug</a>
     ·
-    <a href="https://github.com/jtsai972/Trip-Advisor/issues">Request Feature</a>
+    <a href="https://github.com/jtsai972/Travel-Planner/issues">Request Feature</a>
   </p>
 </p>
 
@@ -59,9 +59,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Trip Advisor is a simple one-page app that allows a person to search and book flights and hotels as well as find restaurants in the area.  
+Travel Planner is a simple one-page app that allows a person to search and book flights and hotels as well as find restaurants in the area.  
 
-Trip Advisor is powered by Amadeus and Yelp API.
+Travel Planner is powered by Amadeus and Yelp API.
 
 ### Built With
  * [API - Amadeus Flight Low Fare Search](https://developers.amadeus.com/self-service/category/air/api-doc/flight-low-fare-search) 
@@ -81,7 +81,7 @@ Trip Advisor is powered by Amadeus and Yelp API.
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Simply go to the [Trip Advisor website](https://jtsai972.github.io/Trip-Advisor/) and select an item in the sidebar menu depending on what it is you want to do.
+Simply go to the [Travel Planner website](https://jtsai972.github.io/Travel-Planner/) and select an item in the sidebar menu depending on what it is you want to do.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -89,7 +89,7 @@ Simply go to the [Trip Advisor website](https://jtsai972.github.io/Trip-Advisor/
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Open up the [Trip Advisor page](https://jtsai972.github.io/Trip-Advisor/) and select an option in the side bar.
+Open up the [Travel Planner page](https://jtsai972.github.io/Travel-Planner/) and select an option in the side bar.
 
 Inside the page is a form you can fill out to search up flights, hotels, or restaurants to see what you want in the area. Things you select will be added to your itinerary on the Itinerary page. 
 
@@ -114,7 +114,7 @@ Contributions are what make the open source community such an amazing place to b
 ### Jasmine 
 [Github Portfolio](https://jtsai972.github.io/Github-Portfolio/) | [Website - Jtsai972.space](jtsai972.space) | [Email Me](jtsai972@gmail.com)
 
-Project Link: [https://github.com/jtsai972/Trip-Advisor](https://github.com/jtsai972/Trip-Advisor)
+Project Link: [https://github.com/jtsai972/Travel-Planner](https://github.com/jtsai972/Travel-Planner)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -135,11 +135,11 @@ Project Link: [https://github.com/jtsai972/Trip-Advisor](https://github.com/jtsa
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/jtsai972/Trip-Advisor.svg?style=flat-square
-[contributors-url]: https://github.com/jtsai972/Trip-Advisor/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/jtsai972/Trip-Advisor.svg?style=flat-square
-[forks-url]: https://github.com/jtsai972/Trip-Advisor/network/members
-[stars-shield]: https://img.shields.io/github/stars/jtsai972/Trip-Advisor.svg?style=flat-square
-[stars-url]: https://github.com/jtsai972/Trip-Advisor/stargazers
-[issues-shield]: https://img.shields.io/github/issues/jtsai972/Trip-Advisor.svg?style=flat-square
-[issues-url]: https://github.com/jtsai972/Trip-Advisor/issues
+[contributors-shield]: https://img.shields.io/github/contributors/jtsai972/Travel-Planner.svg?style=flat-square
+[contributors-url]: https://github.com/jtsai972/Travel-Planner/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/jtsai972/Travel-Planner.svg?style=flat-square
+[forks-url]: https://github.com/jtsai972/Travel-Planner/network/members
+[stars-shield]: https://img.shields.io/github/stars/jtsai972/Travel-Planner.svg?style=flat-square
+[stars-url]: https://github.com/jtsai972/Travel-Planner/stargazers
+[issues-shield]: https://img.shields.io/github/issues/jtsai972/Travel-Planner.svg?style=flat-square
+[issues-url]: https://github.com/jtsai972/Travel-Planner/issues
